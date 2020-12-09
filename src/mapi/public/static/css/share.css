@@ -1,0 +1,73 @@
+body,html{font-size:12px;height:100%;margin:0;}
+.pad-left{padding-left:0px!important;}
+.pad-right{padding-right:0px!important;}
+.pad-all{padding:0px!important;}
+
+.share-title{background-color: #ffffff; height:4em; position: fixed;bottom:calc(100% - 4em);left:0;width: 100%;    z-index: 10000;}
+.share-logo{width:50%;float:left;height:3em;margin: 0.5em 2em;}
+.shate-logo_img{width:3em;float:left;height:100%;}
+.shate-logo_img img{width:100%;height:100%;}
+.shate-logo-p{width:100%;float:left;padding-left:1em;height:2.5em;line-height: 2.5em;font-size: 16px;color:#525252;}
+.share-link{float:left;width:calc(50% - 4em);height:100%;}
+.large{width: 6.8em;
+    line-height: 2.2em;
+    box-shadow: 0px 1px 2px #f5aaaa;
+    background: linear-gradient(to right, #FF0179, #FF4BD1);
+    color: #ffffff;margin-top: 1em;
+    border-radius: 2.4em;
+    display: inline-block;
+    text-align: center;}
+
+
+.share-bgimg{width:100%;position: relative;}
+.share-bgimg img{width: 100%;height: 100%;}
+.share-pay{position: absolute;width:4em;height:4em;top:calc(50% - 2em);left:calc(50% - 2em);}
+.share-pay img{width:100%;}
+.share-name{position:absolute;bottom:0;left:0;width:100%;height:4em;background: #0b0b0b4d;}
+.share-logo-name{width:50%;float:left;height:3em;margin: 0.5em 2em;}
+.shate-logo_img-name{width:3em;float:left;height:100%;}
+.shate-logo_img-name img{width:100%;height:100%;border-radius: 50%;}
+.share-link-name{float:left;width:calc(50% - 4em);height:100%;}
+.shate-logo-p-name{width:calc(100% - 3em);float:left;padding-left:1em;height:2.5em;line-height: 2.5em;font-size: 16px;color:#fff;}
+.large-name{width: 5em;
+    line-height: 2em;
+    background: linear-gradient(to right, #FF0179, #FF4BD1);
+    color: #ffffff;margin-top: 1em;
+    border-radius: 2.4em;
+    display: inline-block;
+    text-align: center;}
+
+.share-host{height:4em;width:70%;margin-left:15%;}
+.share-host-bor{width:30%;float:left;margin-top: 2em;height:1px;background: #666464;}
+.share-host-bor-name{width:40%;float:left;height:4em;line-height: 4em;text-align: center;color:#6a6a6a;}
+.share-video{width:100%;margin-bottom: 1em;border-top: 1px solid #ccc;}
+.share-video-type{float: left;width:50%;position: relative;border-bottom: 2px solid #ccc;height:18em;overflow: hidden;}
+.share-video-type img{width:100%;}
+.share-video-btn{position:absolute;width:100%;height:3em;bottom: 0;left:0;background: #0b0b0b4d;}
+.share-video-btn-img{float:left;height:2em;width:2em;margin:0.5em 0.5em 0.5em 1em;}
+.share-video-btn-img img{width:100%;border-radius: 50%;height:100%;}
+.share-video-btn-name{float:left;width:calc(100% - 3.5em);height:3em;color:#fff;overflow: hidden;}
+.share-video-btn-name-title{width:100%;height:1.5em;font-size: 10px;}
+share-video-btn-name-coin{width:100%;height:1.5em;font-size: 10px;}
+.share-video-btn-name-ic{float:left;width:1em;height:1em;}
+.share-video-btn-name-ic img{width:100%;height:100%;}
+.share-video-btn-name-ic-title{float:left;width:calc(100% - 1em);padding-left:0.5em;overflow: hidden;height:1.5em;line-height:1.5em;}
+
+.share-video-type:nth-child(2n){border-left:1px solid #ccc;}
+.share-video-type:nth-child(2n+1){border-right:1px solid #ccc;}
+.share-video-pay{width:100%;height:100%;display: none;}
+.share-bottom{bottom:0px;background: #ffffff7d;}
+#my-video { object-fit: cover;  object-position: center center;}
+.share-video-pay-fan{position: fixed;top:2em;right:1.5em;width:3em;height:3em;z-index: 1000;line-height: 3em;text-align: center;}
+.share-video-pay-fan a{ display: inline-block; width: 30px;height:5px; background: #dedede;line-height: 0;font-size:0;vertical-align: middle;-webkit-transform: rotate(45deg);}
+.share-video-pay-fan a:after{content:'/';display:block;width: 30px;height:5px; background: #dedede;-webkit-transform: rotate(-90deg);}
+.share-video-pay-right{position: fixed;right:1em;width:3em;height:40%;top:calc(50% - 20%);}
+.share-video-pay-title{width:100%;height:3em;margin-bottom: 1em;}
+.share-video-pay-title img{width:100%;height:100%;border-radius: 50%;}
+.share-video-pay-xin{margin:2em 0.5em 0 0.5em;width:2em;height:2em;}
+.share-video-pay-xin img{width:100%;height:100%;}
+.share-video-pay-sum{width:100%;height:2em;line-height: 2em;color:#fff;text-align: center;font-size: 10px;}
+
+
+.share-video-cuo{height:30em;
+    line-height:30em;width:100%;font-size:16px;font-weight: bold;text-align: center;}

@@ -1,0 +1,49 @@
+<include file="public@header"/>
+</head>
+<body>
+<div class="wrap">
+    <ul class="nav nav-tabs">
+        <li><a href="{:url('sign_in/index')}">签到类型</a></li>
+        <li class="active"><a href="{:url('sign_in/add')}">添加签到类型</a></li> 
+    </ul>
+    <form method="post" class="form-horizontal js-ajax-form margin-top-20" action="{:url('sign_in/addPost')}">
+        <div class="form-group">
+            <label for="input-name" class="col-sm-2 control-label">天数 (第几天)<span class="form-required">*</span></label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" id="input-name" name="sort" placeholder="请输入数字(天)" value="{$list['sort']|default=''}" oninput = "value=value.replace(/[^\d]/g,'')" required="required">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="input-diamonds" class="col-sm-2 control-label">奖励数 (钻石)<span class="form-required">*</span></label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" id="input-diamonds" name="diamonds" placeholder="请输入奖励钻石数" value="{$list['diamonds']|default=''}" oninput = "value=value.replace(/[^\d]/g,'')" required="required">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="input-score" class="col-sm-2 control-label">奖励数 (积分)<span class="form-required">*</span></label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" id="input-score" name="score" placeholder="请输入奖励积分" value="{$list['score']|default=''}" oninput = "value=value.replace(/[^\d]/g,'')" required="required">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="input-site-name" class="col-sm-2 control-label"><span class="form-required">*</span>签到状态</label>
+            <div class="col-md-6 col-sm-10">
+                <select name="status" style="width:100px;height:30px;">
+                    <option value="0" >关闭</option>
+                    <option value="1" <if condition="$list['status'] eq 1"> selected="selected" </if>>开启</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <input type="hidden" name="id" value="{$list['id']|default=''}">
+                <button type="submit" class="btn btn-primary js-ajax-submit">{:lang('ADD')}</button>
+                <a class="btn btn-default" href="{:url('sign_in/index')}">{:lang('BACK')}</a>
+            </div>
+        </div>
+    </form>
+</div>
+<script src="__STATIC__/js/admin.js"></script>
+</body>
+</html>

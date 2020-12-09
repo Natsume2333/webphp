@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="__STATIC__/css/rewards.css" rel="stylesheet">
+    <link href="__STATIC__/css/bootstrap.min.css" rel="stylesheet">
+    <link href="__STATIC__/css/invitation.css" rel="stylesheet">
+    <script src="__STATIC__/js/jquery-1.10.2.min.js"></script>
+
+    <title>提现</title>
+    <style>
+        .new_invitation_rewards_name_center{width:100%;height:2em;line-height: 2em;font-size: 12px;padding-left:20px;color:#aaa8a8;}
+        .new_invitation_rewards_name_color,.new_invitation_rewards_name_coin{height:2.5em!important;line-height: 2.5em!important;}
+ .new_invitation_rewards_type{margin: 0.5em auto!important;}
+    </style>
+</head>
+<body>
+<div class="new_invitation new_invitation_color">
+    <div class="new_invitation_coin">{$invitation_coin}</div>
+    <div class="new_invitation_coin_name">可提现金额</div>
+</div>
+
+<div class="new_invitation_rewards">
+    <div class="new_invitation_rewards_name">
+        <div class="new_invitation_rewards_name_color">提现24小时到账</div>
+        <div class="new_invitation_rewards_name_coin">提现金额</div>
+        <div class="new_invitation_rewards_name_center">每日提现{$data['cash_day_limit']}次,最少提现{$data['less']}元,最多提现{$data['more']}元</div>
+        <div class="new_invitation_rewards_coin"><span>￥</span><input type="text" value="" id="rewards_coin"
+                                                                      placeholder="必须是100的倍数才可以提现"/></div>
+        <div class="new_invitation_rewards_type" data-uid="{$uid}" data-coin="{$invitation_coin}">提现</div>
+    </div>
+</div>
+
+<div class="new_invitation_rewards_center">
+    <div class="new_invitation_rewards_center_img"><img src="__STATIC__/img/imgs.jpg"/></div>
+    <div class="new_invitation_rewards_center_name">我的提现账户</div>
+</div>
+<div class="new_invitation_rewards_pay">
+    <div class="new_invitation_rewards_pay_name">
+        <span>提现账号(支付宝)：</span>
+        <input type="text" value="{$pay['pay']|default=''}" id="pay"/>
+    </div>
+    <div class="new_invitation_rewards_pay_name">
+        <span>提现 账号(微 信)：</span>
+        <input type="text" value="{$pay['wx']|default=''}" id="wx"/>
+    </div>
+    <div class="new_invitation_rewards_pay_name">
+        <span>姓名(支付宝,微信)：</span>
+        <input type="text" value="{$pay['name']|default=''}" id="name"/>
+    </div>
+</div>
+<div class="new_invitation_rewards_pay_btn" data-uid="{$uid}">绑定提现账户</div>
+<script src="__STATIC__/layer/mobile/layer.js" rel="stylesheet"></script>
+<script>
+
+    $(".new_invitation_rewards_type").click(function () {
+        var uid = $(this).attr("data-uid");
+        var coin = $(this).attr("data-coin");
+        var val = $("#rewards_coin").val();
+        var reg = /^\d+(\.\d+)?$/;
+
+        if (reg.test(val) != true || val <= 0) {
+            layer.open({
+                content: '请输入正确的金额'
+                , btn: '确定'
+            });
+            return false;
+        }
+
+        if (parseInt(coin) < parseInt(val)) {
+            layer.open({
+                content: '请输入正确的金额'
+                , btn: '确定'
+            });
+            return false;
+        }
+        $.ajax({
+            url: "/mapi/public/index.php/api/invitation_api/add_rewards",
+            type: 'get',
+            dataType: 'json',
+            data: {"val": val, uid: uid},
+            success: function (data) {
+                layer.open({
+                    content: data.msg
+                    , skin: 'msg'
+                    , time: 2 //2秒后自动关闭
+                });
+                if (data.status == '1') {
+
+                    setTimeout(function () {
+                        window.location.reload();
+                    }, 2000);
+                } else {
+                    layer.close(index);
+                }
+            }
+        });
+    })
+    $(".new_invitation_rewards_pay_btn").click(function () {
+        var pay = $("#pay").val();
+        var wx = $("#wx").val();
+        var uid = $(this).attr("data-uid");
+        var name = $("#name").val();
+        if (pay.length == 0 && wx.length == 0) {
+            layer.open({
+                content: '请输入账号'
+                , btn: '确定'
+            });
+            return false;
+        }
+        if (name.length == 0) {
+            layer.open({
+                content: '请输入账号名称'
+                , btn: '确定'
+            });
+            return false;
+        }
+        $.ajax({
+            url: "/mapi/public/index.php/api/invitation_api/insert_rewards",
+            type: 'get',
+            dataType: 'json',
+            data: {pay: pay, wx: wx, name: name, uid: uid},
+            success: function (data) {
+
+                layer.open({
+                    content: data.msg
+                    , skin: 'msg'
+                    , time: 2 //2秒后自动关闭
+                });
+                if (data.status == '1') {
+                    setTimeout(function () {
+                        window.location.reload();
+                    }, 2000);
+                } else {
+                    layer.close(index);
+                }
+            }
+        });
+
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <script>
+        "use strict";!function(e){function t(){var t=i.getBoundingClientRect().width,u=t/o;t<d?e.rem=100*u:e.rem=d/o*100,i.style.fontSize=e.rem+"px",n.body&&(n.body.style.fontSize="16px")}var n=e.document,i=n.documentElement,o=640,d=640,u=void 0;e.addEventListener("resize",function(){u&&clearTimeout(u),u=setTimeout(t,300)},!1),setTimeout(t,0)}(window);
+    </script>
+    <style>
+        html,
+        body,
+        div,
+        p,
+        ul,
+        li,
+        img {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+
+            font: 0.14rem "Microsoft YaHei", 微软雅黑, arial, simsun, 宋体;
+        }
+        .body{
+            width: 6.4rem;
+        }
+        .header {
+
+            height:9.367rem;
+            background: url({:url('static/image/topbg.png',false,false)}) no-repeat top;
+
+        }
+        .wrapper{
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            align-items: center;
+            text-align: center;
+        }
+        .d-img{
+            /*width: 4.25rem;*/
+            /*height: 1.7rem;*/
+            /*margin-top: 0.204rem;*/
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 0.05rem 0;
+        }
+
+        /*.d-img img{*/
+            /*width: 4.25rem;*/
+            /*height: 2.176rem;*/
+        /*}*/
+        .downios{
+
+            margin-left: 0.2346rem;
+            width: 1.7rem;
+            height: 0.493rem;
+        }
+        .downandroid{
+
+            margin-left: 0.2346rem;
+            width: 1.7rem;
+            height: 0.493rem;
+        }
+        .w1  {
+
+            display: flex;
+            flex-direction: column;
+            align:center;
+        }
+        .aimg{
+            width: 4.25rem;
+            height: 2.176rem;
+            margin-left: 1.241rem;
+        }
+        .bimg{
+            width: 4.624rem;
+            height: 5.984rem;
+            margin-left: 0.901rem;
+        }
+        .title p:first-child{
+            color: #020202;
+            font-size: 0.36rem;
+            font-weight: 100;
+        }
+        .title{
+            text-align: center;
+            padding-bottom: 0.34rem;
+            margin-top: 0.34rem;
+        }
+        .title p:last-child{
+            color: #747474;
+            font-size: 0.2rem;
+            padding-top: 0.05rem;
+            font-weight: 100;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="wrapper" style="display: flex;flex-direction: column;">
+            <div class="w1">
+                <img class="aimg" src="{:url('static/image/title12x.png',false,false)}" alt="">
+                <img class="bimg" style="margin-left: 0.901rem;margin-right: 0.867rem;" src="{:url('static/image/shouji.png',false,false)}" alt="">
+            </div>
+            <div class="w-left">
+                <div class="down">
+                    <div class="d-img">
+                        <a href="{$data['ios_download_url']}"  target="_blank"><img class="downios" src="{:url('static/image/apple2x.png',false,false)}" alt="" border="0"></a>
+                        <a href="{$data['android_download_url']}"  target="_blank"><img class="downandroid" src="{:url('static/image/android2x.png',false,false)}" alt="" border="0"></a>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+
+    </header>
+
+    <section class="sec" id="sec1">
+        <div class="title">
+            <p>在{$data['system_name']}</p>
+            <p>结识你心仪的好友</p>
+        </div>
+        <div align="center">
+            <img style="width: 6.035rem;height:2.312rem ;margin-left: 0.17rem;margin-right: 0.17rem" src="{:url('static/image/2p.png',false,false)}" alt="">
+        </div>
+    </section>
+
+    <section class="sec" id="sec2" style="margin-bottom: 0.34rem;">
+        <div class="title">
+            <p>在{$data['system_name']}</p>
+            <p>邂逅你的甜蜜缘分</p>
+        </div>
+        <div align="center">
+            <img style="width: 6.035rem;height:2.023rem ;margin-left: 0.17rem;margin-right: 0.17rem;"  src="{:url('static/image/3p.png',false,false)}" alt="">
+        </div>
+    </section>
+
+
+</body>
+</html>

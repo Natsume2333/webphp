@@ -1,0 +1,61 @@
+<include file="public@header"/>
+<style type="text/css">
+    .pic-list li {
+        margin-bottom: 5px;
+    }
+</style>
+
+</head>
+<body>
+<div class="wrap js-check-wrap">
+    <ul class="nav nav-tabs">
+         <li><a href="{:url('join_in/index')}">加盟合作</a></li>
+        <li><a href="{:url('join_in/cooperation')}">加盟合作类型</a></li>
+        <li class="active"><a href="{:url('join_in/add_cooperation')}">添加合作类型</a></li>
+    </ul>
+    <form action="{:url('join_in/upd_cooperation')}" method="post" >
+        <div class="row">
+            <div class="col-md-9">
+                <table class="table table-bordered">
+                    <tr>
+                        <th>合作类型名称 <span class="form-required">*</span></th>
+                        <td>
+                            <input class="form-control" type="text" name="post[name]"
+                                   id="title" required value="{$list.name |default=''}" placeholder="请输入合作类型名称"/>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>排序 <span class="form-required">*</span></th>
+                        <td><input class="form-control" type="text" name="post[sort]" id="source" value="{$list.sort |default=''}"
+                                   placeholder="排序"></td>
+                    </tr>
+                    <tr>
+                        <th>状态<span class="form-required">*</span></th>
+                        <td>
+                            <select name="post[status]" id="gift">
+                                <option value="1">开启</option>
+                                <option value="0" <if condition="$list['status'] eq '0'"> selected="selected" </if> >关闭</option>
+
+                            </select>
+                        </td>
+                    </tr>
+                  
+                </table>
+                <input type="hidden" name="id" value="{$list.id |default=''}"/>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-primary js-ajax-submit">{:lang('ADD')}</button>
+                        <a class="btn btn-default" href="{:url('join_in/cooperation')}">{:lang('BACK')}</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
+<script type="text/javascript" src="__STATIC__/js/admin.js"></script>
+
+
+</body>
+</html>

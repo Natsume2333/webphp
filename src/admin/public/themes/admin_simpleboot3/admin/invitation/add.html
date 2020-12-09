@@ -1,0 +1,56 @@
+<include file="public@header"/>
+<style type="text/css">
+    .pic-list li {
+        margin-bottom: 5px;
+    }
+</style>
+
+</head>
+<body>
+<div class="wrap js-check-wrap">
+    <ul class="nav nav-tabs">
+        <li><a href="{:url('Invitation/index')}">邀请提现规则列表</a></li>
+        <li class="active"><a href="javascript:;">添加邀请提现分类</a></li>
+    </ul>
+    <form action="{:url('Invitation/addPost')}" method="post" >
+        <div class="row">
+            <div class="col-md-9">
+                <table class="table table-bordered">
+                    <tr>
+                        <th>请输入提现金额 <span class="form-required">*</span></th>
+                        <td><input class="form-control" type="text" name="post[money]" id="source" value="{$rule.money |default=''}"
+                                   placeholder="请输入提现金额"></td>
+                    </tr>
+
+                    <tr>
+                        <th>排序<span class="form-required">*</span></th>
+                        <td>
+                            <input class="form-control" type="text" name="post[sort]" style="width:100px;"
+                                   required value="{$rule.sort |default='100'}" placeholder="排序号"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>开启状态<span class="form-required">*</span></th>
+                        <td>
+                            <input  type="radio" name="post[status]" <if condition="$rule['status'] eq 1">checked="checked"</if>  value="1"/>&nbsp;&nbsp;开启 &nbsp;&nbsp;&nbsp;&nbsp;
+                            <input  type="radio" name="post[status]" <if condition="$rule['status'] eq 0">checked="checked"</if> value="0"/>&nbsp;&nbsp;关闭
+                        </td>
+                    </tr>
+                </table>
+                <input type="hidden" name="id" value="{$rule.id |default=''}"/>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-primary js-ajax-submit">{:lang('SAVE')}</button>
+                        <a class="btn btn-default" href="{:url('Invitation/index')}">{:lang('BACK')}</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
+<script type="text/javascript" src="__STATIC__/js/admin.js"></script>
+
+
+</body>
+</html>

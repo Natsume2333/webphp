@@ -1,0 +1,66 @@
+<include file="public@header"/>
+<style>
+    .js-ajax-form {
+        margin-top: 30px;
+    }
+</style>
+</head>
+<body>
+<div class="wrap js-check-wrap">
+    <ul class="nav nav-tabs">
+        <li><a href="{:url('refill/recharge')}">手动充值记录</a></li>
+        <li class="active"><a href="javascript:;">手动充值</a></li>
+    </ul>
+
+    <form class="js-ajax-form" method="post" action="{:url('refill/add_recharge_post')}">
+        <div class="row">
+            <div class="col-md-9">
+                <table class="table table-bordered">
+                    <tr>
+                        <th>用户ID<span class="form-required">*</span></th>
+                        <td>
+                            <input class="form-control" type="text" name="user_id" value="{$rule.coin |default=''}"
+                                   placeholder="用户ID">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>需要充值<span class="form-required">*</span></th>
+                        <td>
+                            <input class="form-control" type="text" name="count" value="{$rule.coin |default=''}"
+                                   placeholder="需要充值的金币数">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>操作<span class="form-required">*</span></th>
+                        <td>
+                            <select name="action">
+                                <option value="1">加</option>
+                                <option value="2">减</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>选择充值类型<span class="form-required">*</span></th>
+                        <td>
+                            <select name="type">
+                                <option value="1">金币</option>
+                                <option value="2">收益</option>
+                                <option value="3">邀请金额</option>
+                            </select>
+                        </td>
+                    </tr>
+
+                </table>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-primary js-ajax-submit">{:lang('SAVE')}</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
+<script src="__STATIC__/js/admin.js"></script>
+</body>
+</html>

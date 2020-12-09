@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>财富明细</title>
+
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <link href="__STATIC__/css/detail.css" rel="stylesheet">
+    <link href="__STATIC__/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<style>
+.mingxi{float:left;width:100%;height:6em;margin:1em 1% 0;padding: 1em 1.5em 0;border-radius: 1em;    box-shadow: -1px 4px 8px 2px #afafaf;}
+.mingxi_type{width:100%;height:3em;line-height: 3em;color:#fff;}
+.mingxi_sum{width:100%;height:2em;}
+.mingxi_sum_name{float:left;width:60%;height:2em;line-height: 2em;color:#fff;}
+.mingxi_sum_name_a{float:left;width:40%;height:2em;line-height: 2em;text-align:right;color:#fff;}
+
+.disciple-tab1:nth-child(1){background: #3e93ec;}
+.disciple-tab1:nth-child(2){background: #aa5eff;}
+.disciple-tab1:nth-child(3){background: #00bc31;}
+.disciple-tab1:nth-child(4){background: #ec7c08;}
+.disciple-tab1:nth-child(5){background: #02c5bc;}
+.disciple-tab1:nth-child(6){background: #4c40f6;}
+.disciple-tab1:nth-child(7){background: #4c40f6;}
+.disciple-tab1{border-bottom: 0px!important;}
+</style>
+<body class="dis">
+<div class="col-xs-12 disciple-tab">
+    {volist name="data" id="v"}
+        <div class="mingxi disciple-tab1" style="cursor:pointer;"  data-table="{$v.type}" data-typeid="{$v.table_id}">
+            <div class="mingxi_type">
+                {if condition="($v['user_id'] eq $uid)"}
+                      {$v.content}
+                {else/}
+                      {$v.name}
+                {/if}
+                </div>
+            <div class="mingxi_sum">
+                <div class="mingxi_sum_name">  {if condition="$v['user_id'] eq $uid"}- {else/} +{/if}
+                {if condition="$v['user_id'] eq $uid"}
+                {$v['coin']}
+                {else/}
+                {$v['profit']}
+                {/if}
+                 {if condition="($v['user_id'] eq $uid)"}
+                {$config['val']}
+                {else/}
+                积分
+                {/if}</div>
+                <div class="mingxi_sum_name_a">详情</div>
+            </div>
+        </div>
+    {/volist}
+
+</div>
+
+<script src="__STATIC__/js/jquery-1.10.2.min.js"></script>
+<script src="__STATIC__/layer/layer.js" rel="stylesheet"></script>
+<script>
+    $(function () {
+
+        // 页数
+        var page = {$p};
+        var uid = {$uid};
+        var type = {$type};
+        var isscroll = true;
+        $(window).scroll(function () {
+            srollPos = $(this).scrollTop();
+            totalheight = parseFloat($(window).height()) + parseFloat(srollPos);
+            if (($(document).height() - 50) <= totalheight && isscroll) {
+
+                isscroll = false;
+                getlistmore();
+            }
+
+        });
+
+
+        $(document).on("click", ".disciple-tab1", function () {
+            var table = $(this).attr("data-table");
+
+            var url = "/mapi/public/index.php/api/detail_api/particulars/uid/" + uid + "/type/" + type +"/table/" + table;
+            window.location.href = url;
+        });
+
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+body,html{font-size:12px;height:100%;margin:0; overflow:hidden;}
+.pad{padding:0px!important;}
+.rewards{width:100%;height:15em;background: #FF4081;padding-top:2em;}
+.rewards-title1{width:100%;height:3em;line-height: 3em;color:#fff;text-align: center;}
+.rewards-title2{width:100%;height:3em;line-height: 3em;color:#fff;text-align: center;font-weight: bold;}
+.rewards-title-type{width:60%;height:3em;line-height: 3em;margin-left:20%;text-align: center;background: #fff;margin-top:2em;border-radius: 1em;color:#000;}
+
+.inviter-ul{height:100%;overflow-y:hidden;}
+.inviter-ul li{height:3em;border-bottom: 1px solid #efefef;}
+ul,li{list-style-type:none;padding:0;margin:0}
+.inviter-ul-img{height:2em;margin-top:0.5em;padding-right:0px!important;}
+.inviter-ul-img img{height:2em;width:2em;border-radius: 50%;}
+.inviter-ul-name{height:3em;line-height:3.5em;overflow: hidden;text-align: center;  font-size: 12px;}
+.inviter-ul-time{font-size: 12px;height:3em;line-height: 3.5em;text-align: center;}
+.more{text-align: center;}
+.rewards-bg{background:#eaeaea;}

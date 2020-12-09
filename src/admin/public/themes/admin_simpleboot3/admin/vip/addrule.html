@@ -1,0 +1,70 @@
+<include file="public@header"/>
+<style type="text/css">
+    .pic-list li {
+        margin-bottom: 5px;
+    }
+    .js-ajax-form{margin-top:30px;}
+</style>
+
+</head>
+<body>
+<div class="wrap js-check-wrap">
+    <ul class="nav nav-tabs">
+        <li ><a href="{:url('vip/rule')}" >vip规则详情列表</a></li>
+        <li class="active"><a href="javascript:;">添加vip规则详情</a></li>
+    </ul>
+    <form class="js-ajax-form" action="{:url('vip/add_post_rule')}" method="post" >
+        <div class="row">
+            <div class="col-md-9">
+                <table class="table table-bordered">
+                    <tr>
+                        <th><b>vip详情图标</b></th>
+                        <td>
+                            <div style="text-align: center;">
+                                <input type="hidden" name="img" id="thumbnail" value="{$data.img |default=''}">
+                                <a href="javascript:uploadOneImage('图片上传','#thumbnail');">
+                                    <if condition="$data['img']">
+                                        <img src="{$data['img']}" id="thumbnail-preview" width="135" style="cursor: pointer">
+                                        <else/>
+                                        <img src="/admin/public/themes/admin_simpleboot3/public/assets/images/default-thumbnail.png" id="thumbnail-preview" width="135" style="cursor: pointer">
+                                    </if>
+
+                                </a>
+                                <input type="button" class="btn btn-sm btn-cancel-thumbnail" value="取消图片">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>vip规则详情内容 <span class="form-required">*</span></th>
+                        <td>
+                            <input class="form-control" type="text" name="center"
+                                   id="title" required value="{$data.center |default=''}" placeholder="请输入名称"/>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>排序 <span class="form-required">*</span></th>
+                        <td><input class="form-control" type="text" name="sort" id="day_count" value="{$data.sort |default='0'}"></td>
+                    </tr>
+
+
+
+
+                </table>
+                <input type="hidden" name="id" value="{$data.id |default=''}"/>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-primary js-ajax-submit">{:lang('ADD')}</button>
+                        <a class="btn btn-default" href="{:url('vip/rule')}">{:lang('BACK')}</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
+<script type="text/javascript" src="__STATIC__/js/admin.js"></script>
+
+
+</body>
+</html>

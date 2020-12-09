@@ -1,0 +1,87 @@
+<include file="public@header"/>
+<style>
+    .js-ajax-form {
+        margin-top: 30px;
+    }
+
+    .gift-img {
+        width: 50px;
+        height: 50px
+    }
+
+    .gift-img img {
+        width: 100%;
+        height: 100%;
+    }
+</style>
+</head>
+<body>
+<div class="wrap js-check-wrap">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="javascript:;">等级列表</a></li>
+        <li><a href="{:url('level/add')}">添加等级分类</a></li>
+    </ul>
+
+    <form class="js-ajax-form" action="" method="post">
+
+        <table class="table table-hover table-bordered table-list">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>等级名称</th>
+                <th>金币数</th>
+                <th>收益数</th>
+
+                <th>添加时间</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tfoot>
+            <foreach name="level" id="vo">
+                <tr>
+                    <td>{$vo.levelid}</td>
+                    <td>{$vo.level_name}</td>
+                    <td>{$vo.level_up}</td>
+                    <td>{$vo.level_up_female}</td>
+                  
+                    <td>{$vo.addtime | date="Y-m-d H:i:s",###}</td>
+
+                    <td>
+                        <a href="{:url('level/add',array('id'=>$vo.levelid))}">修改</a> |
+                        <a href="javescript:;" class="del" data-id="{$vo.levelid}">删除</a>
+                    </td>
+                </tr>
+            </foreach>
+            </tfoot>
+        </table>
+    </form>
+</div>
+<script src="__STATIC__/js/admin.js"></script>
+<script src="__STATIC__/js/layer/layer.js" rel="stylesheet"></script>
+<script>
+    $(".del").click(function () {
+        var id = $(this).attr('data-id');
+        layer.confirm('确定删除？', {
+            btn: ['确定', '取消'] //按钮
+        }, function () {
+            $.ajax({
+                url: "{:url('level/del')}",
+                type: 'post',
+                dataType: 'json',
+                data: {id: id},
+                success: function (data) {
+                    if (data == '1') {
+                        layer.msg("删除成功", {time: 2000, icon: 1}, function () {
+                            window.location.reload();
+                        });
+                    } else {
+                        layer.msg("删除失败", {time: 2000, icon: 2});
+                    }
+                }
+            });
+
+        });
+    })
+</script>
+</body>
+</html>

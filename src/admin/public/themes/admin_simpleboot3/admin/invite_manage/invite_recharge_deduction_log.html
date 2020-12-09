@@ -1,0 +1,59 @@
+<include file="public@header"/>
+</head>
+<body>
+<div class="wrap js-check-wrap">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="javascript:;">邀请充值扣单记录</a></li>
+    </ul>
+    <form class="well form-inline margin-top-20" name="form" method="post" action="">
+        邀请人ID:
+        <input type="text" class="form-control" name="user_id" style="width: 200px;"
+               value="{$request.user_id|default=''}" placeholder="请输入被邀请人ID...">
+        被邀请人ID:
+        <input type="text" class="form-control" name="invite_user_id" style="width: 200px;"
+               value="{$request.invite_user_id|default=''}" placeholder="请输入被邀请人ID...">
+        单号:
+        <input type="text" class="form-control" name="order_id" style="width: 200px;"
+               value="{$request.invite_user_id|default=''}" placeholder="请输入单号...">
+        <div style="margin-top:20px;">
+            时间:
+            <input type="text" class="form-control js-bootstrap-datetime" name="start_time"
+                   value="{$request.start_time|default=''}" style="width: 140px;" autocomplete="off">-
+            <input type="text" class="form-control js-bootstrap-datetime" name="end_time"
+                   value="{$request.end_time|default=''}" style="width: 140px;" autocomplete="off"> &nbsp; &nbsp;
+            <input type="submit" class="btn btn-primary" value="搜索" onclick='form.action="{:url('InviteManage/invite_recharge_deduction_log')}";form.submit();'/>
+        </div>
+    </form>
+
+    <form class="js-ajax-form" action="" method="post">
+        <table class="table table-hover table-bordered table-list">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>邀请用户（ID）</th>
+                <th>被邀请用户（ID）</th>
+                <th>金额</th>
+                <th>订单号</th>
+                <th>充值时间</th>
+            </tr>
+            </thead>
+            <tfoot>
+            <foreach name="list" id="vo">
+                <tr>
+                    <td>{$vo.id}</td>
+                    <td>{$vo.user_id}</td>
+                    <td>{$vo.invite_user_id}</td>
+                    <td>{$vo.money}</td>
+                    <td>{$vo.order_id}</td>
+                    <td>{$vo.create_time | date="Y-m-d H:i:s",###}</td>
+                </tr>
+            </foreach>
+            </tfoot>
+        </table>
+        <ul class="pagination">{$page|default=''}</ul>
+    </form>
+</div>
+<script src="__STATIC__/js/admin.js"></script>
+
+</body>
+</html>

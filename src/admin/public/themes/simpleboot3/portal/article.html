@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{$article.post_title}</title>
+    <meta name="keywords" content="{$site_info.site_seo_keywords|default=''}"/>
+    <meta name="description" content="{$site_info.site_seo_description|default=''}">
+    <include file="public@head"/>
+    <style>
+        #article_content img {
+            height: auto !important;
+            max-width: 100%;
+        }
+
+        #article_content {
+            width:100%;
+            word-wrap: break-word;
+        }
+        .body-white{padding-top:0px;padding:15px;}
+        .article_img{width:100%;}
+        .article_img img{width:100%;}
+    </style>
+</head>
+<body class="body-white">
+            <div class="article_img"><img src="{$article.more.thumbnail}"/></div>
+            <div id="article_content">
+                {$article.post_content}
+            </div>
+</body>
+</html>

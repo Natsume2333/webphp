@@ -1,0 +1,67 @@
+<include file="public@header" />
+</head>
+<body>
+<div class="wrap js-check-wrap">
+    <ul class="nav nav-tabs">
+        <li class="active"><a>渠道统计</a></li>
+    </ul>
+    <form class="well form-inline margin-top-20" method="post" action="{:url('settlement/conversion')}">
+     <!--   <if condition="$agent['agent_level'] eq '1'">
+        渠道号:
+        <input type="text" class="form-control" name="channel_agent" style="width: 120px;" value="{$conversion['channel_agent']|default=''}" placeholder="请输入账号">
+        </if> -->
+          日期:
+        <input type="text" class="form-control js-bootstrap-date" name="start_time"
+               value="{$conversion['start_time']|default=''}"
+               style="width: 140px;" autocomplete="off">-
+        <input type="text" class="form-control js-bootstrap-date" name="end_time"
+               value="{$conversion['end_time']|default=''}"
+               style="width: 140px;" autocomplete="off"> &nbsp; &nbsp;
+        <input type="submit" class="btn btn-primary" value="搜索" />
+        <a class="btn btn-danger" href="{:url('settlement/conversion')}">清空</a>
+        <span>安装总数：{$agent_money.registered} &nbsp;总充值金额：{$agent_money.money}元  总收益：{$agent_money.agent_earnings}元</span>
+    </form>
+    <table class="table table-hover table-bordered">
+        <thead>
+        <tr>
+            <th>时间</th>
+            <th>渠道号</th>
+            <th>安装数</th>
+            <th>总充值金额</th>
+
+            <th>代理收益</th>
+            <th>代理分成比例(%)</th>
+
+        </tr>
+        </thead>
+        <tbody>
+
+        <foreach name="users" item="vo">
+            <tr>
+                <td>{$vo.data_time}</td>
+                <td>
+                     <if condition="$agent['agent_level'] eq '1'">
+                         {$agent.channel}
+                  <else/>
+                         {$agent.channel_agent}
+                  </if>
+                </td>
+                <td>{$vo.registered}</td>
+                <td>{$vo.money} 元</td>
+                <td>
+                   <if condition="$agent['agent_level'] eq '1'">
+                        {$vo.agent_earnings}
+                  <else/>
+                        {$vo.earnings} 
+                  </if>
+                  元</td>
+                <td>{$agent.commission}</td>
+            </tr>
+        </foreach>
+        </tbody>
+    </table>
+    <div class="pagination">{$page}</div>
+</div>
+<script src="__STATIC__/js/admin.js"></script>
+</body>
+</html>

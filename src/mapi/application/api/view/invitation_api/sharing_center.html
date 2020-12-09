@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>邀请奖励</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="__STATIC__/css/bootstrap.min.css" rel="stylesheet">
+    <link href="__STATIC__/css/sharing_center.css" rel="stylesheet">
+</head>
+
+<body>
+<div class="body_a">
+  <div class="body_top_txt_right href" data-href="/mapi/public/index.php/api/invitation_api/index/uid/{$data.uid}"><img src="__STATIC__/img/5.png"></div>
+  <div class="body_top_txt">我的分享中心</div>
+
+  <div class="body_a_content">
+    <div class="body_a_content_a">邀请人数</div>
+    <div class="body_a_content_b"><span>{$data['sum']|default='0'}</span>人</div>
+  </div>
+  <div class="hr"></div>
+  <div class="body_a_content_right">
+    <div class="body_a_content_a">推广收入</div>
+    <div class="body_a_content_b"><span>{$data['reward_total']|default='0'}</span>元</div>
+  </div>
+  <div class="body_a_bottom">
+    <div class="body_a_zq body_a_z href" data-href="/mapi/public/index.php/api/invitation_api/index/uid/{$data.uid}" >邀请赚钱</div>
+    <div class="hra"></div>
+    <div class="body_a_xj body_a_zq href" data-href="/mapi/public/index.php/api/invitation_api/rewards/uid/{$data.uid}" >领取现金</div>
+  </div>
+</div>
+<div class="body_b body_b_a href" data-href="/mapi/public/index.php/api/invitation_api/detailed/uid/{$data.uid}" >
+  <img class="body_b_left" src="__STATIC__/img/1.png">
+  <div class="body_b_content">奖励明细</div>
+  <div class="body_b_right">今日收入{$data['daynum'] | default='0'}元</div>
+  <img class="body_b_right_img" src="__STATIC__/img/6.png">
+</div>
+<div class="body_b body_b_a href" data-href="/mapi/public/index.php/api/invitation_api/invitation_user_sex/uid/{$data.uid}/type/1" >
+  <img class="body_b_left" src="__STATIC__/img/3.png">
+  <div class="body_b_content">我邀请的男性</div>
+  <div class="body_b_right body_b_right_a">{$data['invite_reg_reward_man'] | default='0'}人</div>
+  <img class="body_b_right_img" src="__STATIC__/img/6.png">
+</div>
+<div class="body_b body_b_c href" data-href="/mapi/public/index.php/api/invitation_api/invitation_user_sex/uid/{$data.uid}/type/2">
+  <img class="body_b_left" src="__STATIC__/img/4.png">
+  <div class="body_b_content">我邀请的女性</div>
+  <div class="body_b_right body_b_right_a">{$data['invite_reg_reward_female'] | default='0'}人</div>
+  <img class="body_b_right_img" src="__STATIC__/img/6.png">
+</div>
+
+<div class="button href"  data-href="/mapi/public/index.php/api/invitation_api/index/uid/{$data.uid}">邀请好友,赚现金奖励！</div>
+<script src="__STATIC__/js/jquery-1.10.2.min.js"></script>
+
+<script>
+    $(".href").click(function(){
+        var url=$(this).attr("data-href");
+        window.location.href=url;
+    })
+</script>
+</body>
+</html>

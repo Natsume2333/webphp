@@ -1,0 +1,80 @@
+<include file="public@header"/>
+<style>
+    .gift-img{width:150px;height:60px}
+    .gift-img img{width:100%;height:100%;}
+    .gift-in input{width:25px;}
+    .js-ajax-form{margin-top:30px;}
+</style>
+</head>
+<body>
+<div class="wrap js-check-wrap">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="javascript:;">联系人列表</a></li>
+        <li><a href="{:url('web/contactAdd')}">添加联系人</a></li>
+    </ul>
+
+    <form class="js-ajax-form" action="{:url('web/upd')}" method="post">
+
+        <table class="table table-hover table-bordered table-list">
+            <thead>
+            <tr>
+               
+                <th>ID</th>
+                <th>名称</th>
+                <th>手机号</th>
+                <th>邮箱</th>
+                <th>添加时间</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tfoot>
+            <foreach name="data" id="vo">
+                <tr>
+                    <td>{$vo.id}</td>
+                    <td>{$vo.name}</td>
+                    <td>{$vo.c_phone}</td>
+                    <td>{$vo.email}</td>
+                    <td>{$vo.addtime | date="Y-m-d H:i:s",###}</td>
+                    <td>
+                        <a href="{:url('web/contactEdit',array('id'=>$vo.id))}">修改</a> |
+                        <a href="javescript:;" class="del" data-id="{$vo.id}">删除</a>
+                    </td>
+                </tr>
+            </foreach>
+            </tfoot>
+        </table>
+        
+    </form>
+
+</div>
+<script src="__STATIC__/js/layer/layer.js" rel="stylesheet"></script>
+<script>
+    $(".del").click(function(){
+        var id=$(this).attr('data-id');
+        layer.confirm('确定删除？', {
+            btn: ['确定','取消'] //按钮
+        }, function(){
+            $.ajax({
+                url: "{:url('web/contactDel')}",
+                type: 'post',
+                dataType: 'json',
+                data: {id: id},
+                success: function (data) {
+                    if(data =='1'){
+                        layer.msg("删除成功",{time: 2000, icon:1},function(){
+                            window.location.reload();
+                        });
+                    }else{
+                        layer.msg("删除失败",{time: 2000, icon:2});
+                    }
+                }
+            });
+
+        });
+    })
+    /*$(".btn-primary").click(function(){
+        $(".js-ajax-form").submit();
+    })*/
+</script>
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>邀请赚钱</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="__STATIC__/css/invitation.css" rel="stylesheet">
+    <link href="__STATIC__/css/bootstrap.min.css" rel="stylesheet">
+
+    <script src="__STATIC__/js/jquery-1.10.2.min.js"></script>
+    <script src="__STATIC__/js/iscroll.js"></script>
+
+</head>
+<body>
+<div class="new_invitation_income new_invitation_color">
+    <div class="new_invitation_income_name">总收益</div>
+    <div class="new_invitation_income_money">{$sum} 元</div>
+</div>
+<div class="new_invitation_income_title">
+    <div class="new_invitation_income_title_name">用户昵称</div>
+    <div class="new_invitation_income_title_name">收益</div>
+    <div class="new_invitation_income_title_name">时间</div>
+</div>
+<!--收益明细-->
+<div id="wrapper" class="col-xs-12 pad inviter-ul" style="height: calc(100% - 12em)!important;" >
+    <div class="scroller">
+        <ul>
+            {volist name="data" id="v"}
+            <li>
+                <div class="col-xs-4 pad inviter-ul-name text-center">{$v['user_nickname']}</div>
+                <div class="col-xs-3 pad inviter-ul-name text-center">{$v['money']}元</div>
+                <div class="col-xs-5 pad inviter-ul-time text-center">{$v['create_time'] |date="Y-m-d",###}</div>
+            </li>
+
+            {/volist}
+        </ul>
+        <div class="more"><i class="pull_icon"></i><span>上拉加载...</span></div>
+    </div>
+</div>
+
+
+<script>
+    var uid="{$uid}";
+    var myscroll = new iScroll("wrapper",{
+        onScrollMove:function(){
+            if (this.y<(this.maxScrollY)) {
+                $('.pull_icon').addClass('flip');
+                $('.pull_icon').removeClass('loading');
+                $('.more span').text('释放加载...');
+            }else{
+                $('.pull_icon').removeClass('flip loading');
+                $('.more span').text('上拉加载...')
+            }
+            if (this.y>(this.minScrollY)) {
+
+            }
+        },
+        onScrollEnd:function(){
+            if ($('.pull_icon').hasClass('flip')) {
+                $('.pull_icon').addClass('loading');
+                $('.more span').text('加载中...');
+                pullUpAction();
+            }
+
+
+        },
+        onRefresh:function(){
+            $('.more').removeClass('flip');
+            $('.more span').text('上拉加载...');
+        }
+
+    });
+    var page="1";
+    function pullUpAction(){
+        setTimeout(function(){
+            $.ajax({
+                url:'/mapi/public/index.php/api/invitation_api/income_page',
+                type:'get',
+                data:{uid:uid,page:page},
+                dataType:'json',
+                success:function(data){
+                    var html='';
+                    if(data.length >0){
+                        for (var i = 0; i < data.length; i++) {
+                            html+='<li><div class="col-xs-4 pad inviter-ul-name text-center">'+data[i]['user_nickname']+'</div><div class="col-xs-3 pad inviter-ul-name text-center">'+data[i]['money']+' 元</div><div class="col-xs-5 pad inviter-ul-time text-center">'+getMyDate(data[i]['create_time'])+'</div></li>';
+                        }
+                        $('.scroller ul').append(html);
+                        myscroll.refresh();
+                    }else{
+                        $('.more span').text('暂无数据...');
+                    }
+                    page++;
+                },
+
+            })
+            myscroll.refresh();
+        }, 1000)
+    }
+    if ($('.scroller').height()<$('#wrapper').height()) {
+        $('.more').hide();
+        myscroll.destroy();
+    }
+    //jq转换时间
+    function getMyDate(str){
+        var oDate = new Date(str),
+            oYear = oDate.getFullYear(),
+            oMonth = oDate.getMonth()+1,
+            oDay = oDate.getDate(),
+            oHour = oDate.getHours(),
+            oMin = oDate.getMinutes(),
+            oSen = oDate.getSeconds(),
+            oTime = oYear +'-'+ getzf(oMonth) +'-'+ getzf(oDay) +' '+ getzf(oHour) +':'+ getzf(oMin);//最后拼接时间
+        return oTime;
+    };
+    //补0操作
+    function getzf(num){
+        if(parseInt(num) < 10){
+            num = '0'+num;
+        }
+        return num;
+    }
+    $(".href").click(function(){
+        var url=$(this).attr("data-href");
+        window.location.href=url;
+    })
+
+</script>
+</body>
+</html>

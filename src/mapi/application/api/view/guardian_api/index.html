@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+
+    <link href="__STATIC__/css/bootstrap.min.css" rel="stylesheet">
+    <link href="__STATIC__/css/guardian.css" rel="stylesheet">
+    <script src="__STATIC__/js/jquery-1.10.2.min.js"></script>
+
+    <title>守护列表</title>
+</head>
+<body class="guardian_index">
+<div class="guardian_list col-xs-12 pad">
+
+    <div  class="guardian_user_list col-xs-12 pad">
+
+        {volist name="list" id="v" key="k"}
+                <div class="col-xs-12 guardian_user_bottom ">
+                    <div class="guardian_user_img ">
+                        <img src="{$v.avatar}"/>
+                    </div>
+                    <div class="guardian_user_name">
+                        <div class="guardian_user_title">{$v.user_nickname}</div>
+                        <div class="guardian_user_coin">贡献值：{$v.gift_count|default='0'}</div>
+                    </div>
+                    <div class="guardian_user_right_list">
+                        {if condition="$k <=3"}
+                            <div class="guardian_user_img_number guardian_user_img_list">{$k}</div>
+                        {else/}
+                            <div class="guardian_user_img_number guardian_user_img_bg">{$k}</div>
+                        {/if}
+                    </div>
+                </div>
+        {/volist}
+
+    </div>
+
+
+    <div class="guardian_user col-xs-12 ">
+        <div class="guardian_user_img ">
+            <img src="{$user_info['avatar']}"/>
+        </div>
+        <div class="guardian_user_name">
+            <div class="guardian_user_title">{$user_info['user_nickname']}</div>
+            <div class="guardian_user_coin">
+                    {if condition="$list_user"}
+                       贡献值：{$list_user['gift_count']|default='0'}
+                    {else/}
+                        未开通
+                    {/if}
+            </div>
+        </div>
+        <div class="guardian_user_right">
+            {if condition="$user_info['is_auth'] neq 1"}
+                <a href="{:url('guardian_api/buy')}?uid={$user['uid']}&token={$user['token']}&hostid={$user['hostid']}">
+                    {if condition="$list_user"}
+                    <div class="guardian_user_btn">续费</div>
+                    {else/}
+                    <div class="guardian_user_btn">购买</div>
+                    {/if}
+                </a>
+            {/if}
+        </div>
+    </div>
+</div>
+</body>
+</html>

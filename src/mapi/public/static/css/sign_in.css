@@ -1,0 +1,50 @@
+body,html{font-size:12px;margin:0;padding:0;position: relative;width:100%;height:100%;}
+.sign_in{width:90%;height:35em;background: url('../img0/qiandao_bg.png') no-repeat; background-size: 100% 100%;position: absolute;bottom:23%;left:5%;}
+.sign_in_title{margin:2em 30% 1em;width:40%;height: 3em;background: url('../img0/qiandaoyouli_.png') no-repeat; background-size: contain;}
+.sign_in_count{width:16em;height:3em;line-height: 3em;background: rgba(255,255,255,0.3);margin:0 auto;text-align: center;border-radius: 2em;color:#fff;font-size: 13px;}
+.sign_in_count span{color:#FFC600;font-weight: bold;font-size: 16px;}
+ul,li{padding:0px;list-style:none;}
+
+.sign_in_ul ul{width: calc(100% - 1em);margin-left:1em;}
+.sign_in_ul_li{width:22%;margin:1em 0.5em 0em 0;height:8em;background:url('../img0/qiandao_zuanshi.png')no-repeat;background-size: 100% 100%;float:left;border-radius: 0.5em; position: relative;}
+.sign_in_ul_li_day{width:61%;height:2em;line-height: 1.5em;text-align: center;color:#fff;transform:scale(0.8);}
+.sign_in_ul_li_diamond{width:100%;height:1.5em;line-height: 2em;text-align: center;color:#fff;margin-top: 2.8em;transform:scale(0.9);}
+.sign_in_ul_li_integral{width:100%;height:1.5em;line-height: 1.5em;text-align: center;color:#fff;transform:scale(0.9);}
+
+.sign_in_ul_li2{width:45%;margin:1em 0.5em 0em 0;height:8em;background: rgba(255,255,255,0.3);float:left;border-radius: 0.5em; position: relative;}
+.sign_in_ul_li2_bg{position: absolute;width:100%;height: 135%;top:-35%;left:0;text-align: center;}
+.sign_in_ul_li2_bg img{max-height:100%;max-width:100%;}
+.sign_in_ul_li_surprised{position: absolute;bottom: 0;left:0;width:100%;height:2em;line-height: 2em;text-align: center;color:#fff;}
+
+.sign_in_btn{width: 60%;height:3em;line-height: 3em;background: #FFCE1B;color:#323232;position: absolute;bottom: 1em;left: 20%;text-align: center;border-radius: 2em;	font-size: 14px;cursor: pointer;}
+.sign_in_btn0{width: 60%;height:3em;line-height: 3em;background: #B5B4B4;color:#323232;position: absolute;bottom: 1em;left: 20%;text-align: center;border-radius: 2em;	font-size: 14px;cursor: pointer;}
+.sign_in_receive{position: absolute;width: 100%;height: 100%;top:0;left: 0;background: rgba(0,0,0,0.5);border-radius:0.5em; display: none;}
+.sign_in_receive_name{width:62%;height:1.5em;line-height: 1.5em;text-align: center;border:1px solid #fff;color:#fff;margin:55% auto;transform: skew(31deg, -31deg);}
+.receive .sign_in_receive{display: block;}
+.sign_in_receive_name2{width:40%;height:1.5em;line-height: 1.5em;text-align: center;border:1px solid #fff;color:#fff;margin:25% auto;transform: skew(31deg, -31deg);}
+
+.sign_in_over{display: none;}
+.sign_in_over_day{width:100%;height:18em;text-align: center;}
+.sign_in_over_day img{height: 100%;}
+.sign_in_over_status{width:100%;font-size: 18px;color:#fff;text-align: center;height:1.5em;font-weight: bold;}
+.sign_in_over_name{width:100%;height:3em;line-height: 3em;text-align: center;color:#fff;font-size: 16px;    font-weight: bold;}
+.sign_in_over_name span{color:#FFCE1B;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

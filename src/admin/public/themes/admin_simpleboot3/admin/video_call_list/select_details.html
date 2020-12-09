@@ -1,0 +1,69 @@
+<include file="public@header"/>
+</head>
+<body>
+<div class="wrap js-check-wrap">
+
+    <form class="js-ajax-form">
+        <table class="table table-hover table-bordered table-list">
+            <tfoot>
+
+                <tr>
+                    <td>本次通话消费：</td>
+                    <td><a href="javascript:viod(0);" class="select_video" data-id="{$list.id}" data-type="1">{$list.coin}</a></td>
+                </tr>
+                <tr>
+                    <td>本次通话收益：</td>
+                    <td><a href="javascript:viod(0);" class="select_video" data-id="{$list.id}" data-type="1">{$list.profit}</a></td>
+                </tr>
+                <tr>
+                    <td>本次通话礼物消费：</td>
+                    <td><a href="javascript:viod(0);" class="select_video" data-id="{$list.id}" data-type="2">{$list.total_coin}</a></td>
+                </tr>
+                <tr>
+                    <td>本次通话收益：</td>
+                    <td><a href="javascript:viod(0);" class="select_video" data-id="{$list.id}" data-type="2">{$list.total_profit}</a></td>
+                </tr>
+                <tr>
+                    <td>本次通话总消费：{$list.sum_coin}</td>
+
+                    <td>本次通话总收益：{$list.sum_profit}</td>
+
+                </tr>
+
+            </tfoot>
+        </table>
+
+    </form>
+</div>
+<script src="__STATIC__/js/layer/layer.js" rel="stylesheet"></script>
+<script src="__STATIC__/js/admin.js"></script>
+<script>
+    $(".select_video").click(function(){
+
+        id=$(this).attr("data-id");
+        type=$(this).attr("data-type");
+        if(type =='1'){
+            layer.open({
+                type: 2,
+                title: '查看通话记录详情',
+                shadeClose: true,
+                shade: 0.8,
+                area: ['100%', '100%'],
+                content: '/admin/public/admin/video_call_list/select_del/id/' + id //iframe的url
+            });
+        }else{
+            layer.open({
+                type: 2,
+                title: '查看通话礼物详情',
+                shadeClose: true,
+                shade: 0.8,
+                area: ['100%', '100%'],
+                content: '/admin/public/admin/video_call_list/select_call/id/' + id //iframe的url
+            });
+        }
+
+    });
+
+</script>
+</body>
+</html>

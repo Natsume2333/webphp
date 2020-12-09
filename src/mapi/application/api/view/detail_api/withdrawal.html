@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>提现记录</title>
+
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <link href="__STATIC__/css/detail.css" rel="stylesheet">
+    <link href="__STATIC__/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="dis">
+
+<div class="col-xs-12 disciple-tab">
+
+    {volist name="result" id="v"}
+    <div class="col-xs-12  disciple-tab1" >
+        <div class="col-xs-10  creal">提现金额: {$v.money|default='0'} 元 <span>({$v.income} {$config['val']})</span></div>
+        <div class="col-xs-2 creal  text-right">
+            状态
+        </div>
+        <div class="col-xs-6 creal detail-tabcol2">{$v.create_time | date="Y-m-d H:i:s",###}</div>
+        <div class="col-xs-6 creal detail-tabcol2 text-right detail-tabcol1"> {if condition="$v.status eq 0"}审核中{elseif condition="$v.status eq 1"/}成功{else/}失败{/if} </div>
+    </div>
+    {/volist}
+</div>
+
+<script src="__STATIC__/js/jquery-1.10.2.min.js"></script>
+<script src="__STATIC__/layer/layer.js" rel="stylesheet"></script>
+
+<script>
+    $(function () {
+
+        // 页数
+        var page = {$p};
+        var uid = {$uid};
+        var config="{$config['val']}";
+        var isscroll = true;
+        $(window).scroll(function () {
+            srollPos = $(this).scrollTop();
+            totalheight = parseFloat($(window).height()) + parseFloat(srollPos);
+            if (($(document).height() - 50) <= totalheight && isscroll) {
+
+                isscroll = false;
+                getlistmore();
+            }
+        });
+
+        function getlistmore() {
+            $.ajax({
+                type: 'POST',
+                url: "{:url('detail_api/withdrawal')}",
+                data: {'page': page, 'uid': uid},
+                dataType: 'json',
+                success: function (data) {
+                    console.log(data);
+                    if (data.length > 0) {
+                        var html = '';
+                        for (var i = 0; i < data.length; i++) {
+
+                            html += ' <div class="col-xs-12  disciple-tab1" ><div class="col-xs-10  creal">提现金额：';
+                            html +=data[i]['money']+' 元 <span>('+data[i]['income']+config+')</span>';
+
+                            html += '</div><div class="col-xs-2 creal text-right">状态</div><div class="col-xs-6 creal detail-tabcol2">'+data[i]['create_time']+'</div><div class="col-xs-6 creal detail-tabcol2 text-right detail-tabcol1">';
+
+                            if(data[i]['status'] =='0') {
+                                html += '审核中';
+                            }else if(data[i]['status'] =='1'){
+                                html += '成功';
+                            }else{
+                                html += '失败';
+                            }
+                            html +='</div></div>';
+
+                        }
+
+                        $(".disciple-tab").append(html);
+                        page++;
+
+                        isscroll = true;
+                    }
+
+
+                }
+            });
+        }
+
+
+    })
+</script>
+</body>
+</html>
+

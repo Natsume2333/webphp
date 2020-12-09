@@ -1,0 +1,53 @@
+<include file="public@header" />
+</head>
+<body>
+<div class="wrap js-check-wrap">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="{:url('agent/userlist')}">注册用户列表</a></li>
+    </ul>
+    <form class="well form-inline margin-top-20" method="post" action="{:url('agent/registered')}">
+        用户ID:
+        <input type="text" class="form-control" name="user_id" style="width: 120px;" value="{$data.user_id}" placeholder="请输入用户ID">
+        渠道:
+        <input type="text" class="form-control" name="channel" style="width: 120px;" value="{$data.channel}" placeholder="请输入渠道">
+        子渠道:
+        <input type="text" class="form-control" name="channel_agent_link" style="width: 120px;" value="{$data.channel_agent_link}" placeholder="请输入账号">
+       时间:
+        <input type="text" class="form-control js-bootstrap-date" name="starttime" value="{$data['starttime']|default=''}" style="width: 140px;" autocomplete="off">-
+        <input type="text" class="form-control js-bootstrap-date" name="endtime" value="{$data['endtime']|default=''}" style="width: 140px;" autocomplete="off"> &nbsp; &nbsp;
+
+        <input type="submit" class="btn btn-primary" value="搜索" />
+        <a class="btn btn-danger" href="{:url('agent/registered')}">清空</a>
+    </form>
+    <table class="table table-hover table-bordered">
+        <thead>
+        <tr>
+            <th width="50">ID</th>
+            <th>{:lang('USERNAME')}</th>
+            <th>渠道</th>
+            <th>子渠道号</th>
+            <th>注册时间</th>
+            <th>充值总金额</th>
+
+        </tr>
+        </thead>
+        <tbody>
+
+        <foreach name="users" item="vo">
+            <tr>
+                <td>{$vo.id}</td>
+                <td>{$vo.user_nickname}</td>
+                <td>{$vo.channel|default='无'}</td>
+                <td>{$vo.link_id|default='无'}</td>
+                <td>{:date('Y-m-d',$vo['create_time'])}</td>
+                <td>{$vo['summoney']|default='0'} 元</td>
+
+            </tr>
+        </foreach>
+        </tbody>
+    </table>
+    <div class="pagination">{$page}</div>
+</div>
+<script src="__STATIC__/js/admin.js"></script>
+</body>
+</html>

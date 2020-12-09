@@ -1,0 +1,91 @@
+<include file="public@header"/>
+</head>
+<body>
+<div class="wrap js-check-wrap">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="javascript:;">邀请收益明细</a></li>
+    </ul>
+    <form class="well form-inline margin-top-20" name="form1" method="post" action="">
+
+        邀请人ID:
+        <input type="text" class="form-control" name="user_id" style="width: 200px;"
+               value="{$request.user_id|default=''}" placeholder="请输入被邀请人ID...">
+        被邀请人ID:
+        <input type="text" class="form-control" name="invite_user_id" style="width: 200px;"
+               value="{$request.invite_user_id|default=''}" placeholder="请输入被邀请人ID...">
+        邀请码:
+        <input type="text" class="form-control" name="invite_code" style="width: 200px;"
+               value="{$request.invite_code|default=''}" placeholder="请输入邀请码...">
+        消费记录ID:
+        <input type="text" class="form-control" name="c_id" style="width: 200px;"
+               value="{$request.c_id|default=''}" placeholder="请输入消费记录ID">
+        <div style="margin-top:20px;">
+            时间:
+            <input type="text" class="form-control js-bootstrap-datetime" name="start_time" value="{$request.start_time|default=''}" style="width: 140px;" autocomplete="off">-
+            <input type="text" class="form-control js-bootstrap-datetime" name="end_time" value="{$request.end_time|default=''}" style="width: 140px;" autocomplete="off"> &nbsp; &nbsp;
+
+            <input type="submit" class="btn btn-primary" value="搜索" onclick='form1.action="{:url('InviteManage/income_index')}";form1.submit();'/>
+
+            <input type="button" class="btn btn-primary from_export" style="background-color: #1dccaa;" value="导出" onclick='form1.action="{:url('InviteManage/export')}";form1.submit();'>
+        </div>
+    </form>
+    <font color="red">
+        1.邀请的女性收益先按照后台收益比例计算出对应收益积分， 再将积分按照后台的邀请收益兑换比例计算成人民币，而邀请男性是直接将充值总额进行比例计算所得。
+    </font>
+    <br/>
+    <font color="red">
+        2.当收益记录是男性充值时"收益积分数量"为0。
+    </font>
+    <br/>
+    <font color="red">
+        3."总收益或充值"字段意思，当收益是女性用户带来，改字段显示的是女性的总收入积分，当为男性带来的时，显示的是本次男性的充值总额。
+    </font>
+    <form class="js-ajax-form" action="" method="post">
+        <table class="table table-hover table-bordered table-list">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>邀请用户（ID）</th>
+                <th>被邀请用户（ID）</th>
+                <th>总收益或充值</th>
+                <th>收益积分数量</th>
+                <th>收益人民币</th>
+                <th>充值订单（ID）</th>
+                <th>消费记录（ID）</th>
+                <th>收益时间</th>
+            </tr>
+            </thead>
+            <tfoot>
+            <foreach name="list" id="vo">
+                <tr>
+                    <td>{$vo.id}</td>
+                    <td>{$vo.user_nickname}({$vo.user_id})</td>
+                    <td>{$vo.invite_user_nickname}({$vo.invite_user_id})</td>
+                    <td>{$vo.total_coin}
+                        (
+                        <if condition="$vo['type'] eq '1'">
+                            收益奖励
+                            <elseif condition="$vo['type'] eq '2'"/>
+                            充值奖励
+                            <else/>
+                            其他
+                        </if>
+                        )
+                    </td>
+                    <td>{$vo.income}</td>
+                    <td>{$vo.money}</td>
+                    <td>{$vo.order_id}</td>
+                    <td>{$vo.c_id}</td>
+                    <td>{$vo.create_time | date="Y-m-d H:i:s",###}</td>
+
+                </tr>
+            </foreach>
+            </tfoot>
+        </table>
+        <ul class="pagination">{$page|default=''}</ul>
+    </form>
+</div>
+<script src="__STATIC__/js/admin.js"></script>
+
+</body>
+</html>

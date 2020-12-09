@@ -1,0 +1,58 @@
+<include file="public@header" />
+</head>
+<body>
+	<div class="wrap">
+		<ul class="nav nav-tabs">
+			<li><a href="{:url('agent/index')}">渠道</a></li>
+			<li><a href="{:url('agent/add')}">添加渠道</a></li>
+			<li class="active"><a>编辑渠道</a></li>
+		</ul>
+		<form method="post" class="form-horizontal js-ajax-form margin-top-20" action="{:url('agent/editPost')}">
+			<div class="form-group">
+				<label for="input-user_login" class="col-sm-2 control-label"><span class="form-required">*</span>渠道账号</label>
+				<div class="col-md-6 col-sm-10">
+					<input type="text" class="form-control" id="input-user_login" name="agent_login" value="{$agent_login}">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="input-user_pass" class="col-sm-2 control-label"><span class="form-required">*</span>{:lang('PASSWORD')}</label>
+				<div class="col-md-6 col-sm-10">
+					<input type="text" class="form-control" id="input-user_pass" name="agent_pass" value="" placeholder="******">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="input-user_login" class="col-sm-2 control-label"><span class="form-required">*</span>提成比例(%)</label>
+				<div class="col-md-6 col-sm-10">
+					<input type="text" class="form-control" id="input-user_login" name="commission" placeholder="提成比例(%)" value="{$commission}">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="input-user_login" class="col-sm-2 control-label"><span class="form-required">*</span>子渠道号</label>
+				<div class="col-md-6 col-sm-10">
+					<input type="text" class="form-control" id="input-user_login" name="channel_agent" placeholder="子渠道号" value="{$channel_agent}">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label"><span class="form-required">*</span>状态</label>
+				<div class="col-md-6 col-sm-10">
+					<label class="checkbox-inline">
+						<input value="1" type="radio" name="status" <if condition="$status eq 1">checked</if>>账号正常
+					</label>
+						<label class="checkbox-inline">
+							<input value="0" type="radio" name="status"  <if condition="$status eq 0"> checked </if>>账号已封
+						</label>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+					<input type="hidden" name="id" value="{$id}" />
+					<input type="hidden" name="channel" value="{$channel}" />
+					<button type="submit" class="btn btn-primary js-ajax-submit">{:lang('SAVE')}</button>
+					<a class="btn btn-default" href="javascript:history.back(-1);">{:lang('BACK')}</a>
+				</div>
+			</div>
+		</form>
+	</div>
+	<script src="__STATIC__/js/admin.js"></script>
+</body>
+</html>

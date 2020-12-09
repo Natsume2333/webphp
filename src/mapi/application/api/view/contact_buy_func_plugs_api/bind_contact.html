@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>设置联系方式</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <link href="__STATIC__/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <div class="form-group">
+        <label>设置微信账号</label>
+        <input type="text" class="form-control" id="wx_number" placeholder="微信账号" value="{$user_info.wx_number}">
+    </div>
+    <div class="form-group">
+        <label>设置微信账号价格</label>
+        <input type="number" class="form-control" id="wx_number_price" placeholder="微信价格"
+               value="{$user_info.wx_price}">
+    </div>
+    <div class="form-group">
+        <label>设置QQ账号</label>
+        <input type="text" class="form-control" id="qq_number" placeholder="QQ账号" value="{$user_info.qq_number}">
+    </div>
+    <div class="form-group">
+        <label>设置QQ账号价格</label>
+        <input type="number" class="form-control" id="qq_number_price" placeholder="QQ价格"
+               value="{$user_info.qq_price}">
+    </div>
+    <div class="form-group">
+        <label>设置手机号码</label>
+        <input type="text" class="form-control" id="phone_number" placeholder="手机号码"
+               value="{$user_info.phone_number}">
+    </div>
+    <div class="form-group">
+        <label>设置手机价格</label>
+        <input type="number" class="form-control" id="phone_number_price" placeholder="手机价格"
+               value="{$user_info.phone_price}">
+    </div>
+    <input type="hidden" class="form-control" id="uid" value="{$user_info.id}">
+    <input type="hidden" class="form-control" id="token" value="{$token}">
+    <button id="btn_save" class="btn btn-primary btn-lg btn-block">保存</button>
+</div>
+
+</body>
+
+<script src="__STATIC__/js/jquery-1.10.2.min.js"></script>
+<script src="__STATIC__/layer/mobile/layer.js" rel="stylesheet"></script>
+<script type="text/javascript">
+    $("#btn_save").click(function () {
+        var wx_number = $('#wx_number').val();
+        var wx_number_price = $('#wx_number_price').val();
+        var qq_number = $('#qq_number').val();
+        var qq_number_price = $('#qq_number_price').val();
+        var phone_number = $('#phone_number').val();
+        var phone_number_price = $('#phone_number_price').val();
+        var uid = $('#uid').val();
+        var token = $('#token').val();
+
+        $.ajax({
+            url: "/mapi/public/index.php/api/contact_buy_func_plugs_api/save_contact",
+            type: 'post',
+            dataType: 'json',
+            data: {
+                wx_number: wx_number,
+                wx_number_price: wx_number_price,
+                qq_number: qq_number,
+                qq_number_price: qq_number_price,
+                phone_number: phone_number,
+                phone_number_price: phone_number_price,
+                uid: uid,
+                token: token
+            },
+            success: function (data) {
+                layer.open({
+                    content: data.msg
+                    , skin: 'msg'
+                    , time: 2 //2秒后自动关闭
+                });
+                if (data.code == '1') {
+                    setTimeout(function () {
+                        window.location.reload();
+                    }, 2000);
+                }
+            }
+        });
+    });
+</script>
+
+</html>

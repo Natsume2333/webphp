@@ -1,0 +1,68 @@
+<include file="public@header"/>
+</head>
+<body>
+<div class="wrap js-check-wrap">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="javascript:;">手动充值记录</a></li>
+        <li><a href="{:url('refill/add_recharge')}">手动充值</a></li>
+    </ul>
+
+    <form class="well form-inline margin-top-20" method="post" action="{:url('Refill/recharge')}">
+        会员ID:
+        <input type="text" class="form-control" name="uid" style="width: 130px;"
+               value="{$recharge.uid|default=''}" placeholder="请输入会员id...">
+        类型：
+        <select name="type" id="sex" style="width:130px;height:30px;margin-right:10px;">
+            <option value="0">全部</option>
+            <option value="1" <if condition="$recharge.type eq 1"> selected='selected' </if> >增加</option>
+            <option value="2" <if condition="$recharge.type eq 2"> selected='selected' </if> >减少</option>
+        </select>
+        用户类型：
+        <select name="user_type" id="user_type" style="width:130px;height:30px;margin-right:10px;">
+            <option value="0">全部</option>
+            <option value="1" <if condition="$recharge.user_type eq 1"> selected='selected' </if> >金币</option>
+            <option value="2" <if condition="$recharge.user_type eq 2"> selected='selected' </if> >收益</option>
+            <option value="3" <if condition="$recharge.user_type eq 3"> selected='selected' </if> >邀请收益</option>
+        </select>
+        时间:
+        <input type="text" class="form-control js-bootstrap-datetime" name="start_time" value="{:input('request.start_time')}" style="width: 140px;" autocomplete="off">-
+        <input type="text" class="form-control js-bootstrap-datetime" name="end_time" value="{:input('request.end_time')}" style="width: 140px;" autocomplete="off"> &nbsp; &nbsp;
+        <input type="submit" class="btn btn-primary" value="搜索"/>
+    </form>
+
+    <form class="js-ajax-form" method="post">
+
+        <table class="table table-hover table-bordered table-list">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>会员(ID)</th>
+                <th>金币数</th>
+                <th>类型</th>
+                <th>用户类型</th>
+                <th>操作时间</th>
+            </tr>
+            </thead>
+            <tfoot>
+            <php>
+                $type=array(1=>'增加',2=>'减少');
+                $user=array(1=>'金币',2=>'收益',3=>'邀请收益');
+            </php>
+            <foreach name="list" id="vo">
+                <tr>
+                    <td>{$vo.id}</td>
+                    <td>{$vo.user_nickname}({$vo.uid})</td>
+                    <td>{$vo.coin}</td>
+                    <td>{$type[$vo.type]}</td>
+                    <td>{$user[$vo.user_type]}</td>
+                    <td>{$vo.addtime | date="Y-m-d H:i:s",###}</td>
+                </tr>
+            </foreach>
+            </tfoot>
+        </table>
+        <ul class="pagination">{$page|default=''}</ul>
+    </form>
+</div>
+<script src="__STATIC__/js/admin.js"></script>
+</body>
+</html>

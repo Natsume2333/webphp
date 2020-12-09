@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="__STATIC__/css/invitation.css" rel="stylesheet">
+    <link href="__STATIC__/css/bootstrap.min.css" rel="stylesheet">
+    <script src="__STATIC__/js/jquery-1.10.2.min.js"></script>
+    <script src="__STATIC__/js/iscroll.js"></script>
+
+    <title>推广明细</title>
+    <style>
+        .inviter-ul-name{padding-right:0px!important;}
+        .invitater_wrapper,.new_invitation_detail_new{width:100%!important;}
+        .new_invitation_title{width:30%!important;}
+        .new_invitation_title_one{width:40%!important;}
+    </style>
+</head>
+<body class="inviter_border">
+<div class="inviter_btn_name">
+    <div class="inviter_btn_name_div">
+        <div class="inviter_btn_name_type"  data-href="/mapi/public/index.php/api/invitation_api/inviter/uid/{$uid}/type/1">邀请用户</div>
+        <div class="inviter_btn_name_type"  data-href="/mapi/public/index.php/api/invitation_api/inviter/uid/{$uid}/type/2">收益记录</div>
+    </div>
+</div>
+<div class="new_invitation_detail_new">
+    {if $type==2 }
+    <div class="new_invitation_title new_invitation_title_one">(ID)推广用户</div>
+    <div class="new_invitation_title">总收益(元)</div>
+    <div class="new_invitation_title">时间</div>
+    {else}
+    <div class="new_invitation_title new_invitation_title_one">(ID)推广用户名</div>
+    <div class="new_invitation_title">总收益(元)</div>
+    <div class="new_invitation_title">推广时间</div>
+    {/if}
+
+</div>
+<div class="invitater_wrapper" style="overflow: hidden;">
+    <div id="wrapper" class="col-xs-12 pad inviter-ul">
+        <div class="scroller">
+            <ul>
+                {if $type==2 }
+                {volist name="list" id="v"}
+                <li>
+                    <div class="col-xs-5 inviter-ul-name"> ({$v['id']}){$v['user_nickname']}</div>
+                    <div class="col-xs-3 inviter-ul-name">{$v['money']}</div>
+                    <div class="col-xs-4 pad inviter-ul-time">{$v['create_time'] |date="Y/m/d",###}</div>
+                </li>
+
+                {/volist}
+                {else}
+                {volist name="list" id="v"}
+                <li>
+                    <div class="col-xs-5 inviter-ul-name"> ({$v['id']}){$v['user_nickname']}</div>
+                    <div class="col-xs-3 inviter-ul-name">{$v['money']}</div>
+                    <div class="col-xs-4 pad inviter-ul-time">{$v['create_time'] |date="Y/m/d",###}</div>
+                </li>
+
+                {/volist}
+                {/if}
+
+
+            </ul>
+            <div class="more"><i class="pull_icon"></i><span>上拉加载...</span></div>
+        </div>
+    </div>
+</div>
+<script>
+    var uid="{$uid}";
+    var type="{$type}";
+    if(type ==2){
+        $(".inviter_btn_name_type").eq(1).addClass("inviter_btn_color");
+    }else{
+        $(".inviter_btn_name_type").eq(0).addClass("inviter_btn_color");
+    }
+    $(".inviter_btn_name_type").click(function(){
+        var url=$(this).attr("data-href");
+        window.location.href=url;
+    })
+    var myscroll = new iScroll("wrapper",{
+        onScrollMove:function(){
+            if (this.y<(this.maxScrollY)) {
+                $('.pull_icon').addClass('flip');
+                $('.pull_icon').removeClass('loading');
+                $('.more span').text('释放加载...');
+            }else{
+                $('.pull_icon').removeClass('flip loading');
+                $('.more span').text('上拉加载...')
+            }
+            if (this.y>(this.minScrollY)) {
+
+            }
+        },
+        onScrollEnd:function(){
+            if ($('.pull_icon').hasClass('flip')) {
+                $('.pull_icon').addClass('loading');
+                $('.more span').text('加载中...');
+                pullUpAction();
+            }
+        },
+        onRefresh:function(){
+            $('.more').removeClass('flip');
+            $('.more span').text('上拉加载...');
+        }
+
+    });
+    var page="1";
+    function pullUpAction(){
+        setTimeout(function(){
+            $.ajax({
+                url:'/mapi/public/index.php/api/invitation_api/inviter_page',
+                type:'get',
+                data:{uid:uid,page:page,type:type},
+                dataType:'json',
+                success:function(data){
+
+                    var html='';
+                    if(data.length >0){
+                        for (var i = 0; i < data.length; i++) {
+                            html+='<li><div class="col-xs-5 inviter-ul-name">('+data[i]['id']+')'+data[i]['user_nickname']+'</div><div class="col-xs-3 inviter-ul-name">'+data[i]['money']+'</div><div class="col-xs-4 pad inviter-ul-time">'+getMyDate(data[i]['create_time'])+'</div></li>';
+                        }
+                        $('.scroller ul').append(html);
+                        myscroll.refresh();
+                    }else{
+                        $('.more span').text('暂无数据...');
+                    }
+                    page++;
+                },
+            })
+            myscroll.refresh();
+        }, 1000)
+    }
+    if ($('.scroller').height()<$('#wrapper').height()) {
+        $('.more').hide();
+        myscroll.destroy();
+    }
+    //jq转换时间
+    function getMyDate(str){
+
+        var str=str* 1000;
+        oDate = new Date(str),
+            oYear = oDate.getFullYear(),
+            oMonth = oDate.getMonth()+1,
+            oDay = oDate.getDate(),
+            oHour = oDate.getHours(),
+            oMin = oDate.getMinutes(),
+            oSen = oDate.getSeconds(),
+            oTime = oYear +'/'+ getzf(oMonth) +'/'+ getzf(oDay);//最后拼接时间
+
+        return oTime;
+    };
+    //补0操作
+    function getzf(num){
+        if(parseInt(num) < 10){
+            num = '0'+num;
+        }
+        return num;
+    }
+</script>
+</body>
+</html>

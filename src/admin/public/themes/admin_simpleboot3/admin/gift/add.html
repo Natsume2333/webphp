@@ -1,0 +1,116 @@
+<include file="public@header"/>
+<style type="text/css">
+    .pic-list li {
+        margin-bottom: 5px;
+    }
+
+    .gift {
+        margin-top: 40px;
+    }
+
+    #gift {
+        width: 30%;
+        height: 35px;
+        border-color: #dce4ec;
+        color: #a5b6c6;
+    }
+</style>
+
+</head>
+<body>
+<div class="wrap js-check-wrap">
+    <ul class="nav nav-tabs">
+        <li><a href="{:url('gift/index')}">礼物列表</a></li>
+        <li class="active"><a href="javascript:;">添加礼物分类</a></li>
+    </ul>
+    <form action="{:url('gift/addPost')}" method="post">
+        <div class="row gift">
+            <div class="col-md-8  col-md-offset-2">
+                <table class="table table-bordered">
+                    <tr>
+                        <th>礼物名称 <span class="form-required">*</span></th>
+                        <td>
+                            <input class="form-control" type="text" name="post[name]"
+                                   id="title" required value="{$gift.name |default=''}" placeholder="请输入礼物名称"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>礼物类型<span class="form-required">*</span></th>
+                        <td>
+                            <select name="post[type]" id="gift">
+                                <option value="1">普通礼物</option>
+                                <!--<option value="2" <if condition="$gift['type'] eq '2'"> selected = "selected" </if>>连续礼物</option>-->
+                                <!--<option value="3" <if condition="$gift['type'] eq '3'"> selected = "selected" </if>>动画svga</option>-->
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>是否全频道通知<span class="form-required">*</span></th>
+                        <td>
+                            <select name="post[is_all_notify]" id="is_all_notify">
+                                <option value="0" <if condition="$gift['is_all_notify'] eq '0'"> selected = "selected" </if>>否</option>
+                                <option value="1" <if condition="$gift['is_all_notify'] eq '1'"> selected = "selected" </if>>是</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>排序<span class="form-required">*</span></th>
+                        <td>
+                            <input class="form-control" type="text" name="post[orderno]" style="width:100px;"
+                                   required value="{$gift.orderno |default=''}" placeholder="排序号"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>需要的金币数 <span class="form-required">*</span></th>
+                        <td><input class="form-control" type="text" name="post[coin]" id="source"
+                                   value="{$gift.coin |default=''}"
+                                   placeholder="请输入金币数"></td>
+                    </tr>
+                    <tr>
+                        <th>礼物图片<span class="form-required">*</span></th>
+                        <td>
+                            <div style="text-align: center;">
+                                <input type="hidden" name="post[img]" id="thumbnail" value="{$gift['img'] |default=''}">
+                                <a href="javascript:uploadOneImage('图片上传','#thumbnail');">
+                                    <if condition="$gift['img']">
+                                        <img src="{$gift['img']}"
+                                             id="thumbnail-preview"
+                                             width="135" style="cursor: pointer"/>
+                                        <else/>
+                                        <img src="__TMPL__/public/assets/images/default-thumbnail.png"
+                                             id="thumbnail-preview"
+                                             width="135" style="cursor: pointer"/>
+                                    </if>
+
+                                </a>
+                                <input type="button" class="btn btn-sm btn-cancel-thumbnail" value="取消图片">
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                <input type="hidden" name="id" value="{$gift.id |default=''}"/>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-primary js-ajax-submit">{:lang('SAVE')}</button>
+                        <a class="btn btn-default" href="{:url('gift/index')}">{:lang('BACK')}</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
+<script type="text/javascript" src="__STATIC__/js/admin.js"></script>
+<script>
+    $(function () {
+
+        $('.btn-cancel-thumbnail').click(function () {
+            $('#thumbnail-preview').attr('src', '__TMPL__/public/assets/images/default-thumbnail.png');
+            $('#thumbnail').val('');
+        });
+
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>直播</title>
+    <link rel="stylesheet" href="vendor/bootstrap.min.css">
+    <script src="__TMPL__/public/assets/js/jquery-1.10.2.min.js"></script>
+    <script src="//imgcache.qq.com/open/qcloud/video/vcplayer/TcPlayer-2.2.1.js" charset="utf-8"></script>
+</head>
+
+<body>
+<div id="id_video" style="width:100%; height:auto;"></div>
+<script language="javascript">
+
+    var player =  new TcPlayer('id_video', {
+        "flv": "{$video['pull_url']}", //增加了一个flv的播放地址，用于PC平台的播放 请替换成实际可用的播放地址
+        "autoplay" : true,      //iOS下safari浏览器，以及大部分移动端浏览器是不开放视频自动播放这个能力的
+        "coverpic" : "http://www.test.com/myimage.jpg",
+        "width" :  '480',//视频的显示宽度，请尽量使用视频分辨率宽度
+        "height" : '320'//视频的显示高度，请尽量使用视频分辨率高度
+    });
+
+</script>
+</body>
+</html>

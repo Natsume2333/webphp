@@ -1,0 +1,84 @@
+<include file="public@header"/>
+
+<style>
+    .js-ajax-form {
+        margin-top: 30px;
+    }
+</style>
+</head>
+<body>
+<div class="wrap js-check-wrap">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="javascript:;">形象标签列表</a></li>
+        <li><a href="{:url('evaluate/add_image_label')}">添加形象标签分类</a></li>
+    </ul>
+
+    <form class="js-ajax-form" action="{:url('evaluate/list_order_image_label')}" method="post">
+
+        <table class="table table-hover table-bordered table-list">
+            <thead>
+            <tr>
+                <th>排序</th>
+                <th>ID</th>
+                <th>标签名称</th>
+                <th>类型</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tfoot>
+            <foreach name="list" id="vo">
+                <tr>
+                    <td><input type="text" name="list_orders[{$vo.id}]" value="{$vo.sort}"></td>
+                    <td>{$vo.id}</td>
+                    <td>{$vo.name}</td>
+                    <td>
+                        <if condition="$vo['type'] eq '1'">
+                            女
+                            <else/>
+                            男
+                        </if>
+                    </td>
+                
+                    <td>
+                        <a href="{:url('evaluate/add_image_label',array('id'=>$vo.id))}">修改</a> |
+                        <a href="javescript:;" class="del" data-id="{$vo.id}">删除</a>
+                    </td>
+                </tr>
+            </foreach>
+            </tfoot>
+        </table>
+        <button type="button" class="btn btn-primary" style="margin-top:20px;"> 排 序</button>
+    </form>
+
+</div>
+<script src="__STATIC__/js/layer/layer.js" rel="stylesheet"></script>
+<script>
+    $(".del").click(function () {
+        var id = $(this).attr('data-id');
+        layer.confirm('确定删除？', {
+            btn: ['确定', '取消'] //按钮
+        }, function () {
+            $.ajax({
+                url: "{:url('evaluate/del_image_label')}",
+                type: 'post',
+                dataType: 'json',
+                data: {id: id},
+                success: function (data) {
+                    if (data == '1') {
+                        layer.msg("删除成功", {time: 2000, icon: 1}, function () {
+                            window.location.reload();
+                        });
+                    } else {
+                        layer.msg("删除失败", {time: 2000, icon: 2});
+                    }
+                }
+            });
+
+        });
+    })
+    $(".btn-primary").click(function () {
+        $(".js-ajax-form").submit();
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>邀请人做师傅</title>
+
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <link href="__STATIC__/css/invite.css" rel="stylesheet">
+    <link href="__STATIC__/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="col-xs-12 invite creal">
+    <img src="__STATIC__/image/top_cover.png">
+</div>
+<div class="col-xs-12 invite_jj"></div>
+<div class="col-xs-12 invite_ff">
+  <div class="col-xs-10 col-xs-offset-1 creal invite_yqbj ">
+      <div class="col-xs-3 creal_ri">
+          <div class="col-xs-12  invite_img"></div>
+      </div>
+      <div class="col-xs-6 text-center invite_wz">邀请方法</div>
+      <div class="col-xs-3 creal_le">
+          <div class="col-xs-12 invite_img"></div>
+      </div>
+      <div class="col-xs-12 invite_y">
+          点击下方邀请好友做徒弟，分享链接，下载app登录注册，即可完成邀请
+          点击下方邀请好友做徒弟，分享链接，下载app登录注册，即可完成邀请点击下方邀请好友做徒弟，分享链接，下载app登录注册，即可完成邀请
+      </div>
+  </div>
+    <div class="col-xs-10 col-xs-offset-1 creal invite_jiang">
+        <div class="col-xs-6 creal-5">
+            <div class="col-xs-12">
+                <div class="col-xs-2  creal invite_img"></div>
+                <div class="col-xs-8  creal text-center invite_myjl">我的奖励</div>
+                <div class="col-xs-2  creal invite_img"></div>
+            </div>
+            <div class="col-xs-12 creal invite_zhc">
+                <div class="col-xs-12  invite_ztd">每邀请一位好友成功注册 </div>
+                <div class="col-xs-12 creal invite_ztd">男性奖励:<span> {$coin.master}聊币</span></div>
+                <div class="col-xs-12 creal invite_ztd">女性奖励:<span> {$coin.master}积分</span></div>
+            </div>
+        </div>
+        <div class="col-xs-6 creal-6">
+            <div class="col-xs-12">
+                <div class="col-xs-2  creal invite_img"></div>
+                <div class="col-xs-8  creal text-center invite_myjl">好友奖励</div>
+                <div class="col-xs-2  creal invite_img"></div>
+            </div>
+            <div class="col-xs-12 invite_zhc">
+                <div class="col-xs-12  invite_ztd">男性注册成功 </div>
+                <div class="col-xs-12 creal invite_ztd">即奖励:<span> {$coin.registered}聊币</span></div>
+                <div class="col-xs-12  invite_ztd">女性注册成功 </div>
+                <div class="col-xs-12 creal invite_ztd">即奖励:<span> {$coin.women}积分</span></div>
+
+            </div>
+        </div>
+        <div class="col-xs-12">
+            <div class="col-xs-2 col-xs-offset-2 creal invite_img"></div>
+            <div class="col-xs-4  creal text-center invite_myjl">收徒奖励</div>
+            <div class="col-xs-2  creal invite_img"></div>
+        </div>
+        <div class="col-xs-12 invite_shif">
+           师傅可以获得徒弟赚取积分 / 聊币所对应的{$coin.disciple}%作伪额外奖励
+        </div>
+    </div>
+
+    <div class="col-xs-10 col-xs-offset-1 creal invite_xq">
+        <div class="col-xs-6">
+            <div class="col-xs-12 creal invite_leij text-center">累计获得奖励</div>
+            <div class="col-xs-12 text-center invite_je">{$coin.sum}</div>
+        </div>
+        <div class="col-xs-6 invite-lef">
+            <a href="#">
+            <div class="col-xs-12 creal invite_leij text-center">当前徒弟人数</div>
+            <div class="col-xs-12 text-center invite_je">{$coin.teacher}</div>
+            </a>
+        </div>
+    </div>
+    <div class="col-xs-10 col-xs-offset-1 creal invite_td text-center">
+        点击"当前徒弟人数"可查看当前徒弟贡献详情
+    </div>
+    <div class="col-xs-10 col-xs-offset-1 creal invite_yqbj">
+        <div class="col-xs-3 creal_ri">
+            <div class="col-xs-12  invite_img"></div>
+        </div>
+        <div class="col-xs-6 text-center invite_wz">锁师规则</div>
+        <div class="col-xs-3 creal_le">
+            <div class="col-xs-12 invite_img"></div>
+        </div>
+        <div class="col-xs-12 invite_y">
+            <div class="col-xs-12 creal">
+              <div class="col-xs-1">1：</div>
+                <div class="col-xs-10 creal">邀请用户成功注册即可锁定成为该用户的师傅七天（以该用户注册成功之日算起）；</div>
+            </div>
+            <div class="col-xs-12 creal">
+                <div class="col-xs-1">2：</div>
+                <div class="col-xs-10 creal">赠送从未被锁师的用户师徒礼物即可锁定成为该用户的师傅七天；</div>
+            </div>
+            <div class="col-xs-12 creal">
+                <div class="col-xs-1">3：</div>
+                <div class="col-xs-10 creal">师徒锁定每七日更新一次，若师傅的贡献值不足徒弟的近七日贡献榜总值的5%，则师徒关系解除，解除后土地的近七日贡献榜TOP1自动成为新师傅；</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xs-10 col-xs-offset-1 creal invite_yqbj invite_yqbj_bun" >
+        <div class="col-xs-3 creal_ri">
+            <div class="col-xs-12  invite_img"></div>
+        </div>
+        <div class="col-xs-6 text-center invite_wz">师徒奖励排行榜</div>
+        <div class="col-xs-3 creal_le">
+            <div class="col-xs-12 invite_img"></div>
+        </div>
+
+
+    <div class="col-xs-12" id="wrapper">
+        <div class="col-xs-12 invite_y scroller">
+            <div class="uls col-xs-12 creal">
+                {volist name="cal" id="v" key="i"}
+                      <div class="col-xs-12 creal invite_pah">
+                          <div class="col-xs-3 creal">
+                              <div class="col-xs-5 creal_le text-right ">{$i}</div>
+                              <div class="col-xs-6 creal invite_tou"><img src="{$v.avatar}"></div>
+                          </div>
+                          <div class="col-xs-5 creal nick">{$v.user_nickname}</div>
+                          <div class="col-xs-4 creal invite_jqi">
+                              <i class="glyphicon glyphicon-jpy"></i> {$v.sum}
+                          </div>
+                      </div>
+                {/volist}
+
+         </div>
+            <div class="more"><i class="pull_icon"></i><span>上拉加载...</span></div>
+        </div>
+
+    </div>
+    </div>
+</div>
+<div class="col-xs-12 creal invite_bott">
+    <div class="col-xs-6 creal invite_bott1 text-center">招收新人做徒弟</div>
+    <div class="col-xs-6 creal invite_bott2 text-center">邀请好友做徒弟</div>
+</div>
+<script src="__STATIC__/js/jquery-1.10.2.min.js"></script>
+<script src="__STATIC__/js/iscroll.js"></script>
+<script>
+
+    $(function(){
+        var p={$p};
+        var myscroll = new iScroll("wrapper",{
+            onScrollMove:function(){
+                if (this.y<(this.maxScrollY)) {
+                    $('.pull_icon').addClass('flip');
+                    $('.pull_icon').removeClass('loading');
+                    $('.more span').text('释放加载...');
+                }else{
+                    $('.pull_icon').removeClass('flip loading');
+                    $('.more span').text('上拉加载...')
+                }
+                if (this.y>(this.minScrollY)) {
+
+                }
+            },
+            onScrollEnd:function(){
+                if ($('.pull_icon').hasClass('flip')) {
+                    $('.pull_icon').addClass('loading');
+                    $('.more span').text('加载中...');
+                    pullUpAction();
+                }
+            },
+            onRefresh:function(){
+                $('.more').removeClass('flip');
+                $('.more span').text('上拉加载...');
+            }
+
+        });
+
+        function pullUpAction(){
+
+            setTimeout(function(){
+                $.ajax({
+                    url:"{:url('invite/getmore')}",
+                    type:'post',
+                    data:{'page':p},
+                    dataType:'json',
+                    success:function(data){
+
+                       if(data['cal'].length >0){
+                           for (var i = 0; i < data['cal'].length; i++) {
+                               var pm=data.page+i+1;
+                               var  avatar=data['cal'][i]['avatar'];
+                               var  user_nickname=data['cal'][i]['user_nickname'];
+                               var  sum=data['cal'][i]['sum'];
+                               dat="<div class='col-xs-12 creal invite_pah'><div class='col-xs-3 creal'><div class='col-xs-5 creal_le text-right'>"+pm+"</div> <div class='col-xs-6 creal invite_tou'><img src='"+avatar+"'></div></div><div class='col-xs-5 nick creal'>"+user_nickname+"</div> <div class='col-xs-4 creal invite_jqi'><i class='glyphicon glyphicon-jpy'></i>"+sum+"</div></div>";
+                               $('.invite_y .uls').append(dat);
+                           }
+
+                       }
+                        p++;
+
+                        myscroll.refresh();
+
+                    },
+                    error:function(){
+                        console.log('error');
+                    },
+                })
+                p++;
+            }, 1000)
+        }
+        if ($('.scroller').height()<$('#wrapper').height()) {
+            $('.more').hide();
+            myscroll.destroy();
+        }
+
+
+    })
+</script>
+
+
+</body>
+</html>

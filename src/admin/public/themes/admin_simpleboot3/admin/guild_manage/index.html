@@ -1,0 +1,135 @@
+<include file="public@header"/>
+<style>
+    .guild-img {
+        width: 50px;
+        height: 50px
+    }
+
+    .js-ajax-form {
+        margin-top: 30px;
+    }
+</style>
+</head>
+<body>
+<div class="wrap js-check-wrap">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="javascript:;">公会列表</a></li>
+        <li><a href="{:url('guild_manage/add')}">增加公会</a></li>
+    </ul>
+    <div style="width: 100%;height:30px;line-height: 30px;color:#f45e5e;padding-left: 20px;margin:15px 0;">*公会提成收益单位:积分</div>
+    <form class="js-ajax-form" action="{:url('guild_manage/upd')}" method="post" style="margin-top: 0px;">
+
+        <table class="table table-hover table-bordered table-list">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>公会名称</th>
+                <th>公会介绍</th>
+                <th>公会LOGO</th>
+                <th>分成模式</th>
+                <th>提成比例</th>
+                <th>收益</th>
+                <th>总收益</th>
+                <th>状态</th>
+                <th>创建时间</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tfoot>
+            <foreach name="list" id="vo">
+                <tr>
+                    <td>{$vo.id}</td>
+                    <td>{$vo.name}</td>
+                    <td>{$vo.introduce}</td>
+                    <td><img class="guild-img" src="{$vo.logo}" alt=""></td>
+                    <td>
+                        <if condition="$vo['type'] eq '1'">
+                            平台
+                            <else/>
+                            主播
+                        </if>
+                    </td>
+                    <td>{$vo.commission}</td>
+                    <td>{$vo.earnings}</td>
+                    <td>{$vo.total_earnings}</td>
+                    <td>
+                        <if condition="$vo['status'] eq '0'">
+                            审核中
+                            <elseif condition="$vo['status'] eq '1'"/>
+                            审核通过
+                            <else/>
+                            审核拒绝
+                        </if>
+                    </td>
+  
+                    <td>{$vo.create_time | date="Y-m-d H:i:s",###}</td>
+                    <td>
+                        <if condition="$vo['status'] eq '0'">
+                            <a href="{:url('guild_manage/auditing',array('id'=>$vo.id,'status'=>1))}">通过</a>
+                            <a href="{:url('guild_manage/auditing',array('id'=>$vo.id,'status'=>2))}">拒绝</a>
+                            |
+                            <elseif condition="$vo['status'] eq '1'"/>
+                            <a href="#" onclick="select_join_list({$vo.id})">查看主播列表</a>
+                            <a href="#" onclick="select_info({$vo.id})">查看信息</a>
+                            <else/>
+
+                        </if>
+                        <a href="{:url('guild_manage/add',array('id'=>$vo.id))}">编辑</a>
+                        <a href="javescript:;" class="del" data-id="{$vo.id}">删除</a>
+                    </td>
+                </tr>
+            </foreach>
+            </tfoot>
+        </table>
+    </form>
+
+</div>
+<script src="__STATIC__/js/layer/layer.js" rel="stylesheet"></script>
+<script>
+    function select_info(id) {
+        layer.open({
+            type: 2,
+            title: '公会信息',
+            shadeClose: true,
+            shade: 0.8,
+            area: ['50%', '60%'],
+            content: "{:url('guild_manage/select_guild_info')}?id=" + id //iframe的url
+        });
+    }
+
+    function select_join_list(id) {
+        layer.open({
+            type: 2,
+            title: '主播列表',
+            shadeClose: true,
+            shade: 0.8,
+            area: ['65%', '70%'],
+            content: "{:url('guild_manage/join_list')}?id=" + id //iframe的url
+        });
+    }
+     $(".del").click(function(){
+        var id=$(this).attr('data-id');
+        layer.confirm('确定删除？', {
+            btn: ['确定','取消'] //按钮
+        }, function(){
+            $.ajax({
+                url: "{:url('guild_manage/del')}",
+                type: 'post',
+                dataType: 'json',
+                data: {id: id},
+                success: function (data) {
+                    if(data =='1'){
+                        layer.msg("删除成功",{time: 2000, icon:1},function(){
+                            window.location.reload();
+                        });
+                    }else{
+                        layer.msg("删除失败",{time: 2000, icon:2});
+                    }
+                }
+            });
+
+        });
+    })
+</script>
+</body>
+</html>

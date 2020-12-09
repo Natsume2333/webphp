@@ -1,0 +1,51 @@
+<include file="public@header" />
+</head>
+<body>
+	<div class="wrap js-check-wrap">
+		<ul class="nav nav-tabs">
+			<li class="active"><a href="{:url('sign_in/index')}">签到类型</a></li>
+			<if condition="$sign_in_add eq 1">
+			<li><a href="{:url('sign_in/add')}">添加签到类型</a></li>
+			</if>
+		</ul>
+		<table class="table table-hover table-bordered margin-top-20">
+			<thead>
+				<tr>
+					<th width="50">ID</th>
+					<th>奖励(钻石)</th>
+					<th>奖励(积分)</th>
+					<th>状态</th>
+					<th>排序</th>
+					<th>时间</th>
+					<th width="160">{:lang('ACTIONS')}</th>
+				</tr>
+			</thead>
+			<tbody>
+				<foreach name="list" item="vo">
+				<tr>
+					<td>{$vo.id}</td>
+					
+					<td>{$vo.diamonds}</td>
+					<td>{$vo.score}</td>
+					<td>
+						<if condition="$vo.status eq 0">
+                            关闭
+                        <else/>
+                            开启
+                        </if>
+                    </td>
+					<td>{$vo.create_time | date="Y-m-d H:i:s",###}</td>
+					<td>{$vo.sort}</td>
+					<td>
+                        <a href="{:url('sign_in/add',array('id'=>$vo['id']))}">{:lang('EDIT')}</a>
+                        <a href="{:url('sign_in/delete',array('id'=>$vo['id']))}" class="js-ajax-delete">{:lang('DELETE')}</a>
+                    </td>
+				</tr>
+				</foreach>
+			</tbody>
+		</table>
+
+	</div>
+	<script src="__STATIC__/js/admin.js"></script>
+</body>
+</html>

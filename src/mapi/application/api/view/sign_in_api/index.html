@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>签到</title>
+
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <link href="__STATIC__/css/sign_in.css" rel="stylesheet">
+</head>
+<body style="cursor: pointer;">
+
+<div class="sign_in">
+    <div class="sign_in_title"></div>
+    <div class="sign_in_count">连续签到 <span>{$day}天</span> 领取惊喜奖励</div>
+    <div class="sign_in_sel" >
+         <div class="sign_in_ul ">
+            <ul>
+                {volist name="list" id="vo" key="k"}
+                    {if condition="$k neq $day"}
+                    <li class='sign_in_ul_li {if condition="$vo['is_receive'] eq 1"} receive {/if}'>
+                       <div class="sign_in_ul_li_day">第{$k}天</div>
+                       <div class="sign_in_ul_li_diamond">钻石+{$vo['diamonds']}</div>
+                       <div class="sign_in_ul_li_integral">积分+{$vo['score']}</div>
+                       <div class="sign_in_receive">
+                            <div class="sign_in_receive_name">已领取</div>
+                        </div>
+                    </li>
+                    {else/}
+                        <li class="sign_in_ul_li2 {if condition="$vo['is_receive'] eq 1"} receive {/if}">
+                            <div class="sign_in_ul_li2_bg"><img src="__STATIC__/img0/box_kaq.png"/></div>
+                            <div class="sign_in_ul_li_surprised">神秘惊喜奖励</div>
+                             <div class="sign_in_receive">
+                                <div class="sign_in_receive_name2">已领取</div>
+                            </div>
+                        </li>
+                    {/if}
+                {/volist}
+            </ul>
+        </div>
+         {if condition="$is_day_sign eq 0"}
+            <div class="sign_in_btn"> 立即领取</div>
+         {else/}
+            <div class="sign_in_btn0"> 已领取</div>
+         {/if}
+    </div>
+    <div class="sign_in_over sign_show_one" >
+        <div class="sign_in_over_day">
+            <img src="__STATIC__/img0/zhuanshi.png"/>
+        </div>
+        <div class="sign_in_over_status">签到成功</div>
+        <div class="sign_in_over_name">获得 <span></span></div>
+    </div>
+     <div class="sign_in_over sign_show_two">
+        <div class="sign_in_over_day">
+            <img src="__STATIC__/img0/box_kaiqi.png"/>
+        </div>
+        <div class="sign_in_over_status">恭喜，获得惊喜奖励</div>
+        <div class="sign_in_over_name"><span></span></div>
+    </div>
+</div>
+
+<script src="__STATIC__/js/jquery-1.10.2.min.js"></script>
+<script src="__STATIC__/layer/layer.js" rel="stylesheet"></script>
+<script>
+    $(function(){
+        var uid="{$uid}";
+        var token="{$token}";
+      $(".sign_in_btn").click(function(){
+        $.ajax({
+            type: 'GET',
+            url: "{:url('sign_in_api/receive_sign')}",
+            data:{'uid':uid,'token':token},
+            dataType: 'json',
+            success: function(data){
+
+                if(data['code'] != 1){
+                    //提示层
+                    layer.msg(data['msg']);
+                }else{
+                   $(".sign_in_sel").hide();
+                   $(".sign_in_over_name").find("span").html(data['rewards']);
+                    if(data['is_last_day'] ==1){
+                        $(".sign_show_two").show();
+                    }else{
+                        $(".sign_show_one").show();
+                    }
+
+                }
+            }
+        });
+
+      })
+    })
+</script>
+</body>
+</html>

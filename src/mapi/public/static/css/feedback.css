@@ -1,0 +1,76 @@
+body,html{font-size:12px;margin:0;}
+
+.feedback_title{width:100%;height:3em;line-height: 3em;font-weight: 600;color: #5d5d5d;    clear: both;}
+.feedback{width:100%;padding:0 1em;}
+.feedback_title_textarea{width:100%;position: relative;}
+textarea{outline:none;resize:none;border:0!important;background: #efefef;padding:10px;    color: #545454;}
+.feedback_title_maxleng{position: absolute;width:5em;height:1.5em;line-height: 1.5em;bottom:1em;right:1em;color: #717171;    font-size: 12px;font-weight: 100;    text-align: right;}
+.feedback_tel{width:100%;height:4em;}
+.feedback_tel_input{width:100%;height: 4em;line-height: 4em;background: #efefef; border: 0!important;outline:none;padding-left:0.5em;font-size: 12px;}
+.feedback_btn{width:80%;margin:1em auto;background: #f73030;color:#fff;height:3em;line-height: 3em;text-align: center;border-radius: 2em;}
+.feedback_img{width:100%;min-height: 6em;}
+
+#fileBox{
+    margin:1em 0;
+    width:100%;min-height:6em;
+}
+#fileBox label{
+
+    display:block;
+    float:left;
+    height:10em;
+    width:10em;
+    background:url(../image/yuiduiyi.png) no-repeat center;
+    background-size: 100% 100%;
+
+    margin-left: .17rem;
+
+}
+#fileBox .file-btn{
+    height:50px;
+    width:50px;
+    margin:0 .5rem .5rem 0;opacity:0;
+}
+#fileBox .review-box{
+    display:block;
+    float:left;
+    margin-left: .17rem;
+}
+#fileBox .review-box img{
+    height:100%;
+    width:100%;
+    margin:0 .1rem .2rem 0;
+}
+#fileBox .prev-item{
+    position:relative;display:inline-block;width:10em;height:10em;margin-right:0.5em;margin-top:0.5em;
+}
+.clone-dom{margin-top:0.5em;}
+#fileBox .prev-item img{width:100%;height:100%;}
+#fileBox .prev-item .closebtn{
+    position:absolute;
+    right: -1px;
+    top: -4px;
+    display: block;
+    height: 14px;
+    width: 14px;
+    color: #fff;
+    font-size: 16px;
+    line-height:14px;
+    text-align: center;
+    background: red;
+    border-radius: 10px;
+}
+#fileBox .prev-item .closebtn {
+    position: absolute;
+    right: 7px;
+    top: -4px;
+    display: block;
+    height: 14px;
+    width: 14px;
+    color: #fff;
+    font-size: 16px;
+    line-height: 14px;
+    text-align: center;
+    background: #8E8E93;
+    border-radius: 10px;
+}

@@ -1,0 +1,64 @@
+<include file="public@header"/>
+</head>
+<style>
+    #status{    width: 100px;
+        height: 32px;
+        border-color: #dce4ec;
+        color: #aeb5bb;}
+</style>
+<body>
+<div class="wrap js-check-wrap">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="javascript:;">用户签到列表</a></li>
+    </ul>
+    <form class="well form-inline margin-top-20" method="post" action="{:url('sign_in/sign_list')}">
+        用户ID：
+        <input class="form-control" type="text" name="uid" style="width: 200px;" value="{$requery['uid']|default=''}"
+               placeholder="请输入用户ID">
+      
+        时间:
+        <input type="text" class="form-control js-bootstrap-date" name="start_time" value="{$requery['start_time']|default=''}" style="width: 140px;" autocomplete="off">-
+        <input type="text" class="form-control js-bootstrap-date" name="end_time" value="{$requery['end_time']|default=''}" style="width: 140px;" autocomplete="off"> &nbsp; &nbsp;
+        <input type="submit" class="btn btn-primary" value="搜索"/>
+        <a class="btn btn-danger" href="{:url('sign_in/sign_list')}">清空</a>
+    </form>
+    <form class="js-ajax-form" action="{:url('sign_in/sign_list')}" method="post">
+
+        <table class="table table-hover table-bordered table-list">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>用户昵称(ID)</th>
+              
+                <th>奖励(钻石)</th>
+                <th>奖励(积分)</th>
+                <th>签到时间</th>
+                <th>签到天数</th>
+            </tr>
+            </thead>
+            <PHP>
+                $is_fabulous=array('0'=>'否','1'=>'是');
+                $is_free=array('0'=>'否','1'=>'是');
+            </PHP>
+            <tfoot>
+            <foreach name="list" id="vo">
+                <tr>
+                    <td>{$vo.id}</td>
+                    <td>{$vo['user_nickname']}({$vo['uid']})</td>
+                    <td>{$vo['diamonds']}</td>
+                    <td>{$vo['score']}</td>
+                  
+                    <td>{$vo.create_time | date="Y-m-d H:i:s",###}</td>
+                    <td>第 {$vo.day} 天</td>
+                </tr>
+            </foreach>
+            </tfoot>
+        </table>
+        <div class="pagination">{$page}</div>
+    </form>
+</div>
+<script src="__STATIC__/js/layer/layer.js" rel="stylesheet"></script>
+<script src="__STATIC__/js/admin.js"></script>
+
+</body>
+</html>

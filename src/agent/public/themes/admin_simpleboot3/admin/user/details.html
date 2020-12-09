@@ -1,0 +1,17 @@
+<include file="public@header" />
+<link href="__TMPL__/public/assets/simpleboot3/css/announcement.css" rel="stylesheet">
+</head>
+<body  style="background: #fafafa;">
+<div class="wrap">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="{:url('user/announcement')}">公告管理</a></li>
+    </ul>
+    <div class="well form-inline margin-top-20 announcement_title">近 期 公 告</div>
+
+    <div class="announcement_type announcement_type_center">
+      {$users['post_content']}
+    </div>
+
+</div>
+</body>
+</html>

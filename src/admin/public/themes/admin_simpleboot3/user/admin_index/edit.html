@@ -1,0 +1,182 @@
+<include file="public@header"/>
+<style type="text/css">
+    .pic-list li {
+        margin-bottom: 5px;
+    }
+    .gift{margin-top:40px;}
+    #gift{    width: 30%;
+        height: 35px;
+        border-color: #dce4ec;
+        color: #a5b6c6;}
+    .select{width:100px;height:35px;line-height: 35px;}
+</style>
+
+</head>
+<body>
+<div class="wrap js-check-wrap">
+    <ul class="nav nav-tabs">
+        <li><a href="{:url('admin_index/index')}">用户列表</a></li>
+        <li class="active"><a href="javascript:;">编辑信息</a></li>
+    </ul>
+    <form action="{:url('admin_index/edit_post')}" method="post" >
+        <div class="row gift">
+            <div class="col-md-8  col-md-offset-2">
+                <table class="table table-bordered">
+                    <tr>
+                        <th>用户昵称 <span class="form-required">*</span></th>
+                        <td>
+                            <input class="form-control" type="text" name="user_nickname"
+                                   id="user_nickname" required value="{$data.user_nickname |default=''}" placeholder="请输入用户昵称"/>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>性别 <span class="form-required">（最好不要修改,认证后不能修改性别）*</span></th>
+                        <td>
+
+                            <select name="sex" class="sex">
+                                <option value="1">男</option>
+                                <option value="2" <if condition="$data['sex'] eq 2 "> selected="selected" </if>>女</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>自定义价格（视频通话） <span class="form-required">*</span></th>
+                        <td>
+                            <select name="custom_video_charging_coin" class="select">
+                                <option value="0">无</option>
+                                <foreach name="fee" item="v" >
+                                    <option value="{$v['coin']}" <if condition="$data['custom_video_charging_coin'] eq $v['coin'] "> selected="selected" </if> >{$v['coin']} 积分</option>
+                                </foreach>
+                            </select>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>用户头像<span class="form-required">*</span></th>
+                        <td>
+                            <div style="text-align: center;">
+                                <input type="hidden" name="avatar" id="thumbnail" value="{$data['avatar'] |default=''}">
+                                <a href="javascript:uploadOneImage('图片上传','#thumbnail');">
+                                    <if condition="$data['avatar']">
+                                        <img src="{$data['avatar']}"
+                                             id="thumbnail-preview"
+                                             width="135" style="cursor: pointer"/>
+                                        <else/>
+                                        <img src="__TMPL__/public/assets/images/default-thumbnail.png"
+                                             id="thumbnail-preview"
+                                             width="135" style="cursor: pointer"/>
+                                    </if>
+
+                                </a>
+                                <input type="button" class="btn btn-sm btn-cancel-thumbnail" value="取消图片">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>邀请人ID <span class="form-required">*</span></th>
+                        <td>
+                            <input class="form-control" type="text" name="invite_id"
+                                   id="invite_id" required value="{$data.invite_id |default=''}" placeholder="请输入邀请人ID"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>视频通话比例 <span class="form-required">*</span></th>
+                        <td>
+                            <input class="form-control" type="number" name="host_one_video_proportion" step="0.01" min="0" max="1"
+                                   id="host_one_video_proportion" required value="{$data.host_one_video_proportion |default='0'}" placeholder="请输入一对一视频通话比例(例如：0.1)0是后台通用比例"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>购买视频分成比例 <span class="form-required">*</span></th>
+                        <td>
+                            <input class="form-control" type="number" name="host_bay_video_proportion" step="0.01" min="0" max="1"
+                                   id="host_bay_video_proportion" required value="{$data.host_bay_video_proportion |default='0'}" placeholder="请输入购买视频分成比例(例如：0.1)0是后台通用比例"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>赠送礼物分成比例  <span class="form-required">*</span></th>
+                        <td>
+                            <input class="form-control" type="number" name="host_bay_gift_proportion" step="0.01" min="0" max="1"
+                                   id="host_bay_gift_proportion" required value="{$data.host_bay_gift_proportion |default='0'}" placeholder="请输入赠送礼物分成比例(例如：0.1)0是后台通用比例"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>购买私照分成比例 <span class="form-required">*</span></th>
+                        <td>
+                            <input class="form-control" type="number" name="host_bay_phone_proportion" step="0.01" min="0" max="1"
+                                   id="host_bay_phone_proportion" required value="{$data.host_bay_phone_proportion |default='0'}" placeholder="请输入购买私照分成比例(例如：0.1)0是后台通用比例"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>私信消息分成比例 <span class="form-required">*</span></th>
+                        <td>
+                            <input class="form-control" type="number" name="host_direct_messages" step="0.01" min="0" max="1"
+                                   id="host_direct_messages" required value="{$data.host_direct_messages |default='0'}" placeholder="请输入私信消息分成比例(例如：0.1)0是后台通用比例"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>开通守护分成比例 <span class="form-required">*</span></th>
+                        <td>
+                            <input class="form-control" type="text" name="host_guardian_proportion" step="0.01" min="0" max="1"
+                                   id="host_guardian_proportion" required value="{$data.host_guardian_proportion |default='0'}" placeholder="请输入守护分成比例(例如：0.1)0是后台通用比例"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>邀请扣量概率% <span class="form-required">*</span></th>
+                        <td>
+                            <input class="form-control" type="text" name="invite_buckle_probability"
+                                   id="invite_buckle_probability" required value="{$data.invite_buckle_probability |default='0'}" placeholder="请输入1-100的整数(例如：50代表百分之50的几率)"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>在线状态 <span class="form-required">*</span></th>
+                        <td>
+                            <select name="is_online">
+                                <option value="0">下线</option>
+                                <option value="1"  <if condition="$data['is_online'] eq 1"> selected="selected" </if> >上线</option>
+
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>是否认证 <span class="form-required">*</span></th>
+                        <td>
+                            <select name="is_auth">
+                                <option value="0">否</option>
+                                <option value="1"  <if condition="$data['is_auth'] eq 1"> selected="selected" </if> >是</option>
+
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+                <input type="hidden" name="id" value="{$data.id |default=''}"/>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-primary js-ajax-submit">{:lang('SAVE')}</button>
+                        <a class="btn btn-default" href="{:url('admin_index/index')}">{:lang('BACK')}</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
+
+</body>
+<script type="text/javascript" src="__STATIC__/js/admin.js"></script>
+<script>
+    $(function () {
+        var is_auth="{$data['is_auth']}";
+        if(is_auth == 1){
+             $(".sex").attr("disabled","disabled").css("background-color","#EEEEEE;");
+        }
+       
+        $('.btn-cancel-thumbnail').click(function () {
+            $('#thumbnail-preview').attr('src', '__TMPL__/public/assets/images/default-thumbnail.png');
+            $('#thumbnail').val('');
+        });
+
+    });
+</script>
+</html>

@@ -1,0 +1,47 @@
+<include file="public@header" />
+</head>
+<body>
+<div class="wrap">
+    <ul class="nav nav-tabs">
+        <li><a href="{:url('user/link')}">推广链接</a></li>
+        <li class="active"><a href="#">修改下级代理</a></li>
+    </ul>
+    <form class="form-horizontal js-ajax-form margin-top-20" role="form" method="post" action="{:url('User/link_upd')}">
+        <div class="form-group">
+            <label for="input-user-nickname" class="col-sm-2 control-label">渠道号</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" id="input-user-nickname" name="channel" value="{$users['channel']}" readOnly="true">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="input-user-nickname" class="col-sm-2 control-label">推广地址</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" id="input-user-link" name="link" value="{$users['link']}" readOnly="true">
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label for="input-user-nickname" class="col-sm-2 control-label">下级代理ID</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" id="input-user-qq" name="agent_name_id" value="{$users['agent_name_id']|default=''}" placeholder="请输入下级代理ID">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="input-user-nickname" class="col-sm-2 control-label">分成（%）</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" id="input-user-wx" name="next_earnings" value="{$users['next_earnings']|default=''}" placeholder="请输入分成，如 50 则是 50%">
+            </div>
+        </div>
+        <input type="hidden" name="id" value="{$users['id']}"/>
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-primary js-ajax-submit">{:lang('SAVE')}</button>
+            </div>
+        </div>
+    </form>
+</div>
+<script src="__STATIC__/js/admin.js"></script>
+</body>
+</html>

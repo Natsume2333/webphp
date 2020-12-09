@@ -1,0 +1,54 @@
+<include file="public@header"/>
+<style type="text/css">
+    .pic-list li {
+        margin-bottom: 5px;
+    }
+    .gift{margin-top:40px;}
+    #gift{    width: 30%;
+        height: 35px;
+        border-color: #dce4ec;
+        color: #a5b6c6;}
+</style>
+
+</head>
+<body>
+<div class="wrap js-check-wrap">
+    <ul class="nav nav-tabs">
+        <li><a href="{:url('message/index')}">个人消息列表</a></li>
+        <li class="active"><a href="javascript:;">添加个人消息分类</a></li>
+    </ul>
+    <form action="{:url('message/addPost')}" method="post" >
+        <div class="row gift">
+            <div class="col-md-8  col-md-offset-2">
+                <table class="table table-bordered">
+                    <tr>
+                        <th>个人消息标题 <span class="form-required">*</span></th>
+                        <td>
+                            <input class="form-control" type="text" name="post[title]"
+                                   id="title" required value="{$message.title |default=''}" placeholder="请输入个人消息标题"/>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>个人消息内容 <span class="form-required">*</span></th>
+                        <td><textarea class="form-control" name="post[centent]" >{$message.centent |default=''}
+                        </textarea>
+                        </td>
+                    </tr>
+
+                </table>
+                <input type="hidden" name="id" value="{$message.id |default=''}"/>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-primary js-ajax-submit">{:lang('ADD')}</button>
+                        <a class="btn btn-default" href="{:url('message/index')}">{:lang('BACK')}</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

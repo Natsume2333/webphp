@@ -1,0 +1,64 @@
+<include file="public@header"/>
+<style type="text/css">
+
+    .js-ajax-form {
+        margin-top: 30px;
+    }
+</style>
+
+</head>
+<body>
+<div class="wrap js-check-wrap">
+    <ul class="nav nav-tabs">
+        <li><a href="{:url('buckle_sett/buckle_invite_index')}">邀请扣率列表</a></li>
+        <li class="active"><a href="javascript:;">添加扣量规则</a></li>
+    </ul>
+
+    <form class="js-ajax-form" action="{:url('buckle_sett/add_buckle_invite_rule_post')}" method="post">
+
+        <input type="hidden" name="id" value="{$data.id |default=''}"/>
+        <div class="row gift">
+            <div class="col-md-8  col-md-offset-2">
+                <table class="table table-bordered">
+                    <tr>
+                        <th><span class="form-required">注册上限*</span></th>
+                        <td>
+                            <input class="form-control" type="text" name="upper_limit"
+                                   required value="{$data.upper_limit |default=''}" placeholder="注册上限"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><span class="form-required">注册下限*</span></th>
+                        <td>
+                            <input class="form-control" type="text" name="lower_limit"
+                                   required value="{$data.lower_limit |default=''}" placeholder="注册下限"/>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th><span class="form-required">扣单概率%*</span></th>
+                        <td>
+                            <input class="form-control" type="text" name="probability"
+                                   required value="{$data.probability |default=''}" placeholder="请输入1-100的整数"/>
+                        </td>
+                    </tr>
+                </table>
+
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-primary js-ajax-submit">{:lang('SAVE')}</button>
+                        <a class="btn btn-default"
+                           href="{:url('buckle_sett/buckle_invite_index')}">{:lang('BACK')}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<script type="text/javascript" src="__STATIC__/js/admin.js"></script>
+<script>
+
+</script>
+
+</body>
+</html>

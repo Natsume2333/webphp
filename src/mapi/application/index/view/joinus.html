@@ -1,0 +1,161 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>关于布谷鸟一对一商业系统</title>
+    <meta name="Description" content="布谷鸟一对一商业系统，陌生人交友，app，社交应用，聊天赚积分，积分兑奖，聊天赚钱，轨迹，随拍，魅力值，才气值，积分，能量，兑奖，送礼。" />
+    <meta name="Keywords" content="布谷鸟一对一商业系统、收礼等互动形式获取积分，并可将积分兑换成现实奖品的手机应用。本应用支持照片分享、语音聊天、轨迹查询等多款新颖功能，使您在互动中获取更多的乐趣和价值。" />
+    <link rel="stylesheet" href="__STATIC__/css/swiper4.min.css" type="text/css" />
+    <link rel="stylesheet" href="__STATIC__/css/joinus_lct.css" type="text/css" />
+    <script src="__STATIC__/js/jquery2.2.4.min.js"></script>
+    <script src="__STATIC__/js/swiper.min.js"></script>
+    <script src="__STATIC__/js/joinus_lct.js"></script>
+    <script src="__STATIC__/js/joinus_recurit0108.js"></script>
+<script src="__STATIC__/js/counters.js" type="text/javascript"></script></head>
+    <style>
+    code, kbd, pre, samp {
+    font-family: "Microsoft YaHei", Arial, sans-serif;
+    line-height:1.5;
+    word-wrap:break-word;
+    white-space: pre-wrap;
+	word-wrap: break-word;
+}</style>
+<body>
+    <header>
+        <section>
+            <div class="top_part animated fadeInDown">
+                <a href="{:url('/index/index')}" class="a_index ">首页</a>
+                <a href="{:url('/index/abouts')}" class="a_about ">关于我们</a>
+                
+                <a class="a_joinus colorRed" href="{:url('/index/joinus')}">加入我们</a>
+                <a href="{:url('/index/linkus')}" class="a_link">联系我们</a>
+            </div>
+        </section>
+        
+    </header>
+    <section>
+        <div class="swiperlct">
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <img src="__STATIC__/picture/joinus01.jpg" alt="">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="__STATIC__/picture/joinus02.jpg" alt="">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="__STATIC__/picture/joinus03.jpg" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="text_warp_lct">
+            <div class="text_next_lct_show">
+                <div class="tt_lct01">我们努力打造杰出的企业文化，营造愉快的工作氛围，我们坚持创新、共赢、发展的经营理念，如果你热爱互联网行业</div>
+                <div class="tt_lct01">如果你拥有创业激情和梦想，就来加入我们吧！</div>
+                <div class="tt_lct01">在这里，有激情的优秀创始团队；有颇具吸引力的商业模式；富有竞争力的薪资福利； </div>
+                <div class="tt_lct01">国内外旅游奖励和丰富精彩的部门活动； </div>
+                <div class="tt_lct01">五险一金、年度体检、节假日假期福利等等各项福利。 </div>
+                <!-- <div class="tt_lct01 co1">招聘热线：0571-81022379</div>
+                <div class="tt_lct01 co1">简历投递：yangjingru@ipaychat.com</div> -->
+                <div class="tt_lct01 co1">简历投递：hr@ipaychat.com</div>
+                <div class="tt_lct01">注：简历投递格式请以“岗位名称+姓名”作为邮件标题</div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div id="newxlist" class="newxlist">
+            <div class="toplist">
+                <div class="topitem active" onclick="changes(1)">技术类</div>
+                <div class="topitem" onclick="changes(2)">产品类</div>
+                <div class="topitem" onclick="changes(3)">测试类</div>
+                <div class="topitem" onclick="changes(4)">运营类</div>
+                <div class="topitem" onclick="changes(5)">大数据类</div>
+                <div class="topitem" onclick="changes(99)">其他</div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="wrapintroduce" id="wrapintroduce">
+            <div class="list3" id="dingshang">
+                <div class="loi1 w500">职位</div>
+                <div class="loi2 w164">类别</div>
+                <div class="loi3">工作地点</div>
+            </div>
+            <div id="listpart">
+                <div class="partshow active">
+                    <div id="itemlct" class="itemlct">
+                     </div>
+                </div>
+                <div class="partshow" id="product"></div>
+                <div class="partshow" id="test"></div>
+                <div class="partshow" id="operate"></div>
+                <div class="partshow" id="big_data"></div>
+                <div class="partshow" id="others"></div>
+            </div>
+            <div class="pages" id="pages">
+            </div>
+        </div>
+    </section>
+    <div class="foot_bottom2 foot_bottom23">
+        <!-- <a href="aboutus.html" class="gyfl">关于富聊</a> <span class="sp001">|</span>--><span class="sp002">copyright © 2018杭州富聊科技有限公司 版权所有<span class="sp001">|</span> <a href="http://www.miibeian.gov.cn/" target="_blank">ICP证：浙B2-20130232号  网络文化经营许可证-浙网文[2016]0174-074号</a><span class="sp001">|</span><a href="http://jb.ccm.gov.cn/" target="_blank">12318全国文化市场举报网站</a></span>
+    </div>
+    <script src="__STATIC__/js/sea.js"></script>
+    <script>
+    seajs.use('recharge.js?20170214');
+    </script>
+    <script>
+    //Swiper
+    var mySwiper = new Swiper('.swiper-container', {
+        direction: 'horizontal',
+        loop: true,
+        autoplay: 3000
+    });
+
+    //Swiper
+    $('#wrapintroduce').on('click', '.topitems', function() {
+        var _this = $(this);
+        var type = parseInt(_this.attr('data-type'));
+        _this.parent('.itemlct').siblings('.itemlct').find('.bottomitem').hide();
+        if (type == 1) {
+            _this.next('.bottomitem').show();
+            _this.attr('data-type', 2);
+            _this.find('.xiao3 span').addClass('tubiao1');
+        } else {
+            _this.next('.bottomitem').hide();
+            _this.attr('data-type', 1);
+            _this.find('.xiao3 span').removeClass('tubiao1');
+        }
+
+    });
+    $('.topitem').click(function(event) {
+        /* Act on the event */
+        var _this = $(this);
+        var _index = _this.index();
+        $('.topitem').removeClass('active');
+        _this.addClass('active');
+        $('.partshow,.bottomitem').hide();
+        $('.partshow').eq(_index).show();
+    });
+    // console.log($('#newxlist')[0].getBoundingClientRect().top) 723
+    $(window).scroll(function(event) {
+        /* Act on the event */
+        var top=$(window).scrollTop();
+        console.log($(window).scrollTop())
+    //     var top = $('#newxlist')[0].getBoundingClientRect().top;
+        if (top >763) {
+            $('#newxlist').addClass('fixedclass');
+        } else {
+            $('#newxlist').removeClass('fixedclass');
+        };
+    //     console.log(top)
+    });
+    
+    </script>
+
+</body>
+
+</html>

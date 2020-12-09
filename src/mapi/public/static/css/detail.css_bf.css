@@ -1,0 +1,22 @@
+body,html{font-size:12px;height:100%;margin:0;}
+
+.detail-title{height:4.5em;border-bottom: 1px solid #eaeaea;}
+.detail-title1{margin-top:1em;height:2.5em;
+            line-height:2.5em;
+            text-align:center;border-radius: 1.3em;
+            color:#000;background:#f6f6f6;
+            }
+.detail-clo{color: #e81136!important;text-decoration: none!important;border:1px solid #e81136!important;background:#fff; }
+/**/
+.creal{padding:0px!important;}
+.disciple-tab1 div{height:2em;line-height:2em;}
+
+.disciple-tab1{border-bottom:1px solid #ebebeb;margin-top:0.5em;}
+.detail-tabcol1{color:#ff2323;}
+.detail-tabcol2{color:#b3b2b2;font-size:10px;}
+
+.disciple-tab_pm{font-size:10px;}
+.disciple-tab_pm span{color:#ffae0c;}
+.disciple-tab a{color:#565656!important;}
+.box_relative3,.tab-name,box_relative{overflow: hidden;}
+a:active,a:focus{color:#000!important;text-decoration:none!important;}

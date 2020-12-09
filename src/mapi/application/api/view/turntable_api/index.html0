@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>大转盘</title>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <link href="__STATIC__/css/turntableindex.css" rel="stylesheet">
+
+</head>
+<body>
+<div class="content">
+    <div class="bg">
+        <img class="noprize" src="__STATIC__/img/S9VGZU.png">
+        {volist name="list" id="vo" key="k"}
+        <img class="prize{$k} prize" src="{$vo.img}">
+        {/volist}
+        <div class="radio"></div>
+    </div>
+    <div class="statement">
+        <div class="explain">抽奖活动说明：</div>
+        <ul>
+            <li>1、抽奖 <span style="color:#FF7711;">{$sum}</span> 钻石/次</li>
+            <li>2、抽奖钻石/次</li>
+            <li>3、抽奖钻石/次</li>
+        </ul>
+    </div>
+</div>
+<script src="__STATIC__/js/jquery-1.10.2.min.js"></script>
+<script src="__STATIC__/js/jquery.rotate.min.js"></script>
+<script src="__STATIC__/layer/layer.js"></script>
+
+<script>
+
+</script>
+<script type="text/javascript">
+    $('.bg').on('click', function () {
+        var uid = {$uid};
+        var token = "{$token}";
+
+        $.ajax({
+            url: "{:url('turntable_api/turn_post')}",
+            type: 'post',
+            data: {'uid': uid,'token':token},
+            dataType: 'json',
+            success: function (data) {
+
+                if (data.code == 0) {
+                    layer.msg(data.msg);
+                } else {
+                    $('.bg').rotate({
+                        angle: 0,
+                        animateTo: 1440,
+                    });
+                    var num = data.data.order + 1;
+                    var a = 0;
+                    var b = setInterval(function () {
+                        a++;
+                        if (a == 15) {
+                            $('.radio').rotate({
+                                angle: 0,
+                                animateTo: num * 40,
+                                duration: 3000,
+                            });
+                        }
+                        if (a == 47) {
+                            layer.msg(data.msg);
+                        }
+                        if (a == 65) {
+                            clearInterval(b);
+                            //window.location.href = '/mapi/public/index.php/api/turntable_api/index?uid=' + uid;
+                        }
+                    }, 50);
+                }
+            }
+        })
+    })
+</script>
+
+</body>
+</html>

@@ -1,0 +1,73 @@
+
+<include file="public@header"/>
+<style>
+    .js-ajax-form{margin-top:30px;}
+</style>
+</head>
+<body>
+<div class="wrap js-check-wrap">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="javascript:;">vip规则详情列表</a></li>
+        <li><a href="{:url('vip/addrule')}">添加vip规则详情</a></li>
+    </ul>
+
+    <form class="js-ajax-form" action="" method="post">
+
+        <table class="table table-hover table-bordered table-list">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>vip规则详情图标</th>
+                <th>vip规则详情内容</th>
+                <th>排序</th>
+                <th>时间</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tfoot>
+            <foreach name="list" id="vo">
+                <tr>
+                    <td>{$vo.id}</td>
+                    <td><img src="{$vo.img}" style="width:50px;height:50px;"/></td>
+                    <td>{$vo.center}</td>
+                    <td>{$vo.sort}</td>
+                    <td>{$vo.addtime | date="Y-m-d H:i:s",###}</td>
+                    <td>
+                        <a href="{:url('vip/addrule',array('id'=>$vo.id))}">修改</a> |
+                        <a href="javescript:;" class="del" data-id="{$vo.id}">删除</a>
+                    </td>
+                </tr>
+            </foreach>
+            </tfoot>
+        </table>
+    </form>
+</div>
+<script src="__STATIC__/js/admin.js"></script>
+<script src="__STATIC__/js/layer/layer.js" rel="stylesheet"></script>
+<script>
+    $(".del").click(function(){
+        var id=$(this).attr('data-id');
+        layer.confirm('确定删除？', {
+            btn: ['确定','取消'] //按钮
+        }, function(){
+            $.ajax({
+                url: "{:url('vip/delrule')}",
+                type: 'post',
+                dataType: 'json',
+                data: {id: id},
+                success: function (data) {
+                    if(data =='1'){
+                        layer.msg("删除成功",{time: 2000, icon:1},function(){
+                            window.location.reload();
+                        });
+                    }else{
+                        layer.msg("删除失败",{time: 2000, icon:2});
+                    }
+                }
+            });
+
+        });
+    })
+</script>
+</body>
+</html>

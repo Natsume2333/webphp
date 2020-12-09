@@ -1,0 +1,53 @@
+<include file="public@header"/>
+<style type="text/css">
+    .pic-list li {
+        margin-bottom: 5px;
+    }
+    .gift{margin-top:40px;}
+    #gift{    width: 30%;
+        height: 35px;
+        border-color: #dce4ec;
+        color: #a5b6c6;}
+</style>
+
+</head>
+<body>
+<div class="wrap js-check-wrap">
+    <ul class="nav nav-tabs">
+        <li><a href="{:url('message/charge')}">推送记录列表</a></li>
+        <li class="active"><a href="javascript:;">推送消息</a></li>
+    </ul>
+    <form action="{:url('message/push_charge')}" method="post" >
+        <div class="row gift">
+            <div class="col-md-8  col-md-offset-2">
+                <table class="table table-bordered">
+                    <tr>
+                        <th>用户ID <span class="form-required">*</span></th>
+                        <td>
+                            <input class="form-control" type="text" name="touid"
+                                   id="touid"  value="{$message.touid |default=''}" placeholder="请输入用户id"/>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>消息内容 <span class="form-required">*</span></th>
+                        <td><textarea class="form-control" name="centent" ></textarea>
+                        </td>
+                    </tr>
+
+                </table>
+
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-primary js-ajax-submit">{:lang('ADD')}</button>
+                        <a class="btn btn-default" href="{:url('message/charge')}">{:lang('BACK')}</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

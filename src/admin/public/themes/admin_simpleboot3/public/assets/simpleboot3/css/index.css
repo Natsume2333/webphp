@@ -1,0 +1,57 @@
+body{background: #e8e8e8;width:100%;height:100%;padding: 20px !important;}
+.wrap{padding: 0px !important;}
+.bogo_index{float:left;width:80%;min-height:600px;background: #fff;border-radius: 10px;padding:20px;}
+.bogo_index_right{float:left;width:calc(20% - 15px);margin-left:15px;}
+.bogo_index_right_type{cursor: pointer;
+    position: relative;
+    padding: 20px 20px 20px 80px;
+    background-color: #fff;
+    color: #333;}
+.bogo_index_right_type_name{color: #333;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1em;
+    margin-bottom: 5px;}
+.bogo_index_right_type_center{color: #666;
+    font-size: 12px;
+    line-height: 1.5em;}
+.bogo_index_right_type_img{
+    position: absolute;
+    display: inline-block;
+    left: 15px;
+    height: 44px;
+    width: 44px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: bottom;
+}
+.bogo_index_bottom{    margin-bottom: 20px;}
+.bogo_index_right_type_radius{border-radius: 10px;}
+.bogo_index_tel1{background-image: url('../../images/xitong.png');}
+.bogo_index_tel2{background-image: url('../../images/shangye.png');}
+.bogo_index_tel3{background-image: url('../../images/guanfang.png');}
+.bogo_index_title{width:100%;height:50px;line-height: 50px;font-size: 16px;font-weight: 600;color:#585858;}
+.bogo_index_row{padding:20px 80px 10px;position: relative;display: -ms-flexbox; display: flex;border-bottom: 1px solid #eee;}
+.bogo_index_row:before {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    left: 10px;
+    top: 35px;
+    width: 45px;
+    height: 45px;
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    background-image: url('../../images/sprite.png');
+}
+.bogo_img2:before { background-position: 0 -45px;}
+.bogo_img3:before { background-position: 0 -90px;}
+.bogo_img4:before { background-position: 0 -210px;height: 40px;}
+.bogo_img5:before { background-position: 0 -130px;height: 40px;}
+
+.bogo_index_row_type {  color: #333; font-size: 12px;-ms-flex-preferred-size: 25%; flex-basis: 25%; }
+.bogo_index_row_type .amount {cursor: pointer;display: block;font-size: 24px; margin: 6px 0 10px; color: #38f;}
+.bogo_index_row_type .amount-yesterday {color: #999;margin-bottom: 10px;}
+.compare_title{width:100%;height:40px;line-height: 40px;font-size: 13px;}
+.compare_title .fa-long-arrow-up{font-size: 12px;color:#fc0505;}
+.compare_title .fa-long-arrow-down{font-size: 12px;color:#0cb007;}

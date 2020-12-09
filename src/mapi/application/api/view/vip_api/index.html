@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <link href="__STATIC__/css/vip.css" rel="stylesheet">
+    <link href="__STATIC__/css/bootstrap.min.css" rel="stylesheet">
+    <title>购买VIP</title>
+</head>
+<body>
+
+   <div class="div_wrap">
+
+       <div class="div_top">
+           <img class="img-circle head" src="{$user_info.avatar}">
+           <span class="span_name">{$user_info.user_nickname}</span>
+           {if condition="$vip_day gt 0"}
+          <span class="span_vip">VIP : {$vip_day}天后到期</span>
+           {else/}
+           <span class="span_vip">VIP :未开通</span>
+           {/if}
+       </div>
+
+       <div class="div_interval">
+         <span class="span_select_name">请选择VIP服务</span>
+       </div>
+
+       {volist name="list" id="vo" key="k"}
+       <div class="div_item">
+           {if condition="$k ==1"}
+               <div class="text-bgimg color1">{$vo['day_count']}</div>
+           {elseif  condition="$k ==2"/}
+              <div class="text-bgimg color2">{$vo['day_count']}</div>
+           {else/}
+              <div class="text-bgimg color3">{$vo['day_count']}</div>
+           {/if}
+           <div class="text_name">{$vo.name}会员</div>
+           <div class="text_money">
+               <div class="text-money_sum">{$vo.money}{$coin_name}</div>
+              <div class="text-money_day">{$vo.mean}{$coin_name}/天</div>
+
+           </div>
+           <div class="text_buy" onclick="buy_vip('{$vo.id}')">购买</div>
+       </div>
+       {/volist}
+       <div class="div_interval">
+           <span class="span_select_name">VIP尊享特权</span>
+       </div>
+      <div class="vip_privilege">
+           <div class="vip_privilege_type">
+              <div class="vip_privilege_type_img">
+                  <img src="__STATIC__/image/vip_icon_price.png"/>
+              </div>
+              <div class="vip_privilege_type_name">免费观看私照</div>
+          </div>
+
+          <div class="vip_privilege_type">
+              <div class="vip_privilege_type_img">
+                  <img src="__STATIC__/image/vip_icon_video.png"/>
+              </div>
+              <div class="vip_privilege_type_name">免费观看视频</div>
+          </div>
+
+           <div class="vip_privilege_type">
+              <div class="vip_privilege_type_img">
+                  <img src="__STATIC__/image/vip_icon_video.png"/>
+              </div>
+              <div class="vip_privilege_type_name">免费畅聊</div>
+          </div>
+
+      </div>
+   </div>
+
+
+</body>
+<script src="__STATIC__/js/jquery-1.10.2.min.js"></script>
+<script src="__STATIC__/layer/layer.js" rel="stylesheet"></script>
+<script type="text/javascript">
+
+    var __DATA = {uid:"{$uid}",token:"{$token}"};
+    function buy_vip(id) {
+        layer.confirm('是否确定购买？', {
+            btn: ['确定','取消'] //按钮
+        }, function(){
+            $.ajax({
+                type: 'GET',
+                url: "{:url('vip_api/buy_vip')}",
+                data:{'uid':__DATA.uid,'token':__DATA.token,'id':id},
+                dataType: 'json',
+                success: function(data){
+
+                    if(data['code'] != 1){
+                        //提示层
+                        layer.msg(data['msg']);
+                    }else{
+                        layer.msg('购买成功');
+                        setTimeout(function(){window.location.reload();}, 4000);
+
+                    }
+                }
+            });
+
+            layer.close();
+        }, function(){
+            layer.close()
+        });
+    }
+</script>
+</html>

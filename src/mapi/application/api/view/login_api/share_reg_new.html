@@ -1,0 +1,132 @@
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width,height=device-height,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="format-detection" content="telphone=no, email=no">
+    <script src="__STATIC__/js/resize.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/1.11.0/jquery.min.js"></script>
+    <link href="__STATIC__/css/register.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.0/css/jquery-weui.min.css">
+    <title>注册</title>
+
+</head>
+
+<body>
+
+<div class="layout_3">
+    <div class="top_wrap">
+        <div class="top_img">
+            <div class="title_img"><img src="__STATIC__/image/top_txt.png" alt=""></div>
+        </div>
+    </div>
+
+    <div class="form_wrap">
+        <div class="form">
+            <p class="invit_friend">好友：<span class="friend_num" id="nickname">{$user_info.user_nickname}</span>邀请注册</p>
+            <div class="reg2_form">
+                <input class="input1 input" type="number" id="input_phone" placeholder="请输入手机号码">
+                <input class="input2 input" type="number" id="input_verification_code" placeholder="请输入验证码">
+                <input type="hidden" value="{$invite_code}" id="input_invite_code">
+                <button id="btn_send_verification_code" class="code-btn">获取验证码</button>
+                <input type="button" class="register_btn" value="" id="submit">
+            </div>
+            <!--  <p class="agreement"><input type="checkbox" id="check"><label for="check" class="check_box"></label><a href="" class="ag_link">同意《绿萝直播协议》</a></p>  -->
+        </div>
+        <!--
+         <div class="foot">
+             <p class="foot_1">绿萝—花样主播陪你聊，陪你玩</p>
+             <a class="link link_jump" id="url1">APP下载 </a>
+         </div>
+         -->
+    </div>
+
+
+</div>
+
+
+
+<script src="https://cdn.bootcss.com/jquery-weui/1.2.0/js/jquery-weui.min.js"></script>
+<script type="text/javascript">
+
+    $('#submit').click(function () {
+        var mobile = $('#input_phone').val();
+        var input_verification_code = $('#input_verification_code').val();
+        var input_invite_code = $('#input_invite_code').val();
+
+        if(mobile.length != 11){
+            alert("手机号码格式不正确");
+            return;
+        }
+
+        if(input_verification_code.length == 0){
+            alert("验证码格式不正确");
+            return;
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "/mapi/public/index.php/api/login_api/share_reg_insert",
+            data: { mobile: mobile,code:input_verification_code,invite_code:input_invite_code}
+        }).done(function( msg ) {
+            if(msg['code'] == 1){
+                //$.toast(msg['msg'], "text");
+                window.location.href = '/mapi/public/index.php/api/login_api/share_reg_success';
+            }else{
+                alert(msg['msg']);
+            }
+        });
+    })
+
+    $('#btn_send_verification_code').click(function () {
+        send_code();
+
+    });
+
+    //发送验证码
+    function send_code() {
+
+        var mobile = $('#input_phone').val();
+        if(mobile.length != 11){
+            alert("手机号码格式不正确");
+            return;
+        }
+
+        var time = 60;
+        var timer = setInterval(function() {
+            if(time != 0){
+                time --;
+                $('#btn_send_verification_code').html(time);
+            }else{
+                time = 60;
+                $('#btn_send_verification_code').html('获取验证码');
+                $('#btn_send_verification_code').attr('disabled',false);
+                clearTimeout(timer);
+            }
+        }, 1000);
+        $('#btn_send_verification_code').attr('disabled',true);
+
+        $.ajax({
+            type: "POST",
+            url: "/mapi/public/index.php/api/login_api/code",
+            data: { mobile: mobile}
+        }).done(function(msg){
+
+            if(msg['code'] == 1){
+
+                alert(msg['msg']);
+            }else{
+                alert(msg['msg']);
+            }
+        });
+
+    }
+
+</script>
+
+
+</body>
+</html>

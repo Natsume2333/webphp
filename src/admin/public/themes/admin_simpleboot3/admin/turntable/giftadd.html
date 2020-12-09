@@ -1,0 +1,91 @@
+<include file="public@header"/>
+<style type="text/css">
+    .pic-list li {
+        margin-bottom: 5px;
+    }
+    .gift{margin-top:40px;}
+    #gift{    width: 50%;
+        height: 35px;
+        border-color: #dce4ec;
+        color: ;}
+</style>
+
+</head>
+<body>
+<div class="wrap js-check-wrap">
+    <ul class="nav nav-tabs">
+        <li><a href="{:url('turntable/setgift')}">转盘列表</a></li>
+        <li class="active"><a href="javascript:;">设置奖品信息</a></li>
+        <li><a href="{:url('turntable/lottery_info')}">设置抽奖信息</a></li>
+    </ul>
+    <form action="{:url('turntable/addGiftPost')}" class="js-ajax-form" method="post" >
+        <div class="row gift">
+            <div class="col-md-8  col-md-offset-2">
+                <table class="table table-bordered">
+
+                    <tr>
+                        <th>选择礼物<span class="form-required">*</span></th>
+                        <td>
+                            <select name="type" required id="gift">
+                                <option value="">请选择</option>
+                                    <option value="0">未中奖</option>
+                                    <option value="1">一等奖</option>
+                                    <option value="2">二等奖</option>
+                                    <option value="3">三等奖</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>虚拟金币数<span class="form-required">*</span></th>
+                        <td>
+                            <input class="form-control" type="text" name="num" style="width:150px;" required value="10" placeholder="数量" title="默认10" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>中奖概率<span class="form-required">*</span></th>
+                        <td>
+                            <input class="form-control" type="text" name="gl" style="width:150px;" required value="" placeholder="概率总和自定" title="总和自定" />
+
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>图片<span class="form-required">*</span></th>
+                        <td>
+                            <div style="text-align: center;">
+                                <input type="hidden" name="img" id="thumbnail" value="" required />
+                                <a href="javascript:uploadOneImage('图片上传','#thumbnail');">
+                                    <img src="__TMPL__/public/assets/images/default-thumbnail.png" id="thumbnail-preview" width="135" style="cursor: pointer"/>
+                                </a>
+                                <input type="button" class="btn btn-sm btn-cancel-thumbnail" value="取消图片">
+                            </div>
+                        </td>
+                    </tr>
+
+                </table>
+                <input type="hidden" name="id" value=""/>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-primary js-ajax-submit">{:lang('ADD')}</button>
+                        <a class="btn btn-default" href="{:url('turntable/setgift')}">{:lang('BACK')}</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
+<script type="text/javascript" src="__STATIC__/js/admin.js"></script>
+<script>
+    $(function () {
+
+        $('.btn-cancel-thumbnail').click(function () {
+            $('#thumbnail-preview').attr('src', '__TMPL__/public/assets/images/default-thumbnail.png');
+            $('#thumbnail').val('');
+        });
+
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title> 修改资料</title>
+<meta name="keywords" content=""/>
+<meta name="description" content="">
+<include file="public@head"/>
+<style type="text/css">
+  .account_btn{cursor: pointer;}
+</style>
+</head>
+<body class="body-white" id="top" style="padding-top: 20px">
+
+    <div class="container tc-main" style="width: 100%;">
+       <div class="tabs">
+           <ul class="nav nav-tabs">
+               <li class="active"><a href="javascript:;" > 公会收益记录</a></li>
+           </ul>
+
+           <form class="well form-inline" method="post" action="{:url('union/personal/earnings_log')}" style="margin-top:20px;">
+
+                主播ID:
+                <input type="text" class="form-control" name="hid" style="width: 120px;" value="{$result['hid']|default=''}" placeholder="请输入主播ID">
+                 用户ID:
+                <input type="text" class="form-control" name="uid" style="width: 120px;" value="{$result['uid']|default=''}" placeholder="请输入用户ID">
+
+                  时间:
+                <input type="text" class="form-control js-bootstrap-date" name="start_time" value="{$result['start_time']|default=''}" style="width: 140px;" autocomplete="off">-
+                <input type="text" class="form-control js-bootstrap-date" name="end_time" value="{$result['end_time']|default=''}" style="width: 140px;" autocomplete="off"> &nbsp; &nbsp;
+                <input type="submit" class="btn btn-primary" value="搜索" />
+                <a class="btn btn-danger" href="{:url('union/personal/earnings_log')}">清空</a>
+            </form>
+
+           <div class="tab-content" style="margin-top: 60px;">
+                <div class="tab-pane active" id="one">
+                <table class="table table-bordered table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <th>消费用户(ID)</th>
+                        <th>主播(ID)</th>
+                        <th>消费金额</th>
+                        <th>主播收益</th>
+                        <th>公会收益</th>
+                        <th>消费内容</th>
+                        <th>时间</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                       <foreach name="list" item="vo">
+                        <tr>
+                            <td>{$vo.uname}({$vo.uid})</td>
+                            <td>{$vo.hname}({$vo.user_id})</td>
+                            <td>{$vo.ucoin}</td>
+                            <td>{$vo.host_earnings}</td>
+                            <td>{$vo.guild_earnings}</td>
+                            <td>{$vo.content}</td>
+                            <td>{$vo.addtime | date="Y-m-d H:i",###}</td>
+                        </tr>
+                      </foreach>
+                    </tbody>
+                </table>
+            </div>
+           </div>             
+       </div>
+              <ul class="pagination">{$page}</ul>
+    </div>
+  <include file="public@scripts" />
+<script src="__STATIC__/js/admin.js"></script>
+</body>
+
+</html>

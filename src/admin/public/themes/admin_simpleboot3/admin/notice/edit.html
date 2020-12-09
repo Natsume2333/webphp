@@ -1,0 +1,88 @@
+<include file="public@header"/>
+<style type="text/css">
+    .pic-list li {
+        margin-bottom: 5px;
+    }
+</style>
+
+</head>
+<body>
+<div class="wrap js-check-wrap">
+    <ul class="nav nav-tabs">
+        <li><a href="{:url('notice/index')}">公告列表</a></li>
+        <li class="active"><a href="javascript:;">修改公告</a></li>
+    </ul>
+    <form action="{:url('notice/editPost')}" method="post" class="form-horizontal js-ajax-form margin-top-20">
+        <div class="row">
+            <div class="col-md-9">
+                <table class="table table-bordered">
+                    <tr>
+                        <th width="100">分类<span class="form-required">*</span></th>
+                        <td>
+                            <select name="type" class="form-control" id="type">
+                                <option value="0">所有人</option>
+                                <option value="1">男</option>
+                                <option value="2">女</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>标题<span class="form-required">*</span></th>
+                        <td>
+                            <input class="form-control" type="text" name="title"
+                                   id="title" required placeholder="请输入标题" value="{$data[0]['name']}" />
+                        </td>
+                    </tr>
+                   
+                    <input type="hidden" name="id" value="{$data[0]['id']}">
+                    <tr>
+                        <th>内容</th>
+                        <td>
+                            <script type="text/plain" id="content" name="content">{$data[0]['content']}</script>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th width="100">状态<span class="form-required">*</span></th>
+                        <td>
+                            <select name="status" class="form-control" id="status">
+                                
+                                <option value="1">发布</option>
+                                <option value="2">待发布</option>
+                            </select>
+                        </td>
+                    </tr>
+                    
+                </table>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-primary js-ajax-submit">修改</button>
+                        <a class="btn btn-default" href="{:url('AdminArticle/index')}">{:lang('BACK')}</a>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </form>
+</div>
+<script type="text/javascript" src="__STATIC__/js/admin.js"></script>
+<script type="text/javascript">
+    //编辑器路径定义
+    var editorURL = GV.WEB_ROOT;
+</script>
+<script type="text/javascript" src="__STATIC__/js/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" src="__STATIC__/js/ueditor/ueditor.all.min.js"></script>
+<script type="text/javascript">
+    $('#type').val({$data[0]['type']});
+    $('#status').val({$data[0]['status']});
+    $(function () {
+
+        editorcontent = new baidu.editor.ui.Editor();
+        editorcontent.render('content');
+
+
+    });
+
+   
+</script>
+</body>
+</html>

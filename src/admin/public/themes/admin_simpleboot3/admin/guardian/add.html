@@ -1,0 +1,82 @@
+<include file="public@header"/>
+<style type="text/css">
+    .pic-list li {
+        margin-bottom: 5px;
+    }
+
+    .gift {
+        margin-top: 40px;
+    }
+
+    #gift {
+        width: 30%;
+        height: 35px;
+        border-color: #dce4ec;
+        color: #a5b6c6;
+    }
+</style>
+
+</head>
+<body>
+<div class="wrap js-check-wrap">
+    <ul class="nav nav-tabs">
+        <li><a href="{:url('guardian/index')}">守护分类列表</a></li>
+        <li class="active"><a href="javascript:;">添加守护分类</a></li>
+    </ul>
+    <form action="{:url('guardian/addPost')}" method="post">
+        <div class="row gift">
+            <div class="col-md-8  col-md-offset-2">
+                <table class="table table-bordered">
+                    <tr>
+                        <th>守护时间名称 <span class="form-required">*</span></th>
+                        <td>
+                            <input class="form-control" type="text" name="post[title]"
+                                   id="title" required value="{$guardian.title |default=''}" placeholder="请输入守护时间名称"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>守护时间(天) <span class="form-required">*</span></th>
+                        <td>
+                            <input class="form-control" type="text" name="post[day]"
+                                    required value="{$guardian.day |default=''}" placeholder="请输入守护时间(天)"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>排序<span class="form-required">*</span></th>
+                        <td>
+                            <input class="form-control" type="text" name="post[sort]" style="width:100px;"
+                                   required value="{$guardian.sort |default='0'}" placeholder="排序号"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>需要的金币数 <span class="form-required">*</span></th>
+                        <td><input class="form-control" type="text" name="post[coin]" id="source"
+                                   value="{$guardian.coin |default=''}"
+                                   placeholder="请输入金币数"></td>
+                    </tr>
+                    <tr>
+                        <th>状态<span class="form-required">*</span></th>
+                        <td>
+                            <select name="post[status]" id="gift">
+                                <option value="1">开启</option>
+                                <option value="0" <if condition="$guardian['status'] eq '0'"> selected="selected" </if> >关闭</option>
+
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+                <input type="hidden" name="id" value="{$guardian.id |default=''}"/>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-primary js-ajax-submit">{:lang('ADD')}</button>
+                        <a class="btn btn-default" href="{:url('guardian/index')}">{:lang('BACK')}</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

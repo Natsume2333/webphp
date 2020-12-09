@@ -1,0 +1,35 @@
+<include file="public@header"/>
+</head>
+<body>
+<div class="wrap js-check-wrap">
+    <form action="{:url('cash_rule/add_cash_rule_post')}" method="post">
+        <div class="row gift">
+            <div class="col-md-8  col-md-offset-2">
+                <table class="table table-bordered">
+                    <tr>
+                        <th>数量 <span class="form-required">*</span></th>
+                        <td>
+                            <input class="form-control" type="text" name="count"
+                                   id="title" required  placeholder="请输入内容"/>
+                        </td>
+                    </tr>
+
+                </table>
+                <input type="hidden" name="id" value="{$cash_rule.id |default=''}"/>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-primary js-ajax-submit">{:lang('ADD')}</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
+<script type="text/javascript" src="__STATIC__/js/admin.js"></script>
+<script>
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+
+
+    <link href="__STATIC__/css/bootstrap.min.css" rel="stylesheet">
+    <link href="__STATIC__/css/withdrawal.css" rel="stylesheet">
+    <script src="__STATIC__/js/jquery-1.10.2.min.js"></script>
+
+    <title>提现</title>
+</head>
+<body>
+<div class="withdrawal_sum" data-coin="{$user_info['income']}">当前可提现积分：{$user_info['income']}</div>
+<div class="withrawal_type">
+
+        {volist name="list" id="v" key="k"}
+
+        <div class="withrawal_type_bor   {if condition="$k ==1"} withrawal_bor_col {/if}" data-coin="{$v.coin}" data-id="{$v.id}">
+            <div class="withrawal_type_money">{$v.money}元</div>
+            <div class="withrawal_type_sum">{$v.coin}积分</div>
+        </div>
+        {/volist}
+
+
+</div>
+<div class="withdrawal_user" data-type="{$type}"  data-uid="{$uid}">提现</div>
+<div class="withdrawal_prompt">
+    <div class="withdrawal_prompt_0">温馨提示</div>
+    <div class="withdrawal_prompt_1">1、每天可申请提现1次;</div>
+    <div class="withdrawal_prompt_2">2、提现金额次日到账;</div>
+    <div class="withdrawal_prompt_3">3、请自行到绑定相应支付宝或微信账户查看到账金额。</div>
+</div>
+<div class="withdrawal_bangding" data-id="{$uid}"> 绑定账户</div>
+<script src="__STATIC__/layer/mobile/layer.js" rel="stylesheet"></script>
+<script>
+
+    $(".withdrawal_bangding").click(function () {
+        var uid = $(this).attr("data-id");
+        window.location.href="/mapi/public/index.php/api/invitation_api/bound_pay/uid/"+uid;
+    })
+    $(".withrawal_type_bor").click(function(){
+        $(this).addClass("withrawal_bor_col").siblings().removeClass("withrawal_bor_col");
+    })
+    $(".withdrawal_user").click(function () {
+
+        var coin = $(".withrawal_bor_col").attr("data-coin");
+        var id = $(".withrawal_bor_col").attr("data-id");
+        var my_coin = $(".withdrawal_sum").attr("data-coin");
+        var type = $(this).attr("data-type");
+
+        var uid = $(this).attr("data-uid");
+
+        if (parseInt(my_coin) < parseInt(coin)) {
+            layer.open({
+                content: '当前余额不足'
+                , btn: '确定'
+            });
+            return false;
+        }
+        layer.open({
+            content: '确定提现？'
+            ,btn: ['确认', '取消']
+            ,yes: function(index){
+                $.ajax({
+                    url: "/mapi/public/index.php/api/withdrawal_api/user_apply",
+                    type: 'get',
+                    dataType: 'json',
+                    data: {id:id, uid:uid},
+                    success: function (data) {
+
+                        layer.open({
+                            content: data.msg
+                            , skin: 'msg'
+                            , time: 2 //2秒后自动关闭
+                        });
+                        if (data.status == '1') {
+                            setTimeout(function () {
+                                window.location.reload();
+                            }, 2000);
+                        }
+                    }
+                });
+
+
+            }
+        });
+
+
+
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<include file="public@header" />
+</head>
+<style>
+    .table-bordered th{height:50px;line-height:50px;text-align: center;}
+    .table-bordered td{height:40px;line-height:40px;text-align: center;}
+    .withdrawal{width:100%;margin-top: 30px;height:80px;}
+    .withdrawal-name{height:80px;line-height:80px;width:70px;float:left;}
+    .withdrawal-input{height:30px;margin-top: 25px;width:140px;line-height:30px;float:left;}
+    .withdrawal-btn{cursor: pointer;height:34px;line-height:34px;color: #fff;margin-top: 25px;float:left;text-align: center;background: #26B99A;width:60px;margin-left:10px;}
+</style>
+<body>
+<div class="wrap js-check-wrap">
+    <ul class="nav nav-tabs">
+        <li class="active"><a>申请提现</a></li>
+        <li ><a href="{:url('settlement/withdrawalrecord')}">提现记录</a></li>
+    </ul>
+    <table class="table table-hover table-bordered" style="margin-top:60px">
+        <thead>
+        <tr>
+            <th>总收益</th>
+            <th>已结算(包含提现中与已支付)</th>
+            <th>可结算余额</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{$data.sum|default='0'} 元</td>
+                <td>{$data.withdrawal|default='0'} 元</td>
+                <td>{$data.residue|default='0'} 元</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="withdrawal">
+        <div class="withdrawal-name">提现金额:</div>
+        <div class="withdrawal-input"><input type="text"/></div>
+        <div class="withdrawal-btn" data-coin="{$data.residue|default='0'}">提交</div>
+    </div>
+</div>
+<script src="__STATIC__/js/admin.js"></script>
+<script>
+    $(function(){
+        $(".withdrawal-btn").click(function(){
+            var val=$(".withdrawal-input input").val();
+            var coin=$(this).attr("data-coin");
+
+            if(isNaN(val) == true){
+                layer.msg("输入的格式不正确");
+                return false;
+            }else if(parseInt(val) > parseInt(coin)){
+                layer.msg("输入的提现金额不正确");
+                return false;
+            }
+
+            $.ajax({
+                url: "{:url('settlement/addwithdrawal')}",
+                type: 'post',
+                dataType: 'json',
+                data: {money: val},
+                success: function (data) {
+                    if(data =='1'){
+                        layer.msg("申请成功,等待审核",{time: 2000, icon:1},function(){
+                            window.location.reload();
+                        });
+                    }else{
+                        layer.msg("申请失败，请联系客服",{time: 2000, icon:2});
+                    }
+                }
+            });
+
+
+        })
+    })
+</script>
+</body>
+</html>

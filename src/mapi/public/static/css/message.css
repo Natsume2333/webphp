@@ -1,0 +1,17 @@
+body,html{font-size:16px;height:100%;margin:0;}
+.creal{padding:0px!important;}
+.message{border-bottom:1px solid #e9e7e7;}
+.message-col{color:#ff0101;}
+.message-tu{font-size:18px!important;max-width: 40px}
+.message-font{font-weight: bold}
+.message-top{margin-top:1em;}
+.message-center{margin-top:0.6em;font-size:13px!important;color:#727272;}
+.message-time{margin:0.6em 0 1em;font-size:13px!important;}
+.message-time a,a:link{color:#fd22a3!important;text-decoration:none!important;}
+.message-time a i{font-size:13px!important;}
+.message-tclo{color:#9c9c9c;}
+
+.messgae-kong{background:#e8e8e8;}
+.messgae-kong2{margin-top:50%;}
+.messgae-kong3{margin-top:2em;color:#5a5a5a;}
+.messgae-kong .messgae-kong2 img{width:100%;}

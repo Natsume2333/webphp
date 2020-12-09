@@ -1,0 +1,27 @@
+﻿body,ul,ol,li,p,h1,h2,h3,h4,h5,h6,form,fieldset,table,td,img,div{margin:0;padding:0;border:0;}
+body{color:#333; font-size:16px;font-family:"Microsoft YaHei";background-color:transparent;}
+
+ul,ol{list-style-type:none;}
+select,input,img,select{vertical-align:middle;}
+input{ font-size:12px;}
+a{ text-decoration:none; color:#000;}
+a:hover{color:#c00; text-decoration:none;}
+.clear{clear:both;}
+
+/* 大转盘样式 */
+.banner{display:block;width:100%;margin-left:auto;margin-top:3em;}
+.banner .turnplate{display:block;width:65%;position:relative;      padding: 0.4em 0.4em 0.2em;margin:0 auto;}
+.banner .turnplate canvas.item{width:100%;}
+.banner .turnplate img.pointer{position: absolute;height: 32%;left: 36.2%;top: 31.5%;cursor: pointer;}
+.turnplate{background-image:url(../img/turntableradio3.png);background-size:100% 100%;}
+.turntable_btn{width:80%;height:3em;margin:4em 10%;}
+.turntable_btn_termination{float:left;width:40%;height:3em;line-height: 3em;text-align: center;background: #771cff;color:#ffefff;border-radius: 1em;margin-left:7%;cursor: pointer;}
+.turntable_btn_complete{float:left;width:40%;height:3em;line-height: 3em;text-align: center;background: #ffe665;color:#aa712c;border-radius: 1em;margin-left:7%;cursor: pointer;}
+
+.guanbi{position: absolute;width:2em;height: 2em;top:-1em;right:-1em;}
+
+
+
+
+
+

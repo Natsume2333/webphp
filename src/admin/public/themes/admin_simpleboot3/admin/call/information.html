@@ -1,0 +1,72 @@
+<include file="public@header" />
+</head>
+<body>
+<div class="wrap">
+    <ul class="nav nav-tabs">
+        <li><a href="{:url('agent/index')}">代理列表</a></li>
+        <li class="active"><a>用户详情</a></li>
+    </ul>
+    <form class="form-horizontal js-ajax-form margin-top-20">
+        <div class="form-group">
+            <label for="input-user-nickname" class="col-sm-2 control-label">{:lang('NICKNAME')}</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" id="input-user-nickname" name="agent_login" value="{$users['agent_login']}" readOnly="true">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="input-user-nickname" class="col-sm-2 control-label">Email</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" id="input-user-Email" name="email" value="{$users['email']|default=''}" readOnly="true">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="input-user-nickname" class="col-sm-2 control-label">手机</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" id="input-user-mobile" name="mobile" value="{$users['mobile']|default=''}" readOnly="true">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="input-user-nickname" class="col-sm-2 control-label">QQ</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" id="input-user-qq" name="qq" value="{$users['qq']|default=''}" readOnly="true">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="input-user-nickname" class="col-sm-2 control-label">微信</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" id="input-user-wx" name="wx" value="{$users['wx']|default=''}" readOnly="true">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="input-user-nickname" class="col-sm-2 control-label">身份证号</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" id="input-user-identity_card" name="identity_card" value="{$users['identity_card']|default=''}" readOnly="true">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="input-user-nickname" class="col-sm-2 control-label">身份证姓名</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" id="input-user-name" name="name" value="{$users['name']|default=''}" readOnly="true">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="input-user-nickname" class="col-sm-2 control-label">收款人账号（支付宝）</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" id="input-user-pay" name="pay" value="{$users['pay']|default=''}" readOnly="true">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="input-user-nickname" class="col-sm-2 control-label">收款人姓名</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" id="input-user-pay-name" name="pay_name" value="{$users['pay_name']|default=''}" readOnly="true">
+            </div>
+        </div>
+
+    </form>
+</div>
+<script src="__STATIC__/js/admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,415 @@
+<include file="public@header"/>
+<style>
+    .home-info li em {
+        float: left;
+        width: 120px;
+        font-style: normal;
+        font-weight: bold;
+    }
+
+    .home-info ul {
+        padding: 0;
+        margin: 0;
+    }
+
+    .panel {
+        margin-bottom: 0;
+    }
+
+    .grid-sizer {
+        width: 10%;
+    }
+
+    .grid-item {
+        margin-bottom: 5px;
+        padding: 5px;
+    }
+
+    .col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
+        padding-left: 5px;
+        padding-right: 5px;
+        float: none;
+    }
+
+    .main {
+        width: 700px;
+        height: 400px;
+        border: 1px solid #ccc;
+        margin-left: 20px;
+        overflow: hidden;
+    }
+
+    #line {
+        width: 700px;
+        height: 400px;
+        margin-top: -15px;
+    }
+
+    #pie {
+        width: 700px;
+        height: 400px;
+        margin-top: -15px;
+    }
+
+    #lines {
+        width: 700px;
+        height: 400px;
+        margin-top: -15px;
+    }
+</style>
+<link rel="stylesheet" href="/admin/public/themes/admin_simpleboot3/public/assets/simpleboot3/css/index.css">
+<hook name="admin_before_head_end"/>
+</head>
+<body>
+<div class="wrap">
+    <empty name="has_smtp_setting">
+        <!--<div class="grid-item col-md-12">
+            <div class="alert alert-danger alert-dismissible fade in" role="alert" style="margin-bottom: 0;">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <strong>提示!</strong> 邮箱配置未完成,无法进行邮件发送!
+                <a href="#" data-dismiss="alert" aria-label="Close"
+                   onclick="parent.openapp('{:url('Mailer/index')}','admin_mailer_index','邮箱配置');">现在设置</a>
+            </div>
+        </div>-->
+    </empty>
+    <div class="grid-item col-md-12">
+        <div class="alert alert-danger alert-dismissible fade in" role="alert" style="margin-bottom: 0;">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <strong>提示!</strong> 正式上线后请注意修改后台密码，使用默认密码存在风险
+        </div>
+    </div>
+    <if condition="!extension_loaded('fileinfo')">
+        <div class="grid-item col-md-12">
+            <div class="alert alert-danger alert-dismissible fade in" role="alert" style="margin-bottom: 0;">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <strong>提示!</strong> php_fileinfo扩展没有开启，无法正常上传文件！
+            </div>
+        </div>
+    </if>
+
+    <div class="grid-item col-md-12" id="thinkcmf-notices-grid" style="display:none;">
+        <div class="dashboard-box">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{:lang('SYSTEM_NOTIFICATIONS')}</h3>
+                </div>
+                <div class="panel-body home-info">
+                    <ul id="thinkcmf-notices" class="list-unstyled">
+                        <li>
+                            <img src="__TMPL__/public/assets/images/loading.gif" style="vertical-align: middle;"/>
+                            <span style="display: inline-block; vertical-align: middle;">加载中...</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--首页-->
+    <div class="bogo_index">
+        <div class="bogo_index_title">数据统计</div>
+        <div class="bogo_index_box">
+            <div class="bogo_index_row bogo_img1">
+                <div class="bogo_index_row_type">
+                    <div class="title">今日支付金额（元）</div>
+                    <a class="amount" href="{:url('refill/log_index')}" rel="noopener noreferrer">{$admin_index_list['charge']['day_log']['money']|default="0.00"}</a>
+                    <div class="amount-yesterday">
+                        昨日：{$admin_index_list['charge']['Yesterday_log']['money']|default="0.00"}
+                    </div>
+                    <div class="amount-yesterday">
+                        总支付金额：{$admin_index_list['charge']['total_log']['money']|default="0.00"}
+                    </div>
+                </div>
+                <div class="bogo_index_row_type">
+                    <div class="title">今日支付订单数</div>
+                    <a class="amount" href="{:url('refill/log_index')}" rel="noopener noreferrer">{$admin_index_list['charge']['day_log']['ordersum']|default="0"}</a>
+                    <div class="amount-yesterday">
+                        昨日：{$admin_index_list['charge']['Yesterday_log']['ordersum']|default="0"}
+                    </div>
+                    <div class="amount-yesterday">
+                        总支付订单数：{$admin_index_list['charge']['total_log']['ordersum']|default="0"}
+                    </div>
+                </div>
+                <div class="bogo_index_row_type">
+                    <div class="title">今日支付人数</div>
+                    <a class="amount" href="{:url('refill/log_index')}" rel="noopener noreferrer">{$admin_index_list['charge']['user_day']|default="0"}</a>
+                    <div class="amount-yesterday">昨日：{$admin_index_list['charge']['user_Yesterday']|default="0"}</div>
+                    <div class="amount-yesterday">总支付人数：{$admin_index_list['charge']['user_total']|default="0"}</div>
+                </div>
+                <div class="bogo_index_row_type">
+                    <div class="compare_title">
+                        支付金额较前一日 ：
+                        <if condition="$admin_index_list['charge']['day_than']['type'] eq 1">
+                            <i class="fa fa-long-arrow-up">
+                                <else/>
+                                <i class="fa fa-long-arrow-down"> -
+                        </if>
+                        {$admin_index_list['charge']['day_than']['than']}% </i>
+
+                    </div>
+                    <div class="compare_title">
+                        支付订单较前一日 ：
+                        <if condition="$admin_index_list['charge']['day_ordersum_than']['type'] eq 1">
+                            <i class="fa fa-long-arrow-up">
+                                <else/>
+                                <i class="fa fa-long-arrow-down"> -
+                        </if>
+                        {$admin_index_list['charge']['day_ordersum_than']['than']}% </i>
+                    </div>
+                    <div class="compare_title">
+                        支付人数较前一日 ：
+                        <if condition="$admin_index_list['charge']['day_user_than']['type'] eq 1">
+                            <i class="fa fa-long-arrow-up">
+                                <else/>
+                                <i class="fa fa-long-arrow-down"> -
+                        </if>
+                        {$admin_index_list['charge']['day_user_than']['than']}% </i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bogo_index_row bogo_img2">
+                <div class="bogo_index_row_type">
+                    <div class="title">今日注册人数</div>
+                    <a class="amount" href="{:url('user/admin_index/index')}" rel="noopener noreferrer">{$admin_index_list['registered']['day_user']|default="0"}</a>
+                    <div class="amount-yesterday">昨日：{$admin_index_list['registered']['Yesterday_user']|default="0"}
+                    </div>
+                    <div class="amount-yesterday">总注册人数：{$admin_index_list['registered']['total_user']|default="0"}
+                    </div>
+                </div>
+                <div class="bogo_index_row_type">
+                    <div class="title">代理今日注册人数</div>
+                    <a class="amount" href="{:url('agent/index')}" rel="noopener noreferrer">{$admin_index_list['registered']['day_agent']|default="0"}</a>
+                    <div class="amount-yesterday">昨日：{$admin_index_list['registered']['Yesterday_agent']|default="0"}
+                    </div>
+                    <div class="amount-yesterday">代理总注册人数：{$admin_index_list['registered']['total_agent']|default="0"}
+                    </div>
+                </div>
+                <div class="bogo_index_row_type">
+                    <div class="title">今日邀请注册人数</div>
+                    <a class="amount" href="{:url('invite_manage/invite_record_index')}" rel="noopener noreferrer">{$admin_index_list['registered']['day_invitation']|default="0"}</a>
+                    <div class="amount-yesterday">
+                        昨日：{$admin_index_list['registered']['Yesterday_invitation']|default="0"}
+                    </div>
+                    <div class="amount-yesterday">
+                        邀请总注册人数：{$admin_index_list['registered']['total_invitation']|default="0"}
+                    </div>
+                </div>
+                <div class="bogo_index_row_type">
+                    <div class="compare_title">
+                        总 注 册 较前 一日 ：
+                        <if condition="$admin_index_list['registered']['day_registered_than']['type'] eq 1">
+                            <i class="fa fa-long-arrow-up">
+                                <else/>
+                                <i class="fa fa-long-arrow-down"> -
+                        </if>
+                        {$admin_index_list['registered']['day_registered_than']['than']}% </i>
+
+                    </div>
+                    <div class="compare_title">
+                        代理注册较前一日 ：
+                        <if condition="$admin_index_list['registered']['agent_registered_than']['type'] eq 1">
+                            <i class="fa fa-long-arrow-up">
+                                <else/>
+                                <i class="fa fa-long-arrow-down"> -
+                        </if>
+                        {$admin_index_list['registered']['agent_registered_than']['than']}% </i>
+                    </div>
+                    <div class="compare_title">
+                        邀请注册较前一日 ：
+                        <if condition="$admin_index_list['registered']['invitation_registered_than']['type'] eq 1">
+                            <i class="fa fa-long-arrow-up">
+                                <else/>
+                                <i class="fa fa-long-arrow-down"> -
+                        </if>
+                        {$admin_index_list['registered']['invitation_registered_than']['than']}% </i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bogo_index_row bogo_img3">
+                <div class="bogo_index_row_type">
+                    <div class="title">今日消费数</div>
+                    <a class="amount" href="{:url('Consume/index')}" rel="noopener noreferrer">{$admin_index_list['consumption']['day_consumption']['coin']|default="0.00"}</a>
+                    <div class="amount-yesterday">
+                        昨日：{$admin_index_list['consumption']['Yesterday_consumption']['coin']|default="0.00"}
+                    </div>
+                    <div class="amount-yesterday">
+                        总消费数：{$admin_index_list['consumption']['total_consumption']['coin']|default="0.00"}
+                    </div>
+                </div>
+                <div class="bogo_index_row_type">
+                    <div class="title">今日收益数</div>
+                    <a class="amount" href="{:url('Consume/index')}" rel="noopener noreferrer">{$admin_index_list['consumption']['day_consumption']['profit']|default="0.00"}</a>
+                    <div class="amount-yesterday">
+                        昨日：{$admin_index_list['consumption']['Yesterday_consumption']['profit']|default="0.00"}
+                    </div>
+                    <div class="amount-yesterday">
+                        总收益数：{$admin_index_list['consumption']['total_consumption']['profit']|default="0.00"}
+                    </div>
+                </div>
+                <div class="bogo_index_row_type">
+                    <div class="title">今日提现数</div>
+                    <a class="amount" href="{:url('withdrawals_manage/index')}" rel="noopener noreferrer">{$admin_index_list['consumption']['day_withdrawal']['income']|default="0.00"}</a>
+                    <div class="amount-yesterday">
+                        昨日：{$admin_index_list['consumption']['Yesterday_withdrawal']['income']|default="0.00"}
+                    </div>
+                    <div class="amount-yesterday">
+                        总提现数：{$admin_index_list['consumption']['total_withdrawal']['income']|default="0.00"}
+                    </div>
+                </div>
+                <div class="bogo_index_row_type">
+                    <div class="compare_title">
+                        消费数 较前一日 ：
+                        <if condition="$admin_index_list['consumption']['day_consumption_coin_than']['type'] eq 1">
+                            <i class="fa fa-long-arrow-up">
+                                <else/>
+                                <i class="fa fa-long-arrow-down"> -
+                        </if>
+                        {$admin_index_list['consumption']['day_consumption_coin_than']['than']}% </i>
+
+                    </div>
+                    <div class="compare_title">
+                        收益数较前一日 ：
+                        <if condition="$admin_index_list['consumption']['day_consumption_profit_than']['type'] eq 1">
+                            <i class="fa fa-long-arrow-up">
+                                <else/>
+                                <i class="fa fa-long-arrow-down"> -
+                        </if>
+                        {$admin_index_list['consumption']['day_consumption_profit_than']['than']}% </i>
+                    </div>
+                    <div class="compare_title">
+                        提现数较前一日 ：
+                        <if condition="$admin_index_list['consumption']['day_withdrawal_than']['type'] eq 1">
+                            <i class="fa fa-long-arrow-up">
+                                <else/>
+                                <i class="fa fa-long-arrow-down"> -
+                        </if>
+                        {$admin_index_list['consumption']['day_withdrawal_than']['than']}% </i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bogo_index_row bogo_img4">
+                <div class="bogo_index_row_type">
+                    <div class="title">视频未审核数</div>
+                    <a class="amount" href="{:url('audit/index')}" rel="noopener noreferrer">{$admin_index_list['audit']['video_audit']['review']|default="0"}</a>
+                    <div class="amount-yesterday">
+                        已通过数：{$admin_index_list['audit']['video_audit']['through']|default="0"}
+                    </div>
+                    <div class="amount-yesterday">
+                        不通过：{$admin_index_list['audit']['video_audit']['refused']|default="0"}
+                    </div>
+                    <div class="amount-yesterday">
+                        总视频数：{$admin_index_list['audit']['video_audit']['countid']|default="0"}
+                    </div>
+                </div>
+                <div class="bogo_index_row_type">
+                    <div class="title">私照未审核数</div>
+                    <a class="amount" href="{:url('audit/photos')}" rel="noopener noreferrer">{$admin_index_list['audit']['private_photos']['review']|default="0"}</a>
+                    <div class="amount-yesterday">
+                        已通过数：{$admin_index_list['audit']['private_photos']['through']|default="0"}
+                    </div>
+                    <div class="amount-yesterday">
+                        不通过：{$admin_index_list['audit']['private_photos']['refused']|default="0"}
+                    </div>
+                    <div class="amount-yesterday">
+                        总私照数：{$admin_index_list['audit']['private_photos']['countid']|default="0"}
+                    </div>
+                </div>
+                <div class="bogo_index_row_type">
+                    <div class="title">封面图未审核数</div>
+                    <a class="amount" href="{:url('audit/user_thumb')}" rel="noopener noreferrer">{$admin_index_list['audit']['private_img']['review']|default="0"}</a>
+                    <div class="amount-yesterday">
+                        已通过数：{$admin_index_list['audit']['private_img']['through']|default="0"}
+                    </div>
+                    <div class="amount-yesterday">
+                        不通过：{$admin_index_list['audit']['private_img']['refused']|default="0"}
+                    </div>
+                    <div class="amount-yesterday">
+                        总封面图数：{$admin_index_list['audit']['private_img']['countid']|default="0"}
+                    </div>
+                </div>
+                <div class="bogo_index_row_type">
+                    <div class="title">信息认证未审核数</div>
+                    <a class="amount" href="{:url('user/identity/auth_info_list')}" rel="noopener noreferrer">{$admin_index_list['audit']['auth_record']['review']|default="0"}</a>
+                    <div class="amount-yesterday">
+                        已通过数：{$admin_index_list['audit']['auth_record']['through']|default="0"}
+                    </div>
+                    <div class="amount-yesterday">
+                        不通过：{$admin_index_list['audit']['auth_record']['refused']|default="0"}
+                    </div>
+                    <div class="amount-yesterday">
+                        总信息认证数：{$admin_index_list['audit']['auth_record']['countid']|default="0"}
+                    </div>
+                </div>
+
+            </div>
+            <div class="bogo_index_row bogo_img5">
+                <div class="bogo_index_row_type">
+                    <div class="title">安卓今日充值数</div>
+                    <a class="amount" href="{:url('refill/log_index')}?os=android" rel="noopener noreferrer">{$admin_index_list['charge_type']['android_day_log']|default="0"}</a>
+                    <div class="amount-yesterday">
+                        昨日充值：{$admin_index_list['charge_type']['android_Yesterday_log']|default="0"}
+                    </div>
+                    <div class="amount-yesterday">
+                        总充值：{$admin_index_list['charge_type']['android_total_log']|default="0"}
+                    </div>
+                </div>
+                <div class="bogo_index_row_type">
+                    <div class="title">苹果今日充值数</div>
+                    <a class="amount" href="{:url('refill/log_index')}?os=ios" rel="noopener noreferrer">{$admin_index_list['charge_type']['ios_day_log']|default="0"}</a>
+                    <div class="amount-yesterday">
+                        昨日充值：{$admin_index_list['charge_type']['ios_Yesterday_log']|default="0"}
+                    </div>
+                    <div class="amount-yesterday">
+                        总充值：{$admin_index_list['charge_type']['ios']|default="0"}
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    <div class="bogo_index_right">
+        <div class="bogo_index_right_type bogo_index_right_type_radius bogo_index_bottom">
+            <div class="bogo_index_right_type_img bogo_index_tel1"></div>
+            <div class="bogo_index_right_type_name">系统版本</div>
+            <div class="bogo_index_right_type_center">v2.1</div>
+        </div>
+
+        <!--<div class="bogo_index_right_type bogo_index_right_type_radius bogo_index_bottom">-->
+        <!--    <div class="bogo_index_right_type_img bogo_index_tel2"></div>-->
+        <!--    <div class="bogo_index_right_type_name">商业版权</div>-->
+        <!--    <div class="bogo_index_right_type_center">山东布谷鸟网络科技有限公司</div>-->
+        <!--</div>-->
+        <!--<div class="bogo_index_right_type bogo_index_right_type_radius bogo_index_bottom">-->
+        <!--    <div class="bogo_index_right_type_img bogo_index_tel3"></div>-->
+        <!--    <div class="bogo_index_right_type_name">官方网站</div>-->
+        <!--    <div class="bogo_index_right_type_center"><a href="http://www.bogokj.com" target="_blank">http://www.bogokj.com</a>-->
+        <!--    </div>-->
+        <!--</div>-->
+
+    </div>
+
+</div>
+
+
+<script src="__STATIC__/js/admin.js"></script>
+
+<script src="__STATIC__/js/amcharts.js" type="text/javascript"></script>
+<script src="__STATIC__/js/serial.js" type="text/javascript"></script>
+<script src="__STATIC__/js/pie.js" type="text/javascript"></script>
+
+<script>
+
+
+</script>
+<hook name="admin_before_body_end"/>
+</body>
+</html>

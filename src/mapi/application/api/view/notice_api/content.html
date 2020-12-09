@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>公告</title>
+
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <link href="__STATIC__/css/detail.css" rel="stylesheet">
+    <link href="__STATIC__/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="dis">
+<style type="text/css">
+
+	.top{
+		width:100%;
+		text-align:center;
+		font-size: 18px;
+		line-height: 30px;
+		background: red;
+		background:rgba(2,2,2,0.6);
+		color:#fff;
+	}
+	.content{
+		width:80%;
+		height: 200px;
+		
+		margin:0 auto;
+		
+	}
+	.content ul li{
+		list-style: none;
+		padding:0;
+		margin-left:-12%;
+		height:30px;
+		font-size: 16px;
+		border-bottom: 1px solid #c0c0c0;
+	}
+
+	.content ul{
+		margin-top:20px;
+	}
+	
+
+	
+
+</style>
+<div class="top">{$data['name']}</div>
+<div class="content">
+	<p>{$data['content']}</p>
+	<div style="font-size: 12px;">{$data['create_time']|date="Y-m-d H:i:s",###}</div>
+</div>
+</body>
+</html>
+<script src="__STATIC__/js/jquery-1.10.2.min.js"></script>
+
+<script type="text/javascript">
+	
+</script>

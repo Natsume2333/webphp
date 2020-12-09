@@ -1,0 +1,74 @@
+<include file="public@header"/>
+<style type="text/css">
+    .pic-list li {
+        margin-bottom: 5px;
+    }
+    .gift{margin-top:40px;}
+    #gift{    width: 30%;
+        height: 35px;
+        border-color: #dce4ec;
+        color: #a5b6c6;}
+</style>
+
+</head>
+<body>
+<div class="wrap js-check-wrap">
+    <ul class="nav nav-tabs">
+        <li><a href="{:url('web/contact')}">联系人列表</a></li>
+        <li class="active"><a href="javascript:;">修改联系人</a></li>
+    </ul>
+    <form action="{:url('web/contactRunEdit')}" class="js-ajax-form" method="post" >
+        <div class="row gift">
+            <div class="col-md-8  col-md-offset-2">
+                <table class="table table-bordered">
+                    <tr>
+                        <th>联系人名称 <span class="form-required">*</span></th>
+                        <td>
+                            <input class="form-control" type="text" name="name"
+                                   id="title" required  placeholder="名称" value="{$res['name']}" />
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>手机号 <span class="form-required">*</span></th>
+                        <td>
+                            <input class="form-control" type="text" name="phone"
+                                   id="title" required value="{$res['c_phone']}"  placeholder="手机号"/>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <th>邮箱 <span class="form-required">*</span></th>
+                        <td>
+                            <input class="form-control" type="text" name="email"
+                                   id="title" required value="{$res['email']}"  placeholder="邮箱"/>
+                        </td>
+                    </tr>
+
+                </table>
+                <input type="hidden" name="id" value="{$res['id']}"/>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-primary js-ajax-submit">{:lang('EDIT')}</button>
+                        <a class="btn btn-default" href="{:url('web/contact')}">{:lang('BACK')}</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
+<script type="text/javascript" src="__STATIC__/js/admin.js"></script>
+<script>
+    $(function () {
+
+        $('.btn-cancel-thumbnail').click(function () {
+            $('#thumbnail-preview').attr('src', '__TMPL__/public/assets/images/default-thumbnail.png');
+            $('#thumbnail').val('');
+        });
+
+    });
+</script>
+
+</body>
+</html>

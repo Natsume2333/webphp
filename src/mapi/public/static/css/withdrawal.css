@@ -1,0 +1,23 @@
+
+@media screen and (min-width: 370px)  {
+    body,html{font-size:16px;margin:0;}
+}
+@media screen and (max-width: 370px)  {
+    body,html{font-size:14px;margin:0;}
+}
+body{
+    background-color:#f6f6f6;padding:0 1em;
+}
+.withdrawal_sum{width:100%;height:4em;line-height: 4em;}
+.withrawal_type{width:100%;overflow:hidden}
+.withrawal_type_bor{float:left;width:29%;margin:1.5em 2% 0;height:4em;padding:0.7em 0;border: 1px solid #d8d8d8;border-radius: 0.5em;background: #fff;}
+.withrawal_type_money{width:100%;height:1.5em;line-height: 1.5em;text-align:center;color:#ff5491;}
+.withrawal_type_sum{width:100%;height:1em;line-height: 1em;text-align:center;color:#9e9e9e;}
+.withrawal_bor_col{border: 1px solid #f75d91;background: #ffecf2;}
+
+.withdrawal_user{width:90%;margin:3em auto;height:3em;line-height: 3em;text-align: center;color:#fff;background: #fd5892;border-radius: 0.5em;}
+
+.withdrawal_prompt{width:100%;color:#979797;}
+.withdrawal_prompt_0{width:100%;height:3em;line-height: 3em;}
+
+.withdrawal_bangding{width:90%;margin:3em auto;height:3em;line-height: 3em;text-align: center;color:#de3aff;background: #fff;border-radius: 1em;border:1px solid #de3aff;}

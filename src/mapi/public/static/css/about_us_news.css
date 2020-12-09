@@ -1,0 +1,125 @@
+﻿.top_tabs .tab{
+	width: 20%;
+}
+.event-news{	
+	text-indent: 0;
+}
+.news-title li{
+	display: inline-block;
+	font-size: 20px;
+	margin-right: 30px;
+	margin-bottom: 30px;
+}
+.ntactive{
+	color: #e96966;
+	border-bottom: 2px solid #e96966;
+}
+.nitem{
+	color: #666;
+	height: 45px;
+	border-bottom: 1px solid #dedede;	
+	display: flex;
+	padding: 10px 10px 0;
+	box-sizing: border-box;
+}
+.nitem-active{
+	box-shadow: 0 0 10px 1px #cdcdcd;
+}
+.ncontent{
+	flex: auto;
+}
+.ncontent a{
+	color: #666;
+}
+.ntime{
+	flex: 0 auto;
+	text-align: right;
+	color: #aaa;
+	font-size: 16px;
+}
+.newstype .nitem:hover,.news-title li:hover{
+    cursor: pointer;
+}
+/*分页*/
+.pagination{
+	line-height: 20px;
+	text-align: center;
+	margin-top: 50px;
+}
+.pagination a {
+    text-decoration: none;
+    color: #666;
+}
+
+.pagination a, .pagination span {
+    display: inline-block;
+    padding: 0.1em 0.4em;
+    margin-right: 5px;
+	margin-bottom: 5px;
+}
+.pagination .bef-lt,.pagination .aft-gt{
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+    width: 8px;
+    height: 8px; 
+    border-left: 1px solid #333;  
+    border-bottom: 1px solid #333;  
+    -webkit-transform: translate(0,-20%) rotate(45deg);  
+    transform: translate(0,-20%) rotate(45deg);
+}
+.pagination .aft-gt{
+    -webkit-transform: translate(0,-20%) rotate(-135deg);
+    transform: translate(0,-20%) rotate(-135deg); 
+}
+
+.pagination .current {
+    background: #E96966;
+    color: #fff;	
+	border-radius:50%;
+}
+
+.pagination .current.prev, .pagination .current.next{
+	color:#999;
+	background:#fff;
+}
+.pagination .current.prev .bef-lt, .pagination .current.next .aft-gt{
+	border-left: 1px solid #999;  
+    border-bottom: 1px solid #999;
+}
+/*详情*/
+.news-detail{
+	text-indent: 0;
+	padding-top: 10px;
+}
+.news-detail-title{
+	font-size: 24px;
+	color: #343434;
+}
+.news-tips{
+	display: flex;
+	font-size: 14px;
+	border-bottom: 1px solid #ebebeb;
+	padding-top: 20px;
+	padding-right: 10px;
+	margin-bottom: 30px;
+}
+.news-detail-time{
+	flex:none;
+	margin-right: 30px;
+}
+.news-resource{
+	flex: auto;
+}
+.backlist{
+	flex: 0 auto;
+	text-align: right;
+}
+.news-content{
+	font-size: 16px;
+}
+
+/*模板编辑区*/
+.img-box{
+	text-align: center;
+}

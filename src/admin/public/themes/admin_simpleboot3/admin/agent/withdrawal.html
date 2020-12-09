@@ -1,0 +1,50 @@
+<include file="public@header" />
+</head>
+<body>
+<div class="wrap js-check-wrap">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="{:url('agent/index')}">渠道代理提现记录</a></li>
+    </ul>
+    <form class="well form-inline margin-top-20" method="post" action="{:url('agent/withdrawal')}">
+
+        代理id:
+        <input type="text" class="form-control" name="agent_id" style="width: 120px;" value="{$data.agent_id|default=''}" placeholder="请输入代理id">
+         渠道号:
+        <input type="text" class="form-control" name="channel" style="width: 120px;" value="{$data.channel|default=''}" placeholder="请输入渠道号">
+        &nbsp;&nbsp;
+        时间:
+        <input type="text" class="form-control js-bootstrap-date" name="start_time" value="{$data.start_time|default=''}" style="width: 140px;" autocomplete="off">-
+        <input type="text" class="form-control js-bootstrap-date" name="end_time" value="{$data.end_time|default=''}" style="width: 140px;" autocomplete="off"> &nbsp; &nbsp;
+
+        <input type="submit" class="btn btn-primary" value="搜索" />
+        <a class="btn btn-danger" href="{:url('agent/withdrawal')}">清空</a>
+
+        <div style="margin-top:20px;">提现的总金额 :  {$sum} 元</div>
+    </form>
+    <table class="table table-hover table-bordered">
+        <thead>
+        <tr>
+            <th>结算时间</th>
+            <th>{:lang('USERNAME')}(ID)</th>
+            <th>渠道号</th>
+            <th>结算金额</th>
+        </tr>
+        </thead>
+        <tbody>
+        <php>$user_statuses=array("0"=>'审核中',"1"=>'已提现','2'=>'拒绝提现');</php>
+        <foreach name="list" item="vo">
+            <tr>
+                 <td>{$vo['addtime'] |date='Y-m-d',###}</td>
+                <td>{$vo.agent_login}({$vo['agent_id']})</td>
+                <td>{$vo['channel']}</td>
+                <td>{$vo['money'] |default='0'} 元</td>
+
+            </tr>
+        </foreach>
+        </tbody>
+    </table>
+    <div class="pagination">{$page}</div>
+</div>
+<script src="__STATIC__/js/admin.js"></script>
+</body>
+</html>

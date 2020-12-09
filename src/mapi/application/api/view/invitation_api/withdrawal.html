@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="__STATIC__/css/invitation.css" rel="stylesheet">
+    <link href="__STATIC__/css/bootstrap.min.css" rel="stylesheet">
+    <script src="__STATIC__/js/jquery-1.10.2.min.js"></script>
+    <script src="__STATIC__/js/iscroll.js"></script>
+
+    <title>提现明细</title>
+</head>
+<body>
+<div class="new_invitation_detail">
+    <div class="new_invitation_title">时间</div>
+    <div class="new_invitation_title">金额</div>
+    <div class="new_invitation_title">状态</div>
+</div>
+<div id="wrapper" class="col-xs-12 pad inviter-ul">
+    <div class="scroller">
+        <ul>
+            {volist name="list" id="v"}
+            <li>
+                <div class="col-xs-4 inviter-ul-name">
+                   {$v['addtime'] |date="Y/m/d",###}
+                </div>
+                <div class="col-xs-4 inviter-ul-name">{$v['coin']}</div>
+                <div class="col-xs-4 pad inviter-ul-time" style="height:3em;line-height: 3em;">
+                      {if condition="$v['status'] eq 1"}
+                        已提现
+                        {elseif condition="$v['status'] eq 2"/}
+                        提现失败
+                        {else/}
+                        审核中
+                        {/if}
+                </div>
+            </li>
+            {/volist}
+
+        </ul>
+        <div class="more"><i class="pull_icon"></i><span>上拉加载...</span></div>
+    </div>
+</div>
+<script>
+    var uid="{$uid}";
+    var myscroll = new iScroll("wrapper",{
+        onScrollMove:function(){
+            if (this.y<(this.maxScrollY)) {
+                $('.pull_icon').addClass('flip');
+                $('.pull_icon').removeClass('loading');
+                $('.more span').text('释放加载...');
+            }else{
+                $('.pull_icon').removeClass('flip loading');
+                $('.more span').text('上拉加载...')
+            }
+            if (this.y>(this.minScrollY)) {
+
+            }
+        },
+        onScrollEnd:function(){
+            if ($('.pull_icon').hasClass('flip')) {
+                $('.pull_icon').addClass('loading');
+                $('.more span').text('加载中...');
+                pullUpAction();
+            }
+
+
+        },
+        onRefresh:function(){
+            $('.more').removeClass('flip');
+            $('.more span').text('上拉加载...');
+        }
+
+    });
+    var page="1";
+    function pullUpAction(){
+        setTimeout(function(){
+            $.ajax({
+                url:'/mapi/public/index.php/api/invitation_api/withdrawal_page',
+                type:'get',
+                data:{uid:uid,page:page},
+                dataType:'json',
+                success:function(data){
+
+                    var html='';
+                    if(data.length >0){
+                        for (var i = 0; i < data.length; i++) {
+
+                            html+='<li><div class="col-xs-4 inviter-ul-name">'+getMyDate(data[i]['addtime'])+' </div><div class="col-xs-4 inviter-ul-name">'+data[i]['coin']+'</div><div class="col-xs-4 pad inviter-ul-time">'+data[i]['name']+'</div></li>';
+                        }
+                        $('.scroller ul').append(html);
+                        myscroll.refresh();
+                    }else{
+                        $('.more span').text('暂无数据...');
+                    }
+                    page++;
+                },
+
+            })
+            myscroll.refresh();
+        }, 1000)
+    }
+    if ($('.scroller').height()<$('#wrapper').height()) {
+        $('.more').hide();
+        myscroll.destroy();
+    }
+    //jq转换时间
+    function getMyDate(str){
+
+        var str=str* 1000;
+        oDate = new Date(str),
+            oYear = oDate.getFullYear(),
+            oMonth = oDate.getMonth()+1,
+            oDay = oDate.getDate(),
+            oHour = oDate.getHours(),
+            oMin = oDate.getMinutes(),
+            oSen = oDate.getSeconds(),
+            oTime = oYear +'/'+ getzf(oMonth) +'/'+ getzf(oDay);//最后拼接时间
+
+        return oTime;
+    };
+    //补0操作
+    function getzf(num){
+        if(parseInt(num) < 10){
+            num = '0'+num;
+        }
+        return num;
+    }
+</script>
+</body>
+</html>

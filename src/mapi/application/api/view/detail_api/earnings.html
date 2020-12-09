@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>通话记录收益</title>
+
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <link href="__STATIC__/css/detail.css" rel="stylesheet">
+    <link href="__STATIC__/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<style>
+    .disciple-tel{height:5em;margin-top:1.5em;padding:0px!important; }
+    .disciple-tab{padding:0px!important;}
+    .disciple-btn1 a{padding:0.5em 0.5em;background: #6cbcb1;border-radius: 1em;color:#fff!important;}
+    .disciple-btn2 a{padding:0.5em 0.5em;background: #7e4ab8;border-radius: 1em;color:#fff!important;}
+    .pad{padding:0px!important;text-align: center;margin-top:1em;height:3em!important;}
+</style>
+<body class="dis">
+<div class="disciple-tel_bor">
+    <div class="col-xs-12 disciple-tab ">
+        {if $type ==1}
+            {volist name="list" id="v"}
+                <div class="col-xs-12  disciple-tab1 disciple-tel" >
+                    <div class="col-xs-9  ">与{$v.user_nickname} : 通话计时收益 ：</div>
+                    <div class="col-xs-3  detail-tabcol1 text-right">+{$v.profit} 积分</div>
+                    <div class="col-xs-12  detail-tabcol2">通话时间： {$v.create_time | date="Y-m-d H:i:s",###} </div>
+                </div>
+            {/volist}
+        {else}
+            {volist name="list" id="v"}
+                <div class="col-xs-12  disciple-tab1 disciple-tel" >
+                    <div class="col-xs-9  ">与{$v.user_nickname} : 通话礼物收益 ：</div>
+                    <div class="col-xs-3  detail-tabcol1 text-right">+{$v.profit} 积分</div>
+                    <div class="col-xs-12  detail-tabcol2">礼物收益时间： {$v.create_time | date="Y-m-d H:i:s",###} </div>
+                </div>
+            {/volist}
+        {/if}
+
+    </div>
+</div>
+<script src="__STATIC__/js/jquery-1.10.2.min.js"></script>
+<script src="__STATIC__/layer/layer.js" rel="stylesheet"></script>
+
+<script>
+    $(function () {
+
+        // 页数
+        var page = {$p};
+        var uid = {$uid};
+        var type= {$type};
+        var isscroll = true;
+        $(window).scroll(function () {
+            srollPos = $(this).scrollTop();
+            totalheight = parseFloat($(window).height()) + parseFloat(srollPos);
+            if (($(document).height() - 50) <= totalheight && isscroll) {
+
+                isscroll = false;
+                getlistmore();
+            }
+        });
+
+        function getlistmore() {
+            $.ajax({
+                type: 'POST',
+                url: "{:url('detail_api/earnings')}",
+                data: {'page': page, 'uid': uid,type:type},
+                dataType: 'json',
+                success: function (data) {
+
+                    if (data.length > 0) {
+                        var html = '';
+                        for (var i = 0; i < data.length; i++) {
+                            if(type ==1){
+                                html += ' <div class="col-xs-12  disciple-tab1 disciple-tel" ><div class="col-xs-9  ">与'+ data[i]['user_nickname'] +': 通话计时收益 ：</div><div class="col-xs-3  detail-tabcol1 text-right"> +'+ data[i]['profit'] +' 积分</div><div class="col-xs-12  detail-tabcol2">通话时间： '+ data[i]['create_time'] +'</div>';
+                            }else{
+                                html += ' <div class="col-xs-12  disciple-tab1 disciple-tel" ><div class="col-xs-9  ">与'+ data[i]['user_nickname'] +': 通话礼物收益 ：</div><div class="col-xs-3  detail-tabcol1 text-right">'+ data[i]['profit'] +' 积分</div><div class="col-xs-12  detail-tabcol2">礼物收益时间： '+ data[i]['create_time'] +'</div>';
+                            }
+
+                        }
+                        console.log(html);
+                        $(".disciple-tab").append(html);
+                        page++;
+
+                        isscroll = true;
+                    }
+
+
+                }
+            });
+        }
+
+
+    })
+</script>
+</body>
+</html>
+

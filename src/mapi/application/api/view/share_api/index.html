@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>小视频</title>
+
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <link href="__STATIC__/css/share.css" rel="stylesheet">
+    <link href="__STATIC__/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body style="cursor: pointer;">
+{if condition="$user"}
+<div class="share-title">
+    <div class="share-logo">
+       <!-- <div class="shate-logo_img">
+            <img src='http://cdn.vliao1.xyz/prod/image/MZBRtdFdR4.jpg' alt="">
+        </div>-->
+        <p class="shate-logo-p">{$system_name}</p>
+    </div>
+    <div class="share-link">
+        <a class="large" >视频撩她</a>
+    </div>
+</div>
+<div class="share-type-show">
+    <div class="share-bgimg">
+        <img src="{$user.img}"/>
+        <div class="share-pay">
+            <img src="__STATIC__/image/share-pay.png"/>
+        </div>
+        <div class="share-name">
+            <div class="share-logo-name">
+                <div class="shate-logo_img-name">
+                    <img src='{$user.avatar}' alt="">
+                </div>
+                <p class="shate-logo-p-name">{$user.title}</p>
+            </div>
+            <div class="share-link-name">
+                <a class="large-name">关注</a>
+            </div>
+        </div>
+    </div>
+    <div class="share-host">
+        <div class="share-host-bor"></div>
+        <div class="share-host-bor-name">今日热门推荐</div>
+        <div class="share-host-bor"></div>
+    </div>
+    <div class="share-video">
+        {volist name="video" id="vo"}
+        <div class="share-video-type">
+            <img src="{$vo.img}"/>
+            <div class="share-video-btn">
+                <div class="share-video-btn-img">
+                    <img src="{$vo.avatar}"/>
+                </div>
+                <div class="share-video-btn-name">
+                   <div class="share-video-btn-name-title">{$vo.title}</div>
+                    <div class="share-video-btn-name-coin">
+                        <div class="share-video-btn-name-ic">
+                            <img src="__STATIC__/image/xin.png"/>
+                        </div>
+                        <div class="share-video-btn-name-ic-title">{$vo.follow_num|default='0'}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {/volist}
+    </div>
+
+</div>
+
+<div class="share-video-pay">
+
+    <video preload='auto' id='my-video'  src='{$user.video_url}'  webkit-playsinline='true' playsinline='true' x-webkit-airplay='true' x5-video-player-type='h5' x5-video-player-fullscreen='true' x5-video-ignore-metadata='true'  width='100%' height='100%'><p> 不支持video</p>
+
+    </video>
+    <div class="share-video-pay-fan"><a></a></div>
+    <div class="share-video-pay-right">
+        <div class="share-video-pay-title">
+            <img src="{$user.avatar}"/>
+        </div>
+
+        <div class="share-video-pay-xin">
+            <img src="__STATIC__/image/share-xin.png"/>
+        </div>
+        <div class="share-video-pay-sum">{$user.follow_num|default='0'}</div>
+
+        <div class="share-video-pay-xin">
+            <img src="__STATIC__/image/guanzhu.png"/>
+        </div>
+        <div class="share-video-pay-sum">{$user.viewed|default='0'}</div>
+
+        <div class="share-video-pay-xin">
+            <img src="__STATIC__/image/fanhui.png"/>
+        </div>
+        <div class="share-video-pay-sum">{$user.share|default='0'}</div>
+
+
+    </div>
+</div>
+{else/}
+<div class="share-video-cuo">参数错误</div>
+{/if}
+<script src="__STATIC__/js/jquery-1.10.2.min.js"></script>
+<script src="__STATIC__/layer/mobile/layer.js" rel="stylesheet"></script>
+<script>
+    $(function(){
+        var $status="{$user.status}";
+        var $invite_code="{$invite_code}";
+        $(".share-pay").click(function(){
+            if($status =='1'){
+                $(".share-video-pay").show();
+                $(".share-title").addClass("share-bottom");
+                $(".share-type-show").hide();
+                playPause();
+                event.stopPropagation();
+            }else{
+                layer.open({
+                    content: '付费视频，用户注册后观看'
+                    ,btn: '确定'
+                });
+                event.stopPropagation();
+            }
+
+        })
+        function playPause() {
+            var myVideo = document.getElementsByTagName('video')[0];
+             myVideo.play();
+        }
+        $(".share-video-pay-fan").click(function(){
+
+            $(".share-video-pay").hide();
+            $(".share-title").removeClass("share-bottom");
+            $(".share-type-show").show();
+            event.stopPropagation();
+        })
+        $(document).click(function(){
+            var url="/mapi/public/index.php/api/download_api/index?invite_code="+$invite_code;
+            window.location.href=url;
+        });
+
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<include file="public@header"/>
+</head>
+<body>
+<div class="wrap">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="javascript:;">添加邀请用户</a></li>
+    </ul>
+    <form method="post" class="form-horizontal js-ajax-form margin-top-20" action="{:url('InviteManage/relation')}">
+        <div class="form-group">
+            <label for="input-user_login" class="col-sm-2 control-label"><span
+                    class="form-required">*</span>请输入邀请人ID</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" id="user_id" name="user_id"
+                       placeholder="请输入邀请人ID">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="input-user_pass" class="col-sm-2 control-label"><span class="form-required">*</span>请输入被邀请人ID</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" id="invite_user_id" name="invite_user_id" placeholder="请输入被邀请人ID">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button class="btn btn-primary js-ajax-submit">{:lang('ADD')}</button>
+            </div>
+        </div>
+    </form>
+</div>
+<script src="__STATIC__/js/admin.js"></script>
+<script>
+    $(".js-ajax-submit").click(function () {
+        var user_id = $("#user_id").val();
+        var invite_user_id = $("#invite_user_id").val();
+        $.ajax({
+            url: "{:url('InviteManage/sel')}",
+            type: 'post',
+            dataType: 'json',
+            data: {user_id: user_id, invite_user_id: invite_user_id},
+            success: function (data) {
+                if (data.status == '2') {
+                    layer.confirm(data.msg, {
+                        btn: ['更改', '取消'] //按钮
+                    }, function () {
+                        $.ajax({
+                            url: "{:url('InviteManage/sel_upd')}",
+                            type: 'post',
+                            dataType: 'json',
+                            data: {user_id: user_id, invite_user_id: invite_user_id},
+                            success: function (data) {
+                                if (data.status == '1') {
+                                    layer.msg(data.msg, {time: 2000, icon: 1}, function () {
+                                        window.location.reload();
+                                    });
+                                } else {
+                                    layer.msg(data.msg, {time: 2000, icon: 2});
+                                }
+                            }
+                        });
+                    });
+                } else if (data.status == '1') {
+                    layer.msg(data.msg, {time: 2000, icon: 1}, function () {
+                        window.location.reload();
+                    });
+                } else {
+                    layer.msg(data.msg, {time: 2000, icon: 2});
+                }
+            }
+        });
+    })
+</script>
+</body>
+</html>

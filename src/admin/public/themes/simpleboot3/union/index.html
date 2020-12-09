@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>公会后台</title>
+<meta name="keywords" content="" />
+<meta name="description" content="">
+<link href="__TMPL__/public/assets/css/union_index.css" rel="stylesheet">
+<link href="__TMPL__/public/assets/simpleboot3/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet"
+      type="text/css">
+</head>
+<body>
+
+    	<div class="union_index">
+    		<div class="union_index_title">{$config['system_name']}</div>
+        <a href="{:url('union/Personal/index')}" target="content" class="union_index_user_btn">
+           <div class="union_index_user_name">
+              {$user_union.name}
+          </div>
+          <div class="union_index_user">
+              <img src="{$user_union['logo']|default='__TMPL__/public/assets/images/default-thumbnail.png'}" 
+                                           width="35" style="cursor: pointer"/>                
+          </div>
+       </a>
+       
+       
+    	</div>
+      <div class="union_index_cen">  
+        <!-- 左侧 -->
+     		<div class="union_index_left">
+           
+            <ul>
+            
+              <li class="union_index_check">
+                <a href="{:url('union/Personal/home')}" target="content">
+                  <i class="fa fa-desktop normal"></i>
+                  <div class="union_index_left_name">首 页</div>
+                </a>
+              </li>
+
+              <li>
+                <a href="{:url('union/Personal/index')}" target="content">
+                  <i class="fa fa-street-view normal"></i>
+                  <div class="union_index_left_name">个人资料</div>
+                </a>
+              </li>
+              <li>
+                <a href="{:url('union/comment/index')}" target="content">
+                  <i class="fa fa-group normal"></i>
+                  <div class="union_index_left_name">主播列表</div>
+                </a>
+              </li>
+               <li class="union_index_check">
+                <a href="{:url('union/Personal/withdrawal')}" target="content">
+                  <i class="fa fa-jpy normal"></i>
+                  <div class="union_index_left_name">提 现</div>
+                </a>
+              </li>
+               <li class="union_index_check">
+                <a href="{:url('union/personal/earnings_log')}" target="content">
+                  <i class="fa fa-lightbulb-o"></i>
+                  <div class="union_index_left_name">公会收益记录</div>
+                </a>
+              </li>
+              <li>
+                <a href="{:url('union/index/logout')}" target="content">
+                  <i class="fa fa-sign-in normal"></i>
+                  <div class="union_index_left_name">退出</div>
+                </a>
+              </li>
+            </ul>
+      	</div>
+      	<div class="union_index_right">
+			      <iframe src="{:url('union/Personal/home')}" name="content" id="content" class="union_index_iframe"></iframe>
+     		</div>   						
+       </div>
+</body>
+<script src="__TMPL__/public/assets/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+  $(".union_index_left li").click(function(){
+      $(".union_index_left li").removeClass("union_index_check");
+      $(this).addClass("union_index_check");
+  });
+  $(".union_index_user_btn").click(function(){
+    $(".union_index_left li").removeClass("union_index_check");
+       $(".union_index_left li").eq(1).addClass("union_index_check");
+  });
+</script>
+</html>

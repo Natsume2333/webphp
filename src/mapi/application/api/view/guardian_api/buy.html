@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+
+    <link href="__STATIC__/css/bootstrap.min.css" rel="stylesheet">
+    <link href="__STATIC__/css/guardian.css" rel="stylesheet">
+    <script src="__STATIC__/js/jquery-1.10.2.min.js"></script>
+
+    <title>守护主播</title>
+</head>
+<body>
+<div class="guardian_host col-xs-12 pad">
+    <div class="col-xs-12 pad guardian_host_img"></div>
+    <div class="col-xs-12 pad guardian_host_title">
+        <div class="guardian_host_name col-xs-12">守护主播：{$list_host['user_nickname']}</div>
+        <div class="guardian_host_no col-xs-12">
+           {if condition="$list_user"}
+             守护到期时间：  {$list_user['endtime']|date="Y年m月d日",###}
+          {else/}
+              您当前未开通主播守护
+          {/if}
+        </div>
+    </div>
+
+    <div class="guardian_host_time col-xs-12">
+        <div class="col-xs-6 pad guardian_host_time_kai">开通守护时间</div>
+        <div class="col-xs-6 pad guardian_host_time_te"><a href="{:url('guardian_api/privilege')}">守护特权 ></a></div>
+    </div>
+    {if condition="$list"}
+        <div class="col-xs-12">
+            {volist name="list" id="v" key="k"}
+                {if condition="$k ==1"}
+                    <div class="guardian_host_type guardian_host_color" data-id="{$v.id}" data-coin="{$v.coin}" data-day="{$v.day}"  data-date="{$v.date}">
+                {else/}
+                      <div class="guardian_host_type" data-id="{$v.id}" data-coin="{$v.coin}" data-day="{$v.day}" data-date="{$v.date}">
+                {/if}
+                 {$v.title}
+              </div>
+            {/volist}
+        </div>
+        <div class="guardian_host_end col-xs-12">您即将开通守护，有效期至 <span>{$list[0]['date']}</span></div>
+        <div class="guardian_host_coin col-xs-12">应付虚拟币 ： {$list[0]['coin']}</div>
+        <div class="guardian_host_my_coin col-xs-12">我的余额 ：{$user_info['coin']}</div>
+        <div class="guardian_host_btn">立即支付</div>
+    {else/}
+      <div style="width:100%;height:4em;font-size:16px;font-weight:bold;text-align:center;margin-top:20em;">暂无购买守护规则</div>
+    {/if}
+</div>
+    <script src="__STATIC__/layer/mobile/layer.js" rel="stylesheet"></script>
+<script>
+    $(".guardian_host_type").click(function(){
+        var coin=$(this).attr("data-coin");
+        var day=$(this).attr("data-day");
+        var date=$(this).attr("data-date");
+        $(this).addClass("guardian_host_color").siblings().removeClass("guardian_host_color");
+        var html="应付虚拟币 ："+coin;
+        $(".guardian_host_coin").html(html);
+    })
+    var uid="{$user['uid']}";
+    var token="{$user['token']}";
+    var hostid="{$user['hostid']}";
+    $(".guardian_host_btn").click(function(){
+        var id=$(".guardian_host_color").attr("data-id");
+
+        layer.open({
+            content: '确定支付？'
+            ,btn: ['确认', '取消']
+            ,yes: function(index) {
+              
+                $.ajax({
+                    type: 'POST',
+                    url: "{:url('guardian_api/buy_add')}",
+                    data: {'id': id,'uid':uid,'token':token,'hostid':hostid},
+                    dataType: 'json',
+                    success: function (data) {
+                        layer.open({
+                            content: data.msg
+                            , skin: 'msg'
+                            , time: 2 //2秒后自动关闭
+                        });
+                        if (data.status == '1') {
+                            setTimeout(function () {
+                                window.location.reload();
+                            }, 2000);
+                        }
+                    }
+                });
+            }
+            });
+    })
+
+</script>
+</body>
+</html>

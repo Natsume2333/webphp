@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>财富明细</title>
+
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <link href="__STATIC__/css/detail.css" rel="stylesheet">
+    <link href="__STATIC__/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="dis">
+<div class="col-xs-12 detail-title">
+    <div class="col-xs-4"><a href="{:url('api/detail_api/index',array('uid' => $uid))}" class="col-xs-12 detail-title1 {if condition='$type eq null'} detail-clo{/if}">所 有</a></div>
+    <div class="col-xs-4"><a href="{:url('api/detail_api/index',array('type'=>1,'uid' => $uid))}" class="col-xs-12 detail-title1 {if condition='$type eq 1'} detail-clo{/if}">聊 币</a></div>
+    <div class="col-xs-4"><a href="{:url('api/detail_api/index',array('type'=>2,'uid' => $uid))}" class="col-xs-12 detail-title1 {if condition='$type eq 2'} detail-clo{/if}">积 分</a> </div>
+</div>
+<div class="col-xs-12 disciple-tab">
+
+        {volist name="data" id="v"}
+                <div class="col-xs-12  disciple-tab1">
+                    <div class="col-xs-9  creal">{$v.content}</div>
+                    <div class="col-xs-3 creal detail-tabcol1 text-right">
+                        {if condition="$v['user_id'] eq $uid"}-{else/}+{/if}
+                        {if condition="$v['user_id'] eq $uid"}
+                            {$v['coin']}
+                            {else/}
+                            {$v['profit']}
+                        {/if}
+                    </div>
+                    <div class="col-xs-6 creal detail-tabcol2">{$v['create_time']}</div>
+                    <div class="col-xs-6 creal detail-tabcol2 text-right">
+
+                        {if condition="($v['user_id'] eq $uid)"}
+                              聊币
+                            {else/}
+                              积分
+                        {/if}
+
+                    </div>
+                </div>
+
+        {/volist}
+
+</div>
+
+<script src="__STATIC__/js/jquery-1.10.2.min.js"></script>
+<script src="__STATIC__/layer/layer.js" rel="stylesheet"></script>
+<script>
+    $(function(){
+
+        // 页数
+        var page={$p};
+        var uid={$uid};
+        var isscroll=true;
+        $(window).scroll(function() {
+            srollPos = $(this).scrollTop();
+            totalheight = parseFloat($(window).height()) + parseFloat(srollPos);
+            if(($(document).height()-50) <= totalheight  && isscroll) {
+
+                isscroll=false;
+                getlistmore();
+            }
+
+        });
+        function getlistmore(){
+            $.ajax({
+                type: 'POST',
+                url: "{:url('detail_api/pages')}",
+                data:{'page':page,'uid':uid},
+                dataType: 'json',
+                success: function(data){
+
+                    if(data.length>0){
+                        var html='';
+                        for(var i=0;i<data.length;i++){
+
+                             html+="<div class='col-xs-12  disciple-tab1'><div class='col-xs-9  creal'>"+data[i]['name']+"</div><div class='col-xs-3 creal detail-tabcol1 text-right'>";
+                                if(data[i]['user_id'] == {$uid}){
+                                    html+="-";
+                                }else{
+                                    html+="+";
+                                }
+                                if(data[i]['user_id'] == {$uid}){
+                                    html+=data[i]['coin'];
+                                }else{
+                                    html+=data[i]['profit'];
+                                }
+                                html+="</div><div class='col-xs-6 creal detail-tabcol2'>"+data[i]['create_time']+"</div><div class='col-xs-6 creal detail-tabcol2 text-right'>";
+                                if(data[i]['user_id'] == {$uid}){
+                                    html+="聊币";
+                                }else{
+                                    html+="积分";
+                                }
+                                html+="</div></div>";
+                        }
+                        console.log(html);
+                        $(".disciple-tab").append(html);
+                        page++;
+                        isscroll=true;
+                    }
+
+
+                }
+            });
+        }
+    })
+</script>
+</body>
+</html>

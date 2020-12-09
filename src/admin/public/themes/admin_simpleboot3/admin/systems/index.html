@@ -1,0 +1,189 @@
+<include file="public@header" />
+<style>
+.form-control_sum{width: 100px;height:35px;line-height:35px;float: left; margin-right: 10px;margin-bottom: 10px;}
+.form-control_sum_btn{background: #2c3e50;color:#fff;    line-height: 24px!important;  width: 54px!important;}
+.config_left{width: 150px;float:left;border:1px solid #ccc;min-height: 850px;background: #4e4e4e;}
+#div_content{float:left;width: calc(100% - 160px);margin-left:10px;padding:10px;}
+.config_left li{width: 100%;}
+.config_left li a{color:#e4e4e4;}
+.config_left li a:hover{color:#2C3E50;}
+.config_left .active a{background: #f4f4f4!important;}
+.config_left_type{width: 100%;background: #2c3e50;color:#fff;height: 40px;line-height: 40px;text-align: center;}
+.wrap .config_red{float:left;width: 100%;height: 50px;line-height: 50px; background: #2c3e50;padding-left: 40px;margin-bottom: 10px;color: #fff;}
+</style>
+<!-- 颜色值 -->
+<link href="__TMPL__/public/assets/simpleboot3/css/colpick.css" rel="stylesheet">
+
+</head>
+<body>
+	<div class="wrap js-check-wrap" style="padding:0px;">
+		<if condition="IS_TEST eq 1"><font class="config_red" >测试模式数据无法修改！</font><else/></if>
+		<ul class="nav nav-tabs config_left">
+			<foreach name="type" item="vo">
+				<li <if condition="$key eq 0"> class="active" </if>>
+				    <a href="#{$key}" data-toggle="tab">{$vo.group_id}</a>
+				</li>
+			</foreach>
+				<li>
+				    <a href="{:url('systems/add_sys')}" >添加配置</a>
+				</li>
+		</ul>
+
+		
+		<div id="div_content" <if condition="IS_TEST eq 1">style="pointer-events: none;"<else/></if>>
+			<form class="form-horizontal margin-top-20" role="form" action="{:url('systems/upd_post')}" method="post">
+				<fieldset>
+					<div class="tabbable">
+						<div class="tab-content">
+							<foreach name="type" item="vo" key='k'>
+								<div id="{$k}" <if condition="$k eq 0"> class="tab-pane active" <else/>  class="tab-pane" </if> >
+								<foreach name="config" item="v">
+									<if condition="($v['group_id'] eq $vo['group_id']) and ($v['type'] eq 0)">
+										<div class="form-group">
+											<label for="input-site-name" class="col-sm-2 control-label"><span class="form-required">*</span>{$v['title']}</label>
+											<div class="col-md-6 col-sm-10">
+												<if condition="$v['code'] eq 'acquire_group_id'">
+													<input type="text" class="form-control" disabled="disabled" name="{$v['code']}" value="{$v['val']|default=''}">
+													<else/>
+													<input type="text" class="form-control" id="input-site-name" name="{$v['code']}" value="{$v['val']|default=''}">
+												</if>
+
+											</div>
+										</div>
+									</if>
+									<if condition="($v['group_id'] eq $vo['group_id']) and ($v['type'] eq 1)">
+										<div class="form-group">
+											<label for="input-site-name" class="col-sm-2 control-label"><span class="form-required">*</span>{$v['title']}</label>
+											<div class="col-md-6 col-sm-10">
+												<textarea name="{$v['code']}">{$v['val']}</textarea>
+											</div>
+										</div>
+									</if>
+									<if condition="($v['group_id'] eq $vo['group_id']) and ($v['type'] eq 2)">
+										<div class="form-group">
+											<label for="input-mobile_tpl_enabled" class="col-sm-2 control-label">{$v['title']}</label>
+											<div class="col-md-6 col-sm-10">
+
+												<div style="text-align: center;">
+													<input type="hidden" name="{$v['code']}" id="{$v['code']}" value="{$v.val|default=''}">
+													<a href="javascript:uploadOneImage('图片上传','#{$v.code}');">
+														<if condition="empty($v['val'])">
+															<img src="__TMPL__/public/assets/images/default-thumbnail.png"
+																 id="{$v['code']}-preview" width="135" style="cursor: hand"/>
+															<else/>
+															<img src="{:cmf_get_image_preview_url($v['val'])}" id="{$v['code']}-preview"
+																 width="135" style="cursor: hand"/>
+														</if>
+													</a>
+													<input type="button" class="btn btn-sm"
+														   onclick="$('#{$v.code}-preview').attr('src','__TMPL__/public/assets/images/default-thumbnail.png');$('#{$v.code}').val('');return false;"
+														   value="取消图片">
+												</div>
+											</div>
+										</div>
+									</if>
+									<if condition="($v['group_id'] eq $vo['group_id']) and ($v['type'] eq 3)">
+										<div class="form-group">
+											<label for="input-mobile_tpl_enabled" class="col-sm-2 control-label">{$v['title']}</label>
+											<div class="col-md-6 col-sm-10">
+												<div class="checkbox">
+													<foreach name="v['checkbox_val']" item="tv" key="i">
+														<label>
+															<input type="checkbox" name="{$v['code']}[]" value="{$i}" <foreach name="v['checkbox_check']" item="cv"><if condition="$i eq $cv"> checked </if></foreach> > {$tv}
+														</label>
+													</foreach>
+												</div>
+											</div>
+										</div>
+									</if>
+									<if condition="($v['group_id'] eq $vo['group_id']) and ($v['type'] eq 4)">
+										<div class="form-group">
+											<label for="input-mobile_tpl_enabled" class="col-sm-2 control-label">{$v['title']}</label>
+											<div class="col-md-6 col-sm-10">
+												<div class="checkbox">
+													<foreach name="v['type_val']" item="tv">
+														<label>
+															<input type="radio" name="{$v['code']}" value="{$key}" <if condition="$v['val'] eq $key"> checked </if> > {$tv}
+														</label>
+													</foreach>
+												</div>
+											</div>
+										</div>
+									</if>
+									<if condition="($v['group_id'] eq $vo['group_id']) and ($v['type'] eq 5)">
+										<div class="form-group">
+											<label for="input-site-name" class="col-sm-2 control-label"><span class="form-required">*</span>{$v['title']}</label>
+											<div class="col-md-6 col-sm-10">
+												<input type="text" class="form-control js-bootstrap-datetime" name="{$v['code']}"
+													   value="{$v['val']}" style="width: 140px;" autocomplete="off">
+											</div>
+										</div>
+									</if>
+									<if condition="($v['group_id'] eq $vo['group_id']) and ($v['type'] eq 6)">
+										<div class="form-group">
+											<label for="input-site-name" class="col-sm-2 control-label"><span class="form-required">*</span>{$v['title']}</label>
+											<div class="col-md-6 col-sm-10 form-control_sum_val">
+												<input type="button" class="form-control form-control_sum form-control_sum_btn" data-code="{$v['code']}" value="增加">
+												<foreach name="v['list']" item="lv">
+													<input type="text" class="form-control form-control_sum"  name="{$v['code']}[]" value="{$lv|default=''}"  placeholder="输入内容">
+												</foreach>
+												
+												
+											</div>
+										</div>
+									</if>
+									<if condition="($v['group_id'] eq $vo['group_id']) and ($v['type'] eq 7)">
+										<div class="form-group">
+											<label for="input-site-name" class="col-sm-2 control-label"><span class="form-required">*</span>{$v['title']}</label>
+											<div class="col-md-6 col-sm-10">
+												<input type="text" class="form-control picker" name="{$v['code']}" value="{$v['val']|default=''}" style="width: 150px;">
+											</div>
+										</div>
+									</if>
+
+
+								</foreach>
+								<div class="form-group">
+									<div class="col-sm-offset-2 col-sm-10">
+										<button type="submit" class="btn btn-primary js-ajax-submit" data-refresh="1">{:lang('SAVE')}</button>
+									</div>
+								</div>
+						</div>
+						</foreach>
+					</div>
+		</div>
+		</fieldset>
+		</form>
+		</div>
+
+
+	</div>
+	<script type="text/javascript" src="__STATIC__/js/admin.js"></script>
+	    <!-- 颜色值 -->
+    <script src="__TMPL__/public/assets/simpleboot3/js/colpick.js"></script>
+	  <script>
+   $(document).ready(function(){
+      
+        $(".form-control_sum_btn").click(function(){
+        	var code=$(this).attr("data-code");
+            html='<input type="text" class="form-control form-control_sum"  name="'+code+'[]" placeholder="输入内容">';
+          	$(".form-control_sum_val").append(html);
+        });
+
+          /*<!-- 颜色值 -->*/
+       $('.picker').colpick({
+            layout:'hex',
+            submit:0,
+            colorScheme:'dark',
+            onChange:function(hsb,hex,rgb,el,bySetColor) {
+                $(el).css('border-color','#'+hex);
+                if(!bySetColor) $(el).val('#'+hex);
+            }
+        }).keyup(function(){
+            $(this).colpickSetColor(this.value);
+        });
+
+    })
+    </script>
+</body>
+</html>

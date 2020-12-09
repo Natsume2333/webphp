@@ -1,0 +1,213 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+    <meta name="format-detection" content="telephone=no">
+    {include file="public/meta" /}
+    <title>布谷一对一</title>
+    <link rel="stylesheet" href="static/css/index_lct.css">
+    <style>
+        .p04{
+            background: #e96966;
+            color: rgb(255, 255, 255); 
+            opacity: 1;
+        }
+        .p05{
+            background: #f2f2f2;
+            color: rgb(233, 105, 104); 
+            opacity: 1;
+        }
+        .p04 .bgimg{
+            background-size: 100%, 655px;
+            background-image: url(static/images/red-video.png);
+        }
+        .p05 .bgimg{
+            background-size: 100%, 655px;
+            background-image: url(static/images/grey-live.png);
+        }
+
+        .sectionpart img{
+            padding-top:20px;
+            padding-bottom:20px;
+            width:100%;
+            margin:0 auto;
+        }
+        .erweimab{
+            position:absolute;
+            top:-57px;
+            left:181px;
+            width:186px;
+            height:186px;
+            background:url("{$img[0]['img']}");
+            background-repeat:no-repeat;
+            background-size:100% 100%;
+            display: none;
+        }
+    </style>
+    <script src="static/js/config.js"></script>
+    
+<script src="static/js/counters.js" type="text/javascript"></script>
+<script src="static/js/jquery2.2.4.min.js" type="text/javascript"></script>
+</head>
+
+<body class="bodymain">
+    <input type="hidden" id="state" uid="" value="0" />
+    <div class="section_inner" id="fix_out">
+        <div class="text01 ">美女直播0距离</div>
+        <div class="text02 ">与美眉零距离互动,喜欢就大胆表达出来</div>
+    </div>
+    <div class="smdl">
+        <div class="smdlinner">
+            <div class="close">
+            </div>
+            <div class="imgsm">
+                <img id="code" src="" class="cmimg1">
+            </div>
+            <div class="textsm">扫一扫登录富聊</div>
+            <div class="lrpart lrpart01">
+                <div class="leftsm">
+                    <img src="static/picture/sm1.jpg" alt="">
+                </div>
+                <div class="rightsm">
+                    <p class="pp1">登录手机富聊</p>
+                    <p class="pp1">手机上安装并登录富聊</p>
+                </div>
+            </div>
+            <div class="lrpart lrpart02">
+                <div class="leftsm">
+                    <img src="static/picture/sm2.jpg" alt="">
+                </div>
+                <div class="rightsm">
+                    <p class="pp1">进入扫一扫</p>
+                    <p class="pp1">从“
+                        <span class="co009">我的</span>”列表中“
+                        <img src="static/picture/sm3.jpg" alt="">”,进入“扫一扫”</p>
+                    <p class="pp1">扫描登录富聊账号</p>
+                </div>
+            </div>
+        </div>
+        <div class="smdlinner2">
+            <div class="close2">
+            </div>
+            <div class="tx">
+                <img id="userpic" src="" class="tx1">
+            </div>
+            <div class="mcxs"></div>
+            <div class="ts1">扫描成功</div>
+            <div class="ts2">请在手机上点击确认以登录</div>
+            <a class="fhdenglu" id="backLogin">返回二维码登录</a>
+        </div>
+    </div>
+    <header>
+        <section>
+            <div class="top_part animated fadeInDown">
+                <a href="{:url('/index/index')}" class="a_index colorRed">首页</a>
+                <!--<a href="{:url('/index/abouts')}" class="a_about">关于我们</a>-->
+                <!--<a class="a_joinus" href="{:url('/index/joinus')}">加入我们</a>-->
+                <!--<a href="{:url('/index/linkus')}" class="a_link">联系我们</a>-->
+            </div>
+            <a class="logo animated zoomIn">
+                <!-- <i class="logoi "></i> -->
+                <img src="{$imgb[0]['img']}" alt="" srcset="" style="width:370px;height:305px;">
+            </a>
+        </section>
+    </header>
+    <section>
+        <div class="outline">
+            <div class="download animated bounceInUp">
+                <a href="" target="_blank" class="download_app_pc">
+                    <i class="ik"></i>
+                    <span class="text ik">IOS下载</span>
+                </a>
+                <a class="download_android" href="javascript:void(0);" onclick="Isan()" target="_blank">
+                    <i class="ik"></i>
+                    <span class="text ik">Android下载</span>
+                </a>
+                <a class="erweima">
+                    <i class="ik"></i>
+                    <span class="text ik">扫码下载
+                        <div class="erweimab"></div>
+                    </span>
+                </a>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="warp_lct">
+            {volist name="data" id="vo"}
+            <div class="sectionpart p04" id="separt4" style="background: #{$vo.color}">
+                <div class="section_inner section_inner2">
+                    <div class="text01 " style="color:#3E2C2C;">{$vo.name}</div>
+                    <div class="text02 " style="color:black;">{$vo.content}</div>
+                </div>
+                <img src="{$vo.img}">
+            </div>
+            {/volist}
+            
+        </div>
+    </section>
+    <!-- <section>
+        <div class="yujian">
+            <div class="yujianinner">
+                <div class="text03">遇见你，很有聊</div>
+                <div class="text04">这里有
+                    <span class="sp1"></span>人等待与你相遇</div>
+                <div class="zhaopian"></div>
+            </div>
+        </div>
+    </section> -->
+    <footer>
+        <div class="footer">
+            <div class="foot_bottom1">
+                <div class="foot_last">
+                    <div class="top_text1">联系我们</div>
+                    <div class="ovpart">
+                        {volist name="contact" id="vol" key="k"}
+                        <div class="part3 part3{$k}">
+                            <div class="text_l2">联系人：{$vol.name}</div>
+                            <div class="text_l2">手机号：{$vol.c_phone}</div>
+                            <div class="text_l2">邮箱：{$vol.email}</div>
+                        </div>
+                        {/volist}
+                    </div>
+                </div>
+            </div>
+            <div class="foot_bottom11">
+                <div class="part_f_lct1">
+                    <img src="{$imgc[0]['img']}" alt="">
+                    <p class="p_f_lct">微信服务号</p>
+                </div>
+                <div class="part_f_lct3">
+                    <img src="{$imgd[0]['img']}" alt="">
+                    <p class="p_f_lct">官方微博</p>
+                </div>
+            </div>
+            <div class="foot_bottom2">
+                <!-- <a href="aboutus.html" class="gyfl">关于富聊</a> <span class="sp001">|</span>-->
+                <span class="sp002">{$pca[0]['val']}
+                    <span class="sp001">|</span>
+                    
+                </span>
+                &nbsp;&nbsp;
+                <span>联系电话：{$pcb[0]['val']}</span>
+            </div>
+        </div>
+    </footer>
+    
+    <script type="text/javascript">
+        $('.erweima').mouseover(function(){
+            $('.erweimab').css('display','block');
+        })
+
+        $('.erweima').mouseout(function(){
+            $('.erweimab').css('display','none');
+        })
+    </script>>
+        
+        
+</body>
+
+</html>

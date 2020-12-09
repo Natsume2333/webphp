@@ -1,0 +1,60 @@
+<include file="public@header"/>
+
+<style>
+    .js-ajax-form {
+        margin-top: 30px;
+    }
+</style>
+</head>
+<body>
+<div class="wrap js-check-wrap">
+    <ul class="nav nav-tabs">
+        <li><a href="{:url('visualize/index')}">形象标签列表</a></li>
+        <li class="active"><a href="javascript:;">添加形象标签分类</a></li>
+    </ul>
+    <form class="js-ajax-form" action="{:url('visualize/addPost')}" method="post">
+
+        <input class="form-control" type="hidden" name="id" value="{$data.id |default=''}"/>
+
+        <div>
+            <div class="col-md-8  col-md-offset-2">
+                <table class="table table-bordered">
+                    <tr>
+                        <th>形象标签名称 <span class="form-required">*</span></th>
+                        <td>
+                            <input class="form-control" type="text" name="visualize_name"
+                                   id="title" required value="{$data.visualize_name |default=''}" placeholder="请输入名称"/>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>背景颜色<span class="form-required">*</span></th>
+                        <td>
+                            <input class="form-control" type="text" name="visualize_color"
+                                   id="title" required value="{$data.visualize_color |default=''}" placeholder="请输入背景颜色值"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>排序<span class="form-required">*</span></th>
+                        <td>
+                            <input class="form-control" type="text" name="sort" style="width:100px;"
+                                   required value="{$data.sort |default=''}" placeholder="排序号"/>
+                        </td>
+                    </tr>
+                </table>
+                <input type="hidden" name="id" value="{$data.id |default=''}"/>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-primary js-ajax-submit">{:lang('ADD')}</button>
+                        <a class="btn btn-default" href="{:url('visualize/index')}">{:lang('BACK')}</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
+<script type="text/javascript" src="__STATIC__/js/admin.js"></script>
+
+</body>
+</html>

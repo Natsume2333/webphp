@@ -1,0 +1,84 @@
+<include file="public@header"/>
+<style>
+    .gift-img{width:50px;height:50px}
+    .gift-img img{width:100%;height:100%;}
+    .gift-in input{width:25px;}
+    .js-ajax-form{margin-top:30px;}
+</style>
+</head>
+<body>
+<div class="wrap js-check-wrap">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="javascript:;">提现规则列表</a></li>
+    </ul>
+
+    <form class="js-ajax-form" action="{:url('cash_rule/upd')}" method="post">
+        <table class="table table-hover table-bordered table-list">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>数量</th>
+                <th>添加时间</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tfoot>
+            <foreach name="list" id="vo">
+                <tr>
+                    <td>{$vo.id}</td>
+                    <td>{$vo.count}</td>
+                    <td>{$vo.create_time | date="Y-m-d H:i:s",###}</td>
+                    <td>
+                        <a href="javescript:;" class="del" data-id="{$vo.id}">删除</a>
+                    </td>
+                </tr>
+            </foreach>
+            </tfoot>
+        </table>
+        <!--<button type="button" class="btn btn-primary" style="margin-top:20px;"> 排 序 </button>-->
+    </form>
+
+    <button id="bt_add_content" type="button" class="btn btn-success" style="margin-top:20px;">增加规则</button>
+</div>
+<script src="__STATIC__/js/layer/layer.js" rel="stylesheet"></script>
+<script>
+    $(".del").click(function(){
+        var id=$(this).attr('data-id');
+        layer.confirm('确定删除？', {
+            btn: ['确定','取消'] //按钮
+        }, function(){
+            $.ajax({
+                url: "{:url('cash_rule/del')}",
+                type: 'post',
+                dataType: 'json',
+                data: {id: id},
+                success: function (data) {
+                    if(data =='1'){
+                        layer.msg("删除成功",{time: 2000, icon:1},function(){
+                            window.location.reload();
+                        });
+                    }else{
+                        layer.msg("删除失败",{time: 2000, icon:2});
+                    }
+                }
+            });
+
+        });
+    })
+    $(".btn-primary").click(function(){
+        $(".js-ajax-form").submit();
+    })
+    
+    $('#bt_add_content').click(function () {
+        layer.open({
+            type: 2,
+            title: '添加数量',
+            shadeClose: true,
+            shade: 0.8,
+            area: ['380px', '380px'],
+            content: "{:url('cash_rule/add_cash_rule')}" //iframe的url
+        });
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,170 @@
+body{
+  width:100%;
+  height:100%;
+  background: #F3F3F3;
+}
+.body_a{
+  width:100%;
+  height:17em;
+  background: url('../img/bg.png');
+  overflow: hidden;
+  font-size: 1.1em;
+  background-size: cover;
+  -webkit-background-size: cover;
+  -o-background-size: cover;
+}
+
+.body_top_txt_right{
+  float:left;
+  width:5%;
+  margin-top:1em;
+  margin-left: 1em;
+}
+
+.body_top_txt_right img{
+  height:1.2em;
+}
+.body_top_txt{
+  float: right;
+  width:90%;
+  text-align: center;
+  margin-top:1em;
+  font-weight: 900;
+}
+
+.body_a_content{
+  width:30%;
+  height:;
+  margin-top:2.5em;
+  float: left;
+  margin-left: 2em;
+}
+
+.body_a_content_a{
+  width:100%;
+  text-align: center;
+  font-size: 1em;
+
+}
+
+.body_a_content_b{
+  width:100%;
+  text-align: center;
+  font-size: 1em;
+  margin-top:0.8em;
+}
+
+.body_a_content_b span{
+  font-size: 2em;
+}
+
+.body_a_content_right{
+  width:30%;
+  height:;
+  margin-top:2.5em;
+  float: right;
+  margin-right: 2em;
+}
+
+.hr{
+  width:1px;
+  height: 2.2em;
+  border-left: 1.5px solid #E1B909;
+  float: left;
+  margin-top:4em;
+  margin-left: 3em;
+}
+
+.body_a_bottom{
+  margin-top:13.2em;
+}
+
+.body_a_zq{
+  width:32%;
+  height:2.2em;
+  background: #FFD101;
+  font-size: 1.2em;
+  text-align: center;
+  line-height: 2.2em;
+  border-radius: 1.1em;
+}
+
+.body_a_z{
+  float: left;
+  margin-left: 2em;
+}
+
+.body_a_xj{
+  float: right;
+  margin-right: 2em;
+}
+
+.hra{
+  width:1px;
+  height: 1.5em;
+  border-left: 1.5px solid #D6D6D6;
+  float: left;
+  margin-left: 2.1em;
+  margin-top:0.5em;
+}
+
+.body_b{
+  width:100%;
+  overflow: hidden;
+  
+}
+
+.body_b_top{
+  height:2em;
+  margin:0.5em 0;
+}
+.body_b_top_a{
+  float: left;
+  margin-left: 3em;
+}
+
+.body_b_top_b{
+  float: left;
+  margin-left: 5em;
+}
+
+.body_b_top_c{
+  float: left;
+  margin-left: 5em;
+}
+
+.body_b_content{
+  height:3em;
+  background: #fff;
+  border-top:2px solid #F3F3F3;
+}
+
+.body_b_content_ts{
+  height:3em;
+  background: #fff;
+  border-top:2px solid #F3F3F3;
+  text-align: center;
+  line-height: 3em;
+}
+
+.body_b_content_a{
+  width:34%;
+  float: left;
+  margin-left: 3em;
+  overflow: hidden;
+  line-height: 3em;
+}
+
+.body_b_content_b{
+  width:33%;
+  float: left;
+  overflow: hidden;
+  line-height: 3em;
+}
+
+.body_b_content_c{
+  width:20%;
+  float: left;
+  overflow: hidden;
+  line-height: 3em;
+}

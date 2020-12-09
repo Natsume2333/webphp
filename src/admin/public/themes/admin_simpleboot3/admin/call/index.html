@@ -1,0 +1,65 @@
+<include file="public@header" />
+</head>
+<body>
+<div class="wrap js-check-wrap">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="{:url('call/index')}">预约列表</a></li>
+    </ul>
+    <form class="well form-inline margin-top-20" method="post" action="{:url('call/index')}">
+        预约人id:
+        <input type="text" class="form-control" name="to_user_id" style="width: 120px;" value="{$data.to_user_id|default=''}" placeholder="请输入预约人id">
+        主播id:
+        <input type="text" class="form-control" name="user_id" style="width: 120px;" value="{$data.user_id|default=''}" placeholder="请输入主播id">
+        状态：
+        <select name="status" style="width:100px;height:31px;">
+            <option value="-1">全部</option>
+            <option value="0" <if condition="$data['status'] eq '0'"> selected="selected" </if> >未处理</option>
+            <option value="1" <if condition="$data['status'] eq 1"> selected="selected" </if> >已拒绝</option>
+            <option value="2" <if condition="$data['status'] eq 2"> selected="selected" </if> >已经拨通</option>
+            <option value="3" <if condition="$data['status'] eq 3"> selected="selected" </if> >已超时</option>
+        </select>
+        时间:
+        <input type="text" class="form-control js-bootstrap-date" name="start_time" value="{$data['start_time']|default=''}" style="width: 140px;" autocomplete="off">-
+        <input type="text" class="form-control js-bootstrap-date" name="end_time" value="{$data['end_time']|default=''}" style="width: 140px;" autocomplete="off"> &nbsp; &nbsp;
+
+        <input type="submit" class="btn btn-primary" value="搜索" />
+        <a class="btn btn-danger" href="{:url('call/index')}">清空</a>
+
+    </form>
+    <table class="table table-hover table-bordered">
+        <thead>
+        <tr>
+            <th width="50">ID</th>
+            <th>预约人(ID)</th>
+            <th>主播(ID)</th>
+            <th>预约定金（元）</th>
+            <th>预约时间</th>
+            <th>状态</th>
+            <th width="130">操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <php>$user_statuses=array("0"=>'未处理',"1"=>'已拒绝',"2"=>"已经拨通","3"=>"已超时");</php>
+        <foreach name="users" item="vo">
+            <tr>
+                <td>{$vo.id}</td>
+                <td>{$vo.tname}({$vo.to_user_id})</td>
+                <td>{$vo.uname}({$vo.user_id})</td>
+                <td>{$vo['coin'] |default='0'} </td>
+                <td>{:date('Y-m-d H:i:s',$vo['create_time'])} </td>
+                <td>{$user_statuses[$vo['status']]}</td>
+                <td>
+                    <if condition="$vo['status'] eq '0'">
+                        <a href='{:url("call/refund",array("id"=>$vo["id"],"uid"=>$vo["to_user_id"]))}'>退款</a>
+                    </if>
+
+                </td>
+            </tr>
+        </foreach>
+        </tbody>
+    </table>
+    <div class="pagination">{$page}</div>
+</div>
+<script src="__STATIC__/js/admin.js"></script>
+</body>
+</html>

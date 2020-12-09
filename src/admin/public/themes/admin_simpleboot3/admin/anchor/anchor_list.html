@@ -1,0 +1,154 @@
+<include file="public@header"/>
+<style>
+    .gift-img {
+        width: 50px;
+        height: 50px
+    }
+
+    .gift-img img {
+        width: 100%;
+        height: 100%;
+    }
+
+    .gift-in input {
+        width: 25px;
+    }
+
+    .js-ajax-form {
+        margin-top: 30px;
+    }
+
+    .identity img {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+    }
+
+    .details {
+        cursor: pointer;
+        width: 100px;
+        height: 200px
+    }
+
+    .layui-layer-demo .layui-layer-title {
+        background: #e0e0e0 !important;
+    }
+
+    #status, #type {
+        width: 100px;
+        height: 32px;
+        border-color: #dce4ec;
+        color: #aeb5bb;
+    }
+
+    .img_preview {
+        width: 100px;
+        height: 150px;
+    }
+
+    .getChecked {
+        float: left;
+        width: 80px;
+        height: 34px;
+        line-height: 34px;
+        text-align: center;
+        background: #2C3E50;
+        color: #fff;
+        margin-right: 10px;
+        cursor: pointer;
+    }
+</style>
+</head>
+<body>
+<div class="wrap js-check-wrap">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="javascript:;">主播统计列表</a></li>
+        <li><a href="{:url('anchor/reference_list')}">人气主播</a></li>
+        <li><a href="{:url('anchor/anchor_sort')}">人气主播排序</a></li>
+    </ul>
+    <form class="well form-inline margin-top-20" method="post" action="{:url('anchor/anchor_list')}">
+        用户ID：
+        <input class="form-control" type="text" name="uid" style="width: 200px;" value="{:input('request.uid')}"
+               placeholder="请输入用户ID">
+        用户昵称：
+        <input class="form-control" type="text" name="nickname" style="width: 200px;"
+               value="{:input('request.nickname')}"
+               placeholder="请输入用户昵称">
+
+        <input type="submit" class="btn btn-primary" value="搜索"/>
+        <a class="btn btn-danger" href="{:url('anchor/anchor_list')}">清空</a>
+    </form>
+
+    <form class="js-ajax-form" action="{:url('anchor/index')}" method="post">
+
+        <table class="table table-hover table-bordered table-list">
+            <thead>
+            <tr>
+                <th>用户ID</th>
+                <th>用户昵称</th>
+                <th>头像</th>
+                <th>接通率</th>
+                <th>分类</th>
+                <th>短视频总收益</th>
+                <th>私照总收益</th>
+                <th>礼物总收益</th>
+                <th>通话总收益</th>
+                <th>私信总收益</th>
+                <th>守护总收益</th>
+                <th>游戏总收益</th>
+                <th>购买联系方式总收益</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tfoot>
+            <foreach name="list" id="vo">
+                <tr>
+
+                    <td>{$vo.id}</td>
+                    <td>{$vo.user_nickname}</td>
+                    <td><img width="80" src="{$vo.avatar}"></td>
+                    <td>{$vo.answer_rate}</td>
+                    <td>
+                        <if condition="$vo.reference eq 1">人气主播
+                            <else/>
+                            普通主播
+                        </if>
+                    </td>
+                    <td>{$vo.video_sum}</td>
+                    <td>{$vo.photos_sum}</td>
+                    <td>{$vo.gift_sum}</td>
+                    <td>{$vo.call_sum}</td>
+                    <td>{$vo.messages_sum}</td>
+                    <td>{$vo.guardian_sum}</td>
+                    <td>{$vo.game_sum}</td>
+                    <td>{$vo.contact_sum}</td>
+                    <td>
+                        <if condition="$vo.user_status eq 2">
+                            <a href="{:url('Anchor/add_black',array('id'=>$vo.id))}">拉黑</a>
+                            <else/>
+                            <a href="{:url('Anchor/add_black',array('id'=>$vo.id))}">取消拉黑</a>
+                        </if>
+                        |
+                        <if condition="$vo.reference eq 1">
+                            <a href="{:url('Anchor/add_reference',array('id'=>$vo.id))}">取消人气主播</a>
+                            <else/>
+                            <a href="{:url('Anchor/add_reference',array('id'=>$vo.id))}">设置人气主播</a>
+                        </if>
+
+                    </td>
+                </tr>
+            </foreach>
+            </tfoot>
+        </table>
+        <ul class="pagination">{$page}</ul>
+
+    </form>
+
+</div>
+<script src="__STATIC__/js/layer/layer.js" rel="stylesheet"></script>
+<script src="__STATIC__/js/admin.js"></script>
+<script>
+
+</script>
+</body>
+</html>

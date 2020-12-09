@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"  content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>系统消息</title>
+    <link href="__STATIC__/css/message.css" rel="stylesheet">
+    <link href="__STATIC__/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+{if condition="$message eq null"}
+        <body class="messgae-kong">
+        <div class="col-xs-4 col-xs-offset-4 text-center messgae-kong2"><img src="__STATIC__/image/kong.png"/></div>
+        <div class="col-xs-12 text-center messgae-kong3">没有找到数据 !</div>
+    {else/}
+        <body>
+        {volist name="message" id="v"}
+            <div class="col-xs-12 creal message">
+                <div class="col-xs-12 creal message-top">
+                    <div class="col-xs-2 message-col message-tu"><i class="glyphicon glyphicon-volume-up"></i></div>
+                    <div class="col-xs-10 message-font creal">{$v.title}</div>
+                </div>
+                <div class="col-xs-12 message-center">
+                   {$v.centent}
+                </div>
+                <div class="col-xs-12 creal message-time">
+                    <div class="col-xs-6 message-tclo">{$v['addtime']| date="Y-m-d H:i",###}</div>
+                    {if condition="$v['url'] neq ''"}
+                        <div class="col-xs-6 text-right">
+                            <a href="{$v.url}">点击查看详情  <i class="glyphicon glyphicon-menu-right"></i><i class="glyphicon glyphicon-menu-right"></i></a>
+                        </div>
+                    {/if}
+                </div>
+            </div>
+        {/volist}
+{/if}
+<script src="__STATIC__/js/jquery-1.10.2.min.js"></script>
+</body>
+</html>

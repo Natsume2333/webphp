@@ -1,0 +1,47 @@
+<include file="public@header" />
+</head>
+<body>
+<div class="wrap js-check-wrap">
+    <ul class="nav nav-tabs">
+        <li class="active"><a>结算记录</a></li>
+    </ul>
+    <form class="well form-inline margin-top-20" method="post" action="{:url('settlement/index')}">
+        渠道号:
+        <input type="text" class="form-control" name="channel_agent" style="width: 120px;" value="{$data['channel_agent']|default=''}" placeholder="请输入账号">
+        日期:
+        <input type="text" class="form-control js-bootstrap-date" name="start_time"
+               value="{$data.start_time|default=''}"
+               style="width: 140px;" autocomplete="off">-
+        <input type="text" class="form-control js-bootstrap-date" name="end_time"
+               value="{$data.end_time|default=''}"
+               style="width: 140px;" autocomplete="off"> &nbsp; &nbsp;
+        <input type="submit" class="btn btn-primary" value="搜索" />
+        <a class="btn btn-danger" href="{:url('settlement/index')}">清空</a>
+        <span style="margin-left:30px;">总金额 ： {$data['count']|default='0'} 元</span>
+    </form>
+    <table class="table table-hover table-bordered">
+        <thead>
+        <tr>
+            <th>日期</th>
+            <th>用户（ID）</th>
+            <th>渠道号</th>
+            <th>结算金额</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <foreach name="users" item="vo">
+            <tr>
+                <td>{:date('Y-m-d',$vo['addtime'])}</td>
+                <td>{$vo.agent_login} ({$vo.agent_id})</td>
+                <td>{$vo.channel}</td>
+                <td>{$vo.money} 元</td>
+            </tr>
+        </foreach>
+        </tbody>
+    </table>
+    <div class="pagination">{$page}</div>
+</div>
+<script src="__STATIC__/js/admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<include file="public@header"/>
+<style>
+    .guild-img {
+        width: 50px;
+        height: 50px
+    }
+
+    .js-ajax-form {
+        margin-top: 30px;
+    }
+</style>
+</head>
+<body>
+<div class="wrap js-check-wrap">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="javascript:;">主播列表</a></li>
+    </ul>
+
+    <form class="js-ajax-form" action="{:url('guild_manage/upd')}" method="post">
+
+        <table class="table table-hover table-bordered table-list">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>主播昵称（ID）</th>
+                <th>头像</th>
+                <th>接通率</th>
+                <th>礼物价值</th>
+                <th>音频收入</th>
+                <th>打字收入</th>
+                <th>公会收益</th>
+                <th>时间</th>
+                <th>状态</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tfoot>
+            <foreach name="list" id="vo">
+                <tr>
+                    <td>{$vo.id}</td>
+                    <td>{$vo.user_nickname}({$vo.user_id})</td>
+                    <td><img width="80" src="{$vo.avatar}"></td>
+                    <td>{$vo.answer_rate}%</td>
+                    <td>{$vo.gift_coin}</td>
+                    <td>{$vo.video_coin}</td>
+                    <td>{$vo.private_coin}</td>
+                    <td><a href="{:url('guild_manage/earnings_log',array('id'=>$vo['guild_id'],'hid'=>$vo['user_id']))}"  />{$vo.guild_earnings}</a></td>
+                   
+                    <td>{$vo.create_time | date="Y-m-d",###}</td>
+                    <td>
+                        <if condition="$vo['status'] eq '0'">
+                            审核中
+                            <elseif condition="$vo['status'] eq '1'"/>
+                            审核通过
+                            <else/>
+                            审核拒绝
+                        </if>
+                    </td>
+                    <td>
+                        <if condition="$vo['status'] eq '0'">
+                            <a href="{:url('guild_manage/auditing_join',array('id'=>$vo.id,'status'=>1))}">通过</a>
+                            <a href="{:url('guild_manage/auditing_join',array('id'=>$vo.id,'status'=>2))}">拒绝</a>
+                            |
+                            <elseif condition="$vo['status'] eq '1'"/>
+                            <else/>
+                        </if>
+                        <!--<a href="javescript:;" class="del" data-id="{$vo.id}">删除</a>-->
+                    </td>
+                </tr>
+            </foreach>
+            </tfoot>
+        </table>
+    </form>
+
+</div>
+<script src="__STATIC__/js/layer/layer.js" rel="stylesheet"></script>
+<script>
+    function select_info(id) {
+        layer.open({
+            type: 2,
+            title: '公会信息',
+            shadeClose: true,
+            shade: 0.8,
+            area: ['50%', '60%'],
+            content: "{:url('guild_manage/select_guild_info',array('id'=>" + id + "))}" //iframe的url
+        });
+    }
+</script>
+</body>
+</html>

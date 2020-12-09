@@ -1,0 +1,54 @@
+<include file="public@header"/>
+<style>
+
+    .js-ajax-form {
+        margin-top: 30px;
+    }
+
+    .table-list th, .table-list td {
+        text-align: center;
+    }
+</style>
+</head>
+<body>
+<div class="wrap js-check-wrap">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="javascript:;">主播在线时长</a></li>
+    </ul>
+
+    <form class="well form-inline margin-top-20" method="post" name="form">
+
+        用户ID：
+        <input class="form-control" type="text" name="uid" style="width: 200px;" value="{:input('request.uid')}"
+               placeholder="请输入用户ID">
+        日期:
+        <input type="text" class="form-control js-bootstrap-datetime" name="start_time"
+               value="{:input('request.start_time')}" style="width: 130px;" autocomplete="off">-
+        <input type="text" class="form-control js-bootstrap-datetime" name="end_time"
+               value="{:input('request.end_time')}" style="width: 130px;" autocomplete="off"> &nbsp;
+
+        <input type="submit" class="btn btn-primary" value="搜索" onclick='form1.action="{:url(' reference/emcee_online_count')}";form.submit();'/>
+    </form>
+    <table class="table table-hover table-bordered table-list">
+        <thead>
+        <tr>
+            <th>主播ID</th>
+            <th>在线时长</th>
+        </tr>
+        </thead>
+        <tfoot>
+        <foreach name="list" id="vo" key="k">
+            <tr>
+                <td>{$vo.id}</td>
+                <td>{$vo.online_time}</td>
+            </tr>
+        </foreach>
+        </tfoot>
+    </table>
+    <ul class="pagination">{$page}</ul>
+
+</div>
+<script type="text/javascript" src="__STATIC__/js/admin.js"></script>
+<script src="__STATIC__/js/layer/layer.js" rel="stylesheet"></script>
+</body>
+</html>

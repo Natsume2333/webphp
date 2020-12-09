@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <link href="__STATIC__/css/feedback.css" rel="stylesheet">
+    <link href="__STATIC__/css/bootstrap.min.css" rel="stylesheet">
+    <title>意见反馈</title>
+</head>
+<body>
+<form id="form"  enctype="multipart/form-data">
+<div class="feedback">
+
+  <div class="feedback_title">问题和意见</div>
+    <div class="feedback_title_textarea">
+        <textarea class="msgedit" name="centent" id="msgedit" onKeyUp="keypress(this)" rows="8"  style="overflow-y:hidden; width: 100%;"  placeholder="请填写10个字以上的描述，以便我们提供更好的帮助"></textarea>
+        <div class="feedback_title_maxleng">
+            <label class="name">0</label><span>/</span><label class="maxleng">100</label>
+        </div>
+    </div>
+    <div class="feedback_title">图片(选填,最多4张,支持单张上传)</div>
+    <div class="feedback_img">
+        <div class="file-box clearboth" id="fileBox">
+            <label class="clone-dom " style="display:none;">
+                <input type="file" class="file-btn" name="img[]"/>
+            </label>
+            <div class="review-box"></div>
+            <label><input type="file" class="file-btn clone-dom" name="img[]"/>
+            </label>
+        </div>
+
+    </div>
+    <div class="feedback_title">联系电话(必填)</div>
+    <div class="feedback_tel">
+        <input type="text" name="tel" class="feedback_tel_input" placeholder="便于我们与您联系"/>
+    </div>
+    <div class="feedback_btn" style="cursor: pointer;">提 交</div>
+</div>
+</form>
+
+</body>
+<script src="__STATIC__/js/jquery-1.10.2.min.js"></script>
+<script src="__STATIC__/layer/mobile/layer.js" rel="stylesheet"></script>
+<script type="text/javascript">
+    function keypress(t) {
+        var txt=$(t).val().length;
+        var len=$('.maxleng').html()-txt;
+        if(len>=0){
+            $('.name').html(txt);
+        }else{
+            $(t).val($(t).val().substring(0,$('.maxleng').text()));
+        }
+    }
+    $(".feedback_btn").click(function(){
+      //  $("#form").submit();
+        console.log(new FormData($("#form")[0]));
+        $.ajax({
+            type: "post",
+            url: "{:url('feedback_api/buy')}",
+            data:  new FormData($("#form")[0]),
+            dataType:'json',
+            contentType: false, // 注意这里应设为false
+            processData: false,    //false
+            cache: false,    //缓存
+            success: function(data){
+                layer.open({
+                    content: data.msg
+                    , skin: 'msg'
+                    , time: 2 //2秒后自动关闭
+                });
+                if(data.status==1){
+
+                }
+            }
+        })
+    })
+</script>
+<script type="text/javascript">
+    //获取文件url
+    function createObjectURL(blob){
+        if (window.URL){
+            return window.URL.createObjectURL(blob);
+        } else if (window.webkitURL){
+            return window.webkitURL.createObjectURL(blob);
+        } else {
+            return null;
+        }
+    }
+    var box = $("#fileBox .review-box");    //显示图片box
+    var file = $("#file"); //file对象
+    var domFragment =  document.createDocumentFragment();   //文档流优化多次改动dom
+
+    $("#fileBox").on("click", ".file-btn",function(){
+        var index = $(this).parent().index();
+        if(index == 6){
+            alert("最多可以上传4张图片！");
+            return false;
+        }
+    });
+    //触发选中文件事件
+    $("#fileBox").on("change", ".file-btn", function(event){
+        var imgNum = parseInt($("#fileBox .review-box img").length);
+        if(imgNum < 4){
+            var file = event.target.files;  //获取选中的文件对象
+            var imgTag = $("<img src=''/>");
+            var fileName = file[0].name;    //获取当前文件的文件名
+            var url = createObjectURL(file[0]); //获取当前文件对象的URL
+            //忽略大小写
+            var jpg = (fileName.indexOf(".jpg") > -1) || (fileName.toLowerCase().indexOf(".jpg") > -1);
+            var png = (fileName.indexOf(".png") > -1) || (fileName.toLowerCase().indexOf(".png") > -1);
+            var jpeg = (fileName.indexOf(".jpeg") > -1) || (fileName.toLowerCase().indexOf(".jpeg") > -1);
+            var jpeg = (fileName.indexOf(".gif") > -1) || (fileName.toLowerCase().indexOf(".gif") > -1);
+            var jpeg = (fileName.indexOf(".bmp") > -1) || (fileName.toLowerCase().indexOf(".bmp") > -1);
+            //判断文件是否是图片类型
+            if(jpg || png || jpeg || gif || bmp){
+                imgTag.attr("src",url);
+            }else{
+                alert("请选择合适的图片类型文件！");
+            }
+
+            //最佳显示
+            var imgbox = $("<div class='prev-item'><span class='closebtn'>×</span></div>");
+            imgbox.append(imgTag);
+            box.append(imgbox);
+            event.target.parentNode.style.display = "none";
+            var cloneDom = $(".clone-dom").eq(0).clone().removeAttr("style");
+            $("#fileBox").append(cloneDom);
+        }
+    });
+
+    $(".review-box").on("click", ".prev-item", function(){
+        var index = $(this).index();
+        $(this).remove();
+        $("#fileBox label:eq(" + (index + 1) + ")").remove();
+    });
+</script>
+
+</html>

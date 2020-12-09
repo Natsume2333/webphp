@@ -1,0 +1,322 @@
+.layout_3{
+    background: url(../image/bg_register.png) no-repeat center;
+    background-size: cover;
+    position: absolute;
+    top:0;
+    bottom: 0;
+    width: 100%;
+}
+.top_wrap{
+    position: relative;
+    height: 5.185rem;
+}
+
+.top_img{
+    padding-top: 0.278rem;
+    height: 5.185rem;
+    width: 100%;
+    z-index: 1000;
+}   
+
+.top_img  .title_img{
+    width: calc(100% - 0.7rem);
+    margin:0 0.35rem;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.top_img  .title_img img{
+    width: 100%;
+}
+
+.form_wrap{
+    width:100%;
+    padding-bottom:1rem;
+}
+.invit_friend{
+    font-size: 0.22rem;
+    color: #fff;
+    padding-left: 0.23rem;
+}
+
+.invit_friend .friend_num{
+    margin:0 0.08rem;
+}
+
+.form_wrap .form{
+    padding-left: 0.27rem;
+}
+.form_wrap .reg2_form{
+    position: relative;
+    padding-top: 0.24rem;
+    width:5.89rem;
+}
+.form_wrap .input{
+    padding-left: 0.38rem;
+    height: 0.83rem;
+    width: 100%;
+    margin-bottom: 0.28rem;
+    -webkit-border-radius: 0.5rem;
+    -moz-border-radius: 0.5rem;
+    border-radius: 0.5rem;
+    font-size: 0.26rem;
+    color: #333333;
+}
+
+.form_wrap .input::-webkit-input-placeholder { /* WebKit browsers */
+    color:    #333;
+}
+.form_wrap .input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color:    #333;
+}
+.form_wrap .input::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color:    #333;
+}
+.form_wrap .input:-ms-input-placeholder { /* Internet Explorer 10+ */
+    color:    #333;
+}
+.form_wrap .input2{
+    width:3.49rem;
+}
+
+.reg2_form button{
+    width: 2.21rem;
+    height: 0.83rem;
+    line-height: 0.83rem;
+    font-size: 0.26rem;
+    background: #FFD329;
+    color: #d25548;
+    outline: none;
+    border: 0;
+    -webkit-border-radius: 0.5rem;
+    -moz-border-radius: 0.5rem;
+    border-radius: 0.5rem;
+    margin-left: 0.19rem;
+    float: right;
+}
+
+
+
+.register_btn{
+    width:100%;
+    height:0.89rem;
+    line-height: 0.8rem;
+    font-size: 0.43rem;
+    letter-spacing: 0.065rem;
+    color: #cc023b;
+    background: url(../image/register_btn.png) no-repeat;
+    background-size: 100% 100%;
+}
+
+.agreement{
+    padding-left:0.34rem;
+    padding-top:0.1rem;
+}
+
+.agreement .check_box{
+    display: inline-block;
+    width: 0.24rem;
+    height: 0.24rem;
+    background: url("../image/un_check.png") no-repeat;
+    background-size: 100% 100%;
+    vertical-align: middle;
+    margin-right:0.07rem;
+}
+
+.agreement #check{
+    -webkit-appearance:checkbox;
+    width:0;
+    height: 0;
+}
+.agreement #check:checked  + label.check_box{
+
+    background: url("../image/checked_icon.png") no-repeat;
+    background-size: 100% 100%;
+    vertical-align: middle;
+}
+.agreement .ag_link{
+    color: #8463b1;
+    font-size: 0.22rem;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+
+.qr_code{
+    margin-top: 0.7552rem;
+}
+
+.qr_code .code_img{
+    width: 2.6489rem;
+    height: 2.684rem;
+    background: url(../image/qr_code.png) no-repeat;
+    background-size: 100% 100%;
+    margin: 0 auto;
+}
+
+.foot{
+    position: fixed;
+    bottom:0;
+    width:100%;
+    height:1rem;
+    color: #fff;
+    background:#b951e5;
+}
+
+.foot .fl{
+    width:0.6rem;
+    margin-top:0.21rem;
+    margin-left:0.21rem;
+}
+.foot_1{
+    line-height: 0.6rem;
+    margin-top:0.2rem;
+    font-size:0.23rem;
+    color:#fff;
+    float:left;
+    margin-left:0.21rem;
+}
+.link{
+    float:right;
+    margin-right:0.1rem;
+    height:0.53rem;
+    color:#fff;
+    width:1.96rem;
+    text-align:center;
+    line-height: 0.53rem;
+    font-size:0.26rem;
+    -webkit-border-radius: 0.3rem;
+    -moz-border-radius: 0.3rem;
+    border-radius: 0.3rem;
+    background:url("../image/bg_app.png") no-repeat;
+    background-size: 100% 100%;
+    margin-top:0.2rem;
+}
+.link img{
+    width:0.3rem;
+    margin-top:0.15rem;
+}
+
+/*下载弹窗*/
+.popup_box{
+    position: relative;
+}
+.popup_wrap{
+    position: fixed;
+    z-index: 100;
+    top:0;
+    bottom: 0;
+    width:100%;
+    color: #fff;
+    background: rgba(0,0,0,0.5);
+}
+.close_group{
+    position: absolute;
+    top:0;
+    right: 0.2rem;
+}
+
+.close_btn{
+    font-size: 0.4rem;
+    color: #000;
+}
+
+.registed_box{
+    width: 80%;
+    margin: 0 auto;
+    height: 3rem;
+    background: #fff;
+     position: absolute;
+     border-radius:0.2rem;
+    top: 40%;
+    left: 50%;
+    transform:translate(-50%,-50%);
+}
+.app_down_remind{
+    text-align: center;
+    color: #8463b1;
+    font-size: 0.26rem;
+    padding: 0.6rem 0 0.3rem;
+}
+
+.app_down{
+    text-align: center;
+    margin-top:0.5rem;
+}
+.app_down .app_down_btn{
+    display: inline-block;
+    padding: 0.06rem 0.3rem;
+    border-radius:0.3rem;
+    background:url("../image/bg_app.png") no-repeat;
+    background-size: 100% 100%;
+    color: #fff;
+    width:1.96rem;
+    height: 0.53rem;
+    text-align:center;
+    font-size:0.26rem;
+    
+
+}
+
+
+
+*,
+::after,
+::before{
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+    /*从边框开始计算  盒子模型*/
+    -webkit-box-sizing:border-box;
+    box-sizing: border-box;
+}
+body{
+    font-size: 0.16rem;
+    font-family: "Microsoft YaHei",Helvitica,Verdana,Tohoma,Arial,"sans-serif";
+}
+a{
+    color:#4D4D4D;
+    text-decoration: none;
+}
+a:hover{
+    text-decoration: none;
+}
+input{
+    border: none;
+    outline:0;
+    /*ios端的输入框样式去除*/
+    -webkit-appearance:none;
+}
+img{
+    /*-webkit-border-radius: 5px;*/
+    /*-moz-border-radius: 5px;*/
+    /*border-radius: 5px;*/
+    vertical-align:top;
+}
+/*ie黑色边框兼容*/
+a img{
+    border:0;
+}
+li{
+    list-style: none;
+}
+.fl{
+    float: left;
+}
+.fr{
+    float: right;
+}
+table{
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+.clearfix::before,
+.clearfix::after{
+    content: "";
+    height: 0;
+    line-height: 0;
+    display: block;
+    visibility: hidden;
+    clear: both;
+    overflow: hidden;
+}

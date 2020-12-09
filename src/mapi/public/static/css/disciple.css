@@ -1,0 +1,36 @@
+body,html{font-size:12px;height:100%;margin:0;}
+/*徒弟贡献榜*/
+.creal{padding:0px!important;}
+.disciple{height: 20em; background: -webkit-linear-gradient(right,#871fe5,#fe5f98);}
+.disciple-shou{margin-top:1em;}
+.disciple-shou img{width:60%;}
+.disciple-shou-col{color:#fff;margin-top:0.2em;}
+.disciple-qir{color:#d8d0d0;}
+.disciple-jblef{height: 0.1em; background: -webkit-linear-gradient(left,#fe5f98,#fff);margin-top:1em;}
+.disciple-jbrig{height: 0.1em; background: -webkit-linear-gradient(right,#871fe5,#fff);margin-top:1em;}
+.disciple-jbcol{color:#fff;font-size:20px;font-weight: bold;}
+/*头像1*/
+
+.disciple-oneimg{width:6em;margin:0.5em auto 0;}
+.disciple-oneimg1{width:100%; position: relative; top: 2.4em;margin:0 auto;}
+.disciple-oneimg2{width:4.5em; position: relative;bottom: 3.8em;margin:0 auto;}
+.disciple-oneimg img,.disciple-oneimg1 img,.disciple-oneimg2 img{width:100%;}
+.disciple-oneimg3,.disciple-oneimg4,.disciple-oneimg5{width:5em;height:5em; position: relative; bottom: 2.5em;margin:0 auto;}
+.disciple-oneimg3 img{width:100%;height:100%;border-radius: 50%;border:2px solid #f8a710;}
+.disciple-oneimg4 img{width:100%;height:100%;border-radius: 50%;border:2px solid #dedede;}
+.disciple-oneimg5 img{width:100%;height:100%;border-radius: 50%;border:2px solid #deb770;}
+.disciple-dingw{position:relative; bottom: 6.5em;}
+.disciple-zha{position:relative; bottom: 2em;}
+.disciple-zha1{position:relative; top: 1.5em;}
+.box_relative {position: absolute;bottom:0.1em; text-align:center;color:#fff;font-size: 14px;}
+.box_relative1 {position: absolute;bottom:0em; color:#fff; text-align:center;font-size:10px;}
+.box_relative2{position: absolute;bottom:0em; color:#ffae0c;text-align:center;font-size:10px;}
+.box_relative3 {position: absolute;bottom:0.1em;color:#ffae0c;text-align:center;font-size: 14px;}
+
+.disciple-tab{margin-top:2em;height:29em;overflow: hidden;}
+.disciple-tab1{height:4em;line-height:4em;border-bottom:1px solid #ebebeb;}
+.disciple-tab_img img{width:3em;height:3em;border-radius: 50%;}
+.disciple-tab_pm{font-size:10px;}
+.disciple-tab_pm span{color:#ffae0c;}
+.disciple-tab a{color:#565656!important;}
+.box_relative3,.tab-name,box_relative{overflow: hidden;}

@@ -1,0 +1,52 @@
+<include file="public@header" />
+</head>
+<body>
+<div class="wrap js-check-wrap">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="#">短信发送记录</a></li>
+    </ul>
+    <form class="well form-inline margin-top-20" method="post" action="{:url('sms/index')}">
+        手机号:
+        <input type="text" class="form-control" name="account" style="width: 120px;" value="{$data.account|default=''}" placeholder="请输入账号">
+      
+        <input type="submit" class="btn btn-primary" value="搜索" />
+        <a class="btn btn-danger" href="{:url('sms/index')}">清空</a>
+        
+    </form>
+    <table class="table table-hover table-bordered">
+        <thead>
+        <tr>
+            <th width="50">编号</th>
+            <th>手机号</th>
+            <th>验证码</th>
+            <th>截止当天发送次数</th>
+            <th>发送时间</th>
+            <th>过期时间</th>
+            
+            <th>状态</th>
+            <th>返回信息</th>
+        
+        </tr>
+        </thead>
+        <tbody>
+        <php>$user_statuses=array("1"=>'成功',"2"=>"失败");</php>
+        <foreach name="users" item="vo">
+            <tr>
+                <td>{$vo.id}</td>
+                <td>{$vo.account}</td>
+                <td>{$vo.code}</td>
+                 <td>{$vo.count}</td>
+                <td>{:date('Y-m-d H:i:s',$vo['send_time'])} </td>
+                <td>{:date('Y-m-d H:i:s',$vo['expire_time'])} </td>
+                <td>{$user_statuses[$vo['status']]}</td>
+                <td>{$vo.msg}</td>
+               
+            </tr>
+        </foreach>
+        </tbody>
+    </table>
+    <div class="pagination">{$page}</div>
+</div>
+<script src="__STATIC__/js/admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+ <!DOCTYPE html>
+<html>
+<head>
+    <title>主播列表</title>
+    <meta name="keywords" content=""/>
+    <meta name="description" content="">
+    <include file="public@head"/>
+</head>
+<style>
+    td{padding:1px 8px!important;}
+    .pagination{margin:0px!important;}
+</style>
+<body class="body-white" style="padding-top:0px;">
+    <div class="tab-content">
+        <div class="tab-pane active" id="one">
+             <form class="well form-inline" method="post" action="{:url('union/comment/gift')}" style="margin-top:20px;">
+                用户ID:
+                <input type="text" class="form-control" name="user_id" style="width: 140px;" value="{$result['user_id']|default=''}" placeholder="请输入用户ID">
+                 主播ID:
+                <input type="text" class="form-control" name="to_user_id" style="width: 140px;" value="{$result['to_user_id']|default=''}" placeholder="请输入主播ID">
+                  时间:
+                <input type="text" class="form-control js-bootstrap-date" name="start_time" value="{$result['start_time']|default=''}" style="width: 140px;" autocomplete="off">-
+                <input type="text" class="form-control js-bootstrap-date" name="end_time" value="{$result['end_time']|default=''}" style="width: 140px;" autocomplete="off"> &nbsp; &nbsp;
+                <input type="submit" class="btn btn-primary" value="搜索" />
+                <a class="btn btn-danger" href="{:url('union/comment/gift',array('to_user_id'=>$result['to_user_id']))}">清空</a>
+            </form>
+            <table class="table table-bordered table-striped table-hover">
+                <thead>
+                <tr>
+                    <th>消费用户(ID)</th>
+                    <th>主播(ID)</th>
+                    <th>礼物名称</th>
+                    <th>礼物数量</th>
+                    <th>礼物价格</th>
+                    <th>主播收益</th>
+                    <th>公会收益</th>
+                    <th width="150">时间</th>
+                </tr>
+                </thead>
+                <tbody>
+                <foreach name="list" item="vo">
+                    <tr>
+                        <td>{$vo.tname}({$vo.user_id})</td>
+                        <td>{$vo.uname}({$vo.to_user_id})</td>
+                        <td>{$vo.gift_name}</td>
+                        <td>{$vo.gift_count}</td>
+                        <td>{$vo.gift_coin}</td>
+                        <td>{$vo.profit}</td>
+                        <td>{$vo.guild_earnings}</td>
+                        <td>{$vo.create_time | date="Y-m-d H:i:s",###}</td>
+                    </tr>
+                </foreach>
+                </tbody>
+            </table>
+        </div>
+
+        <ul class="pagination">{$page}</ul>
+    </div>
+</body>
+<script src="__STATIC__/js/layer/layer.js" rel="stylesheet"></script>
+<script src="__STATIC__/js/admin.js"></script>
+</html>

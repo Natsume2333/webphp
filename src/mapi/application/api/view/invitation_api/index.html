@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>分成计划</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="__STATIC__/css/invitation.css" rel="stylesheet">
+    <link href="__STATIC__/css/bootstrap.min.css" rel="stylesheet">
+
+    <script src="__STATIC__/js/jquery-1.10.2.min.js"></script>
+
+
+</head>
+<body>
+<div class="new_invitation new_invitation_color">
+    <div class="new_invitation_coin">{$data.invitation_coin}</div>
+    <div class="new_invitation_coin_name">可提现金额</div>
+</div>
+<div class="new_invitation_log href" data-href="/mapi/public/index.php/api/invitation_api/withdrawal/uid/{$uid}">提现记录</div>
+<div class="new_invitation_title_type">
+  <div class="new_invitation_title_type_name">
+      <div class="new_invitation_center href" data-href="/mapi/public/index.php/api/invitation_api/inviter/uid/{$uid}">
+          <div class="new_invitation_center_img img_cor" >推</div>
+          <div class="new_invitation_center_btn">推广明细</div>
+      </div>
+      <div class="new_invitation_center href"  data-href="/mapi/public/index.php/api/invitation_api/rewards/uid/{$uid}">
+          <div class="new_invitation_center_img img_coin">提</div>
+          <div class="new_invitation_center_btn">提现</div>
+      </div>
+  </div>
+</div>
+
+<div class="new_invitation_bottom">
+    <div class="new_invitation_bottom_name new_invitation_color" data-code="{$data.invite_url}">去推广</div>
+</div>
+<div class="new_invitation_bor_rules">
+    <div class="new_invitation_bor"></div>
+    <div class="new_invitation_rules">分成规则</div>
+    <div class="new_invitation_bor"></div>
+</div>
+<div class="new_invitation_center_wen">{$rules}</div>
+
+<script>
+
+    $(".href").click(function(){
+        var url=$(this).attr("data-href");
+        window.location.href=url;
+    })
+    //分享
+    $(".new_invitation_bottom_name").click(function(){
+        //var url = $(this).attr("data-code");
+        window.location.href = "cuckoo://invite_share"
+    })
+
+</script>
+</body>
+</html>

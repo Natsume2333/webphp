@@ -1,0 +1,181 @@
+<include file="public@header"/>
+<style>
+    .gift-img {
+        width: 50px;
+        height: 50px
+    }
+
+    .gift-img img {
+        width: 100%;
+        height: 100%;
+    }
+
+    .gift-in input {
+        width: 25px;
+    }
+
+    .js-ajax-form {
+        margin-top: 30px;
+    }
+
+    .identity img {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+    }
+
+    .details {
+        cursor: pointer;
+    }
+
+    .layui-layer-demo .layui-layer-title {
+        background: #e0e0e0 !important;
+    }
+
+    #status {
+        width: 100px;
+        height: 32px;
+        border-color: #dce4ec;
+        color: #aeb5bb;
+    }
+
+</style>
+</head>
+<body>
+<div class="wrap js-check-wrap">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="javascript:;">信息认证列表</a></li>
+    </ul>
+    <form class="well form-inline margin-top-20" method="post" action="{:url('user/identity/auth_info_list')}">
+        用户ID：
+        <input class="form-control" type="text" name="uid" style="width: 200px;" value="{:input('request.uid')}"
+               placeholder="请输入用户ID">
+        状态：
+        <select name="status" id="status">
+            <option value="">全部</option>
+            <option value="0"<if condition="$request.status eq '0'"> selected="selected"</if>>未审核</option>
+            <option value="1"<if condition="$request.status eq 1"> selected="selected"</if>>已审核</option>
+            <option value="2"<if condition="$request.status eq 2"> selected="selected"</if>>已拒绝</option>
+        </select>
+        时间:
+        <input type="text" class="form-control js-bootstrap-datetime" name="start_time"
+               value="{:input('request.start_time')}" style="width: 140px;" autocomplete="off">-
+        <input type="text" class="form-control js-bootstrap-datetime" name="end_time"
+               value="{:input('request.end_time')}" style="width: 140px;" autocomplete="off"> &nbsp; &nbsp;
+
+        <input type="submit" class="btn btn-primary" value="搜索"/>
+        <a class="btn btn-danger" href="{:url('user/identity/auth_info_list')}">清空</a>
+    </form>
+    <form class="js-ajax-form" action="{:url('identity/upd')}" method="post">
+
+        <table class="table table-hover table-bordered table-list">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>用户昵称</th>
+                <th>邀请人ID</th>
+                <!--<th>身高</th>-->
+                <!--<th>体重</th>-->
+                <th>性别</th>
+                <!--<th>手机号</th>-->
+                <!--<th>星座</th>-->
+                <!--<th>所在地</th>-->
+                <!--<th>形象标签</th>-->
+                <!--<th>自我介绍</th>-->
+                <!--<th>个性签名</th>-->
+                <th>身份证正面</th>
+                <th>身份证反面</th>
+                <th>提交时间</th>
+                <th>状态</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tfoot>
+
+            <foreach name="list" id="vo">
+                <tr>
+                    <td>{$vo.user_id}</td>
+                    <td>{$vo.user_nickname}</td>
+                    <td>{$vo.invite_id}</td>
+                    <td>
+                        <if condition="$vo.sex eq 1">男
+                            <else/>
+                            女
+                        </if>
+                    </td>
+                    <!--<td>{$vo.height}</td>-->
+                    <!--<td>{$vo.weight}</td>-->
+                    <!--<td>{$vo.phone}</td>-->
+                    <!--<td>{$vo.constellation}</td>-->
+                    <!--<td>{$vo.city}</td>-->
+                    <!--<td>{$vo.image_label}</td>-->
+                    <!--<td>{$vo.introduce}</td>-->
+                    <!--<td>{$vo.sign}</td>-->
+                    <td><img width="100px" height="50px" src="{$vo.auth_id_card_img_url1}"
+                             onclick="show_image('{$vo.auth_id_card_img_url1}')"></td>
+                    <td><img width="100px" height="50px" src="{$vo.auth_id_card_img_url2}"
+                             onclick="show_image('{$vo.auth_id_card_img_url2}')"></td>
+                    <td>{$vo.create_time | date="Y-m-d H:i:s",###}</td>
+                    <td>
+                        <if condition="$vo['status'] eq '0'">
+                            正在审核中
+                            <elseif condition="$vo['status'] eq '2'"/>
+                            已拒绝
+                            <else/>
+                            已审核
+                        </if>
+                    </td>
+                    <td>
+
+                        <!--                        <a class="details" data-url="{$vo['auth_video_url']}">查看认证视频</a>-->
+                        <if condition="$vo['status'] eq '0'">
+                            | <a href="javascript:void(0)" class="is_audit_status"
+                                 data-url="{:url('identity/change_status_auth_info',array('uid'=>$vo['user_id'],'id'=>$vo['id'],'type'=>1))}">通过</a>
+                            | <a href="javascript:void(0)" class="is_audit_status"
+                                 data-url="{:url('identity/change_status_auth_info',array('uid'=>$vo['user_id'],'id'=>$vo['id'],'type'=>2))}">拒绝</a>
+                        </if>
+                        <a href="{:url('identity/del',array('uid'=>$vo['user_id'],'id'=>$vo['id']))}" >删除认证</a>
+                    </td>
+                </tr>
+            </foreach>
+            </tfoot>
+        </table>
+        <ul class="pagination">{$page}</ul>
+
+    </form>
+
+</div>
+<script src="__STATIC__/js/layer/layer.js" rel="stylesheet"></script>
+<script src="__STATIC__/js/admin.js"></script>
+<script type="text/javascript">
+
+    function show_image(url) {
+        //图片显示
+        layer.open({
+            type: 1,
+            title: false,
+            closeBtn: 0,
+            area: ['500px', '300px'],
+            skin: 'layui-layer-nobg', //没有背景色
+            shadeClose: true,
+            content: "<img src='" + url + "' style='width:100%;height:100%;'/>"
+        });
+    }
+
+    $(".details").click(function () {
+        var url = $(this).attr("data-url");
+        //自定页
+        layer.open({
+            title: '视频认证',
+            type: 1,
+            skin: 'layui-layer-demo', //样式类名
+            closeBtn: 0, //不显示关闭按钮
+            anim: 2,
+            shadeClose: true, //开启遮罩关闭
+            content: "<video src='" + url + "' controls='controls'></video>"
+        });
+    })
+
+</script>
+</body>
+</html>

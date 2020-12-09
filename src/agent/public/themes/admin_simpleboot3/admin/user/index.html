@@ -1,0 +1,99 @@
+<include file="public@header" />
+</head>
+<body>
+<div class="wrap">
+	<ul class="nav nav-tabs">
+		<li class="active"><a href="{:url('user/userInfo')}">{:lang('ADMIN_USER_USERINFO')}</a></li>
+	</ul>
+	<form class="form-horizontal js-ajax-form margin-top-20" role="form" method="post" action="{:url('User/userInfoPost')}">
+		<div class="form-group">
+			<label for="input-user-nickname" class="col-sm-2 control-label">{:lang('NICKNAME')}</label>
+			<div class="col-md-6 col-sm-10">
+				<input type="text" class="form-control" id="input-user-nickname" name="agent_login" value="{$users['agent_login']}" readOnly="true">
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label for="input-user-nickname" class="col-sm-2 control-label">密码</label>
+			<div class="col-md-6 col-sm-10">
+				<input type="password" class="form-control" id="input-user-pass" name="agent_pass" value="{$users['agent_pass']}" placeholder="请输入密码">
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label for="input-user-nickname" class="col-sm-2 control-label">Email</label>
+			<div class="col-md-6 col-sm-10">
+				<input type="text" class="form-control" id="input-user-Email" name="email" value="{$users['email']|default=''}" placeholder="请输入邮箱">
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label for="input-user-nickname" class="col-sm-2 control-label">手机</label>
+			<div class="col-md-6 col-sm-10">
+				<input type="text" class="form-control" id="input-user-mobile" name="mobile" value="{$users['mobile']|default=''}" placeholder="请输入手机号">
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label for="input-user-nickname" class="col-sm-2 control-label">QQ</label>
+			<div class="col-md-6 col-sm-10">
+				<input type="text" class="form-control" id="input-user-qq" name="qq" value="{$users['qq']|default=''}" placeholder="请输入QQ">
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="input-user-nickname" class="col-sm-2 control-label">微信</label>
+			<div class="col-md-6 col-sm-10">
+				<input type="text" class="form-control" id="input-user-wx" name="wx" value="{$users['wx']|default=''}" placeholder="请输入微信号">
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="input-user-nickname" class="col-sm-2 control-label">身份证号</label>
+			<div class="col-md-6 col-sm-10">
+				<input type="text" class="form-control" id="input-user-identity_card" name="identity_card" value="{$users['identity_card']|default=''}" placeholder="请输入身份证号">
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="input-user-nickname" class="col-sm-2 control-label">身份证姓名</label>
+			<div class="col-md-6 col-sm-10">
+				<input type="text" class="form-control" id="input-user-name" name="name" value="{$users['name']|default=''}" placeholder="请输入身份证姓名">
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="input-user-nickname" class="col-sm-2 control-label">收款人账号（支付宝）</label>
+			<div class="col-md-6 col-sm-10">
+				<input type="text" class="form-control" id="input-user-pay" name="pay" value="{$users['pay']|default=''}" placeholder="请输入支付宝账号">
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="input-user-nickname" class="col-sm-2 control-label">收款人姓名</label>
+			<div class="col-md-6 col-sm-10">
+				<input type="text" class="form-control" id="input-user-pay-name" name="pay_name" value="{$users['pay_name']|default=''}" placeholder="请输入收款人姓名">
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label for="input-user-nickname" class="col-sm-2 control-label">推荐人（ID）</label>
+			<div class="col-md-6 col-sm-10">
+				<input type="text" class="form-control" id="input-user-superior_id" name="superior_id" value="{$users['superior_id']}" readOnly="true">
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="input-user-nickname" class="col-sm-2 control-label">注册时间</label>
+			<div class="col-md-6 col-sm-10">
+				<input type="text" class="form-control" id="input-user-addtime" name="addtime" value="{$users['addtime']}" readOnly="true">
+			</div>
+		</div>
+
+
+
+
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-10">
+				<button type="submit" class="btn btn-primary js-ajax-submit">{:lang('SAVE')}</button>
+			</div>
+		</div>
+	</form>
+</div>
+<script src="__STATIC__/js/admin.js"></script>
+</body>
+</html>

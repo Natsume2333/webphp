@@ -1,0 +1,54 @@
+<include file="public@header"/>
+<style type="text/css">
+    .pic-list li {
+        margin-bottom: 5px;
+    }
+</style>
+
+</head>
+<body>
+<div class="wrap js-check-wrap">
+    <ul class="nav nav-tabs">
+        <li><a href="{:url('level/star_index')}">星级列表</a></li>
+        <li class="active"><a href="javascript:;">添加星级分类</a></li>
+    </ul>
+    <form action="{:url('level/add_star_post')}" method="post" >
+        <div class="row">
+            <div class="col-md-9">
+                <table class="table table-bordered">
+                    <tr>
+                        <th>等级名称 <span class="form-required">*</span></th>
+                        <td>
+                            <input class="form-control" type="text" name="level_name"
+                                   id="title" required value="{$level.level_name |default=''}" placeholder="请输入等级"/>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>最低收益 <span class="form-required">*</span></th>
+                        <td><input class="form-control" type="text" name="min_income" id="source" value="{$level.min_income |default=''}"
+                                   placeholder="请输入收益数"></td>
+                    </tr>
+
+                    <tr>
+                        <th>最高收益 <span class="form-required">*</span></th>
+                        <td><input class="form-control" type="text" name="max_income" id="income" value="{$level.max_income |default=''}"
+                                   placeholder="请输入收益数"></td>
+                    </tr>
+                </table>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-primary js-ajax-submit">{:lang('ADD')}</button>
+                        <a class="btn btn-default" href="{:url('level/star_index')}">{:lang('BACK')}</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
+<script type="text/javascript" src="__STATIC__/js/admin.js"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,165 @@
+body,html{font-size:14px;height:100%;margin:0;}
+.pad{padding:0px!important;}
+.invitation{height:100%;width:100%;background: url("../image/invitation.png")no-repeat;background-size: 100% 100%;}
+.invitation-type{margin-top:87%;height:11em;background:url("../image/invitation_img.png")no-repeat;background-size: 100% 100%;}
+.invitation-type-hei{height:3em;}
+.invitation-type-name{height:3em;line-height:3em;text-align: center;}
+.invitation-type-name span{font-size: 25px;font-weight: bold;}
+.invitation-type-coin{height:3em;line-height:3em;}
+.invitation-type-coin span{font-size: 20px;font-weight: bold;color:#f2c100;padding-right:0.3em;}
+.invitation-type-rules{height:2em;line-height: 2em;text-align: right;font-size: 12px;}
+.invitation-type-rules span{padding-right:1em;color:#f2c100;}
+
+.invitation-cumulative{margin-top:1em;height:6em;}
+.invitation-cumulative-coin{width: 35%;margin-left:10%;float:left;height:6em;position: relative;}
+.invitation-cumulative-coin-name{height:1em;background: #f2c100;margin-top:1.5em;border-radius: 0.5em;}
+.invitation-cumulative-coin-names{text-align: center;height:3em;line-height: 3em;position: absolute;top:0em;left:0;width:100%;}
+.invitation-cumulative-coin-names span{font-size: 16px;font-weight: 600;}
+.invitation-cumulative-coin-name-sum{height:3em;line-height:3em;text-align: center;font-size: 16px;}
+.invitation-btn-div{height:3em;line-height:3em;background: #f2c100;color:#fff;text-align: center;border-radius: 2em;border:1px solid #000;}
+.invitation-my-inviter{height:2em;line-height: 2em;text-align: center;margin-top:1em;}
+
+/*详情*/
+.invitation-details{height:3em;}
+.invitation-details-fan{height:3em;padding-top:1em;}
+.invitation-details-title{height:3em;line-height: 3em;text-align: center;}
+.invitation-rules{height: 100%;}
+.invitation-details-jian{
+    width: 1em;
+    height:1em;
+    border-top: 2px solid #000;
+    border-right: 2px solid #000;
+    transform: rotate(-130deg);
+}
+/*邀请详情*/
+.inviter-ul{height:100% ;overflow-y:scroll;font-size: 12px;}
+.invitater_wrapper{height:calc(100% - 6rem - 10em);width:83%;margin:auto;padding:0 0.3em;background: #fff;border-radius: 0.5em;}
+.inviter-ul li{height:3em;border-bottom: 1px solid #efefef;}
+ul,li{list-style-type:none;padding:0;margin:0}
+.inviter-ul-id{height:3em;line-height:3em;text-align: center;}
+.inviter-ul-img{height:2em;margin-top:0.5em;text-align: center;}
+.inviter-ul-img img{height:2em;width:2em;border-radius: 50%;}
+.inviter-ul-name{height:3em;line-height:3em;overflow: hidden;padding-left:0px!important;text-align: center;}
+.inviter-ul-time{font-size: 12px;height:3.5em;line-height: 3.5em;text-align: center;}
+.inviter-ul-time_1{font-size: 12px;height:3.5em;line-height: 3.5em;text-align: right;}
+.more{text-align: center;}
+
+/*最新邀请*/
+.new_invitation{width:100%;height:9em;padding-top:1em;}
+.new_invitation_color{
+    background: -webkit-linear-gradient(left,#ffa3a3, #eb33cc); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(left,#ffa3a3, #eb33cc); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(left,#ffa3a3, #eb33cc); /* Firefox 3.6 - 15 */
+    background: linear-gradient(left,#ffa3a3, #eb33cc); /* 标准的语法 */
+}/*
+.new_invitation_title{width:100%;height:9em;border-bottom: 2px solid #fff;}
+.new_invitation_title-left{width:calc(50% - 0.5px);height:100%;float:left;}
+.new_invitation_right_bor{border-right:1px solid #fff;}
+.new_invitation_title_name{width:100%;height:2.5em;line-height: 2.5em;text-align: center;font-size: 16px;color:#fff;}
+.new_invitation_ctn{width:100%;height:3em;}
+.new_invitation_ctn_name{width:calc(50% - 0.5px);height:3em;line-height: 3em;float:left;color:#fff;text-align: center;}
+.new_invitation_bottom{position:fixed;bottom:0;left:0;width:100%;height:5em;}
+.new_invitation_bottom_name{height:3em;line-height: 3em;border-radius: 1em;color:#fff;text-align: center;}
+.new_invitation_bottom_money{height:4em;width:4em;float: right;border-radius: 50%;color:#fff;text-align: center;padding: 0.5em;}
+.new_invitation_title_type{width:100%;height:3em;border-bottom:1px solid #efefef;background: #f4f4f4;}
+.new_invitation_type{float:left;width:33%;height:3em;line-height: 3em;text-align: center;}
+.new_invitation_right_bor_cor{border-right:1px solid #d0d0d0;}
+.color_k:nth-child(1) .inviter-ul-id{color:#f93939;}
+.color_k:nth-child(2) .inviter-ul-id{color:#fb9f02;}
+.color_k:nth-child(3) .inviter-ul-id{color:#01b2f1;}*/
+
+/*收益明细*/
+.new_invitation_income{width:100%;height:9em;}
+.new_invitation_income_name{width:100%;height:3em;line-height: 2em;padding-top:1em;font-size:20px;color:#fff;text-align: center;}
+.new_invitation_income_money{width:100%;height:3em;line-height: 3em;text-align: center;color:#fff;font-size: 16px;}
+.new_invitation_income_title{width:100%;height:3em;border-bottom:1px solid #efefef;background: #f4f4f4;}
+.new_invitation_income_title_name{float:left;width:33%;height:3em;line-height: 3em;text-align: center;}
+
+
+
+/*
+* 最新规则
+*/
+.new_invitation_coin{width:100%;height:1em;line-height: 1em;font-size:40px;text-align: center;color:#fff;}
+.new_invitation_coin_name{width: 100%;height:3em;line-height:3em;text-align: center;color:#fff;}
+.new_invitation_title_type{width:100%;height:6em;position: relative;}
+.new_invitation_title_type_name{position: absolute;width:80%;height:6em;top:-2em;left:10%;background: #fff;border-radius: 0.8em; border:1px solid #ededed; box-shadow:#c7c7c7 1px 0px 18px 0px;}
+.new_invitation_center{width:50%;height:100%;float:left;}
+.new_invitation_center_img{width:2em;height:2em;font-size: 20px;text-align: center;line-height: 2em;border-radius: 50%;color:#fff;margin: 1em 0 1em 1em;float:left;}
+.new_invitation_center_btn{width:calc(100% - 5em);height:6em;line-height: 6em;text-align: center;float:left;color: #6f6f6f;}
+.img_cor{background: #24f091;}
+.img_coin{background: #67ceff;}
+.new_invitation_bottom{width:100%;height:5em;margin-top: 2em;}
+.new_invitation_bottom_name{width:70%;margin-left:15%;height:3em;line-height: 3em;border-radius: 2em;color:#fff;text-align: center;}
+.new_invitation_bor_rules{width:100%;height:3em;line-height: 3em;}
+.new_invitation_bor{float:left;width:30%;height:1px;background: #ebebeb;margin: 1.5em 1em 0 1em;}
+.new_invitation_rules{float:left;width:calc(40% - 4em);text-align: center;height:3em;line-height: 3em;color: #828181;}
+.new_invitation_center_wen{width:90%;margin-left:5%;}
+pre{background: #fff!important;border:0px!important;}
+
+
+/*
+* 推广明细
+*/
+.new_invitation_detail{width:100%;height:3em;border-bottom: 1px solid #f6f6f6;}
+.new_invitation_title{width:33%;float:left;height:3em;line-height:3em;text-align: center;}
+
+
+/*
+*  提现页面
+*/
+.new_invitation_rewards{width:100%;height:14em;position: relative;}
+.new_invitation_rewards_name{position: absolute;width:80%;height:15em;top:-2em;left:10%;background: #fff;border-radius: 0.8em; border:1px solid #ededed; box-shadow:#c7c7c7 1px 0px 18px 0px;}
+.new_invitation_rewards_name_color{width:100%;height:3em;line-height: 3em;padding-left:1em;margin-top:0.5em;color: #ff54cd;font-weight: bold;font-size: 16px;}
+.new_invitation_rewards_name_coin{width:100%;height:3em;line-height: 3em;padding-left:1em;color: #545253;}
+.new_invitation_rewards_coin{width:100%;height:3em;padding-left:1em;position: relative}
+.new_invitation_rewards_coin input{width:100%;BORDER-TOP-STYLE: none; BORDER-RIGHT-STYLE: none; BORDER-LEFT-STYLE: none; border-bottom:1px solid #f0f0f0;height:3em;line-height: 3em;outline:none;padding-left:2em;}
+.new_invitation_rewards_coin span{position: absolute;width:2em;height:1.5em;line-height: 1.5em;text-align: center;top:0;left: 0em;font-weight:bold;font-size: 25px; }
+.new_invitation_rewards_type{width:60%;height:3em;line-height: 3em;text-align: center;background: #f347a7;color:#fff;margin:1em auto;border-radius: 2em;}
+.new_invitation_rewards_center{width:80%;border-bottom: 1px solid #e4e4e4;height:4em;margin:auto;}
+.new_invitation_rewards_center_img{width:2em;height:2em;float:left;margin-top:1.2em;}
+.new_invitation_rewards_center_img img{width:100%;}
+.new_invitation_rewards_center_name{width:calc(100% - 3em);height:4em;line-height:4em;float:left;padding-left:1em;color: #343131;}
+.new_invitation_rewards_pay{width:100%;}
+.new_invitation_rewards_pay_name{width:90%;height:3em;line-height: 3em;margin:auto;position: relative;}
+.new_invitation_rewards_pay_name span{position: absolute;width:9em;height:3em;line-height: 3em;top:0;left: 0em;    color: #6b6b6b;}
+.new_invitation_rewards_pay_name input{width:100%;border:0px;height:3em;line-height: 3em;outline:none;padding-left:9em;}
+.new_invitation_rewards_pay_btn{width:60%;height:3em;line-height: 3em;text-align: center;margin: auto;border:1px solid #de3aff;color:#de3aff;border-radius: 2em;margin-top: 1em;}
+
+
+
+.inviter_btn_name{width:100%;height:6rem;
+    background: -webkit-linear-gradient(top,#ffa3d6, #eb33cc);
+    background: -o-linear-gradient(top,#ffa3d6, #eb33cc);
+    background: -moz-linear-gradient(top,#ffa3d6, #eb33cc);
+    background: linear-gradient(top,#ffa3d6, #eb33cc);
+    overflow: hidden;
+}
+.inviter_border{background: #e0e8ea;}
+.inviter_btn_name_div{width:14rem;height:calc(3rem + 2px);margin:1.5rem auto;border:1px solid #fff;border-radius: 0.5rem;}
+.inviter_btn_name_type{width:50%;float: left;height:3rem;line-height:3rem;text-align: center;color:#fff;border-radius: 0.4rem;}
+.inviter_btn_color{background: #fff;color:#eb33cc;}
+.new_invitation_detail_new{width:83%;height:3em;border-bottom: 1px solid #f6f6f6;background: #fff;margin:2em auto 0.5em;border-radius: 0.5em;}
+
+
+
+.bangding{height:20em!important;}
+.bangding_top{margin-top:2em;}
+.bangding_name{font-size: 20px;}
+
+.new_invitation_log{    position: absolute;top: 1em;right: 1em;color: #fff;font-size: 12px;width: 6em;height: 2em;line-height: 2em;text-align: center;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

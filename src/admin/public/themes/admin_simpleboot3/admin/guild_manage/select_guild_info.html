@@ -1,0 +1,37 @@
+<include file="public@header"/>
+</head>
+<body>
+
+<table class="table table-hover table-bordered table-list">
+    <thead>
+    <tr>
+        <th>公会总收益</th>
+        <th>公会剩余收益</th>
+        <th>公会今日收益</th>
+        <th>总人数</th>
+        <th>待审核人数</th>
+        <th>账户类型</th>
+        <th>账户</th>
+        <th>账户名称</th>
+        
+    </tr>
+    </thead>
+    <tfoot>
+    <td>{$data.total_earnings}</td>
+    <td>{$data.earnings}</td>
+    <td>{$data.day_income}</td>
+    <td>{$data.num}</td>
+    <td>{$data.auditing_num}</td>
+    <td>
+         <if condition="$data['account_type'] eq '1'">
+            支付宝
+            <else/>
+            微信
+        </if>
+    </td>
+    <td>{$data.cash_account}</td>
+    <td>{$data.account_name}</td>
+    </tfoot>
+</table>
+</body>
+</html>

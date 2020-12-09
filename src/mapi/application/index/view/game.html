@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>大转盘抽奖</title>
+    <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <script>
+        "use strict";!function(e){function t(){var t=i.getBoundingClientRect().width,u=t/o;t<d?e.rem=100*u:e.rem=d/o*100,i.style.fontSize=e.rem+"px",n.body&&(n.body.style.fontSize="16px")}var n=e.document,i=n.documentElement,o=640,d=640,u=void 0;e.addEventListener("resize",function(){u&&clearTimeout(u),u=setTimeout(t,300)},!1),setTimeout(t,0)}(window);
+    </script>
+    <script src="{:url('/static/layer/mobile/layer.js',false,false)}"></script>
+    <script src="{:url('/static/js/jquery2.2.4.min.js',false,false)}" type="text/javascript"></script>
+    <style>
+        html,
+        body,
+        div,
+        p,
+        ul,
+        li,
+        img {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+
+            font: 0.14rem "Microsoft YaHei", 微软雅黑, arial, simsun, 宋体;
+        }
+
+        body{
+            width:6.4rem;
+        }
+
+        .main{
+            width:6.4rem;
+            height:11.37rem;
+            background:url({$data['bgimgurl']}) no-repeat;
+            z-index:-10;
+            zoom: 1;
+            background-color: #fff;
+            background-repeat: no-repeat;
+            background-size: cover;
+            -webkit-background-size: cover;
+            -o-background-size: cover;
+            background-position: center 0;
+        }
+
+
+        #lottery{width:1rem;height:1rem;padding-top:3.89rem;margin-left:0.68rem;}
+
+        #lottery table td{position:relative;width:1.59rem;height:1.59rem;padding: 0.02rem 0.02rem;text-align:center;color:#333;font-index:-999}
+        #lottery table td img{display:block;width:1.59rem;height:1.59rem;}
+        #lottery table td a{width:1.59rem;height:1.59rem;display:block;text-decoration:none;background:url({:url('static/image/game_start.png',false,false)}) no-repeat top center;background-position:center;}
+        #lottery table td a:hover{background-image:url({:url('static/image/game_start.png',false,false)});}
+        #lottery table td.active .mask{display:block;}
+        .mask{
+            width:1.59rem;
+            height:1.59rem;
+            position:absolute;
+            left:0;
+            top:0;
+            background:url({:url('static/image/game_d.png',false,false)}) no-repeat;
+            display:none;
+        }
+
+    </style>
+</head>
+<body class="keBody">
+<!--效果html开始-->
+<div class="main">
+    <div id="lottery">
+        <table border="0" cellpadding="0" cellspacing="0">
+            <tr>
+                <!--{:url('static/image/game_1.png',false,false)}-->
+                <td class="lottery-unit lottery-unit-0"><img src="{$data['gift_info'][1]['imgurl']}"><div class="mask"></div></td>
+                <td class="lottery-unit lottery-unit-1"><img src="{$data['gift_info'][2]['imgurl']}"><div class="mask"></div></td>
+                <td class="lottery-unit lottery-unit-2"><img src="{$data['gift_info'][3]['imgurl']}"><div class="mask"></div></td>
+            </tr>
+            <tr>
+                <td class="lottery-unit lottery-unit-7"><img src="{$data['gift_info'][0]['imgurl']}"><div class="mask"></div></td>
+                <td><a href="javascript:;"></a></td>
+                <td class="lottery-unit lottery-unit-3"><img src="{$data['gift_info'][2]['imgurl']}"><div class="mask"></div></td>
+            </tr>
+            <tr>
+                <td class="lottery-unit lottery-unit-6"><img src="{$data['gift_info'][1]['imgurl']}"><div class="mask"></div></td>
+                <td class="lottery-unit lottery-unit-5"><img src="{$data['gift_info'][3]['imgurl']}"><div class="mask"></div></td>
+                <td class="lottery-unit lottery-unit-4"><img src="{$data['gift_info'][0]['imgurl']}"><div class="mask"></div></td>
+            </tr>
+        </table>
+    </div>
+    <div>
+        <script src="http://code.jquery.com/jquery-latest.js"></script>
+        <script type="text/javascript">
+            var lottery={
+                index:-1,    //当前转动到哪个位置，起点位置
+                count:0,    //总共有多少个位置
+                timer:0,    //setTimeout的ID，用clearTimeout清除
+                speed:20,    //初始转动速度
+                times:0,    //转动次数
+                cycle:50,    //转动基本次数：即至少需要转动多少次再进入抽奖环节
+                prize:-1,    //中奖位置
+                init:function(id){
+                    if ($("#"+id).find(".lottery-unit").length>0) {
+                        $lottery = $("#"+id);
+                        $units = $lottery.find(".lottery-unit");
+                        this.obj = $lottery;
+                        this.count = $units.length;
+                        $lottery.find(".lottery-unit-"+this.index).addClass("active");
+                    };
+                },
+                roll:function(){
+                    var index = this.index;
+                    var count = this.count;
+                    var lottery = this.obj;
+                    $(lottery).find(".lottery-unit-"+index).removeClass("active");
+                    index += 1;
+                    if (index>count-1) {
+                        index = 0;
+                    };
+                    $(lottery).find(".lottery-unit-"+index).addClass("active");
+                    this.index=index;
+                    return false;
+                },
+                stop:function(index){
+                    this.prize=index;
+                    return false;
+                }
+            };
+
+            function roll(){
+                lottery.times += 1;
+                lottery.roll();//转动过程调用的是lottery的roll方法，这里是第一次调用初始化
+                if (lottery.times > lottery.cycle+10 && lottery.prize==lottery.index) {
+                    clearTimeout(lottery.timer);
+                    lottery.prize=-1;
+                    lottery.times=0;
+                    click=false;
+                }else{
+
+                    if (lottery.times<lottery.cycle) {
+                        lottery.speed -= 10;
+                    }else if(lottery.times==lottery.cycle) {
+                        //var index = Math.random()*(lottery.count)|0;
+                        //lottery.prize = index;
+                    }else{
+                        if (lottery.times > lottery.cycle+10 && ((lottery.prize==0 && lottery.index==7) || lottery.prize==lottery.index+1)) {
+                            lottery.speed += 110;
+                        }else{
+                            lottery.speed += 20;
+                        }
+                    }
+                    if (lottery.speed<40) {
+                        lottery.speed=40;
+                    };
+                    //console.log(lottery.times+'^^^^^^'+lottery.speed+'^^^^^^^'+lottery.prize);
+                    lottery.timer = setTimeout(roll,lottery.speed);//循环调用
+                }
+                return false;
+            }
+            var click=false;
+            window.onload=function(){
+                lottery.init('lottery');
+                $("#lottery a").click(function(){
+                    if(click){
+                        //click控制一次抽奖过程中不能重复点击抽奖按钮，后面的点击不响应
+                        return false;
+                    }else{
+                        lottery.speed=100;
+                        roll();    //转圈过程不响应click事件，会将click置为false
+                        click=true; //一次抽奖完成后，设置click为true，可继续抽奖
+                        return false;
+                    }
+                });
+            };
+
+            $("#lottery a").click(function(){
+                user_id = {$data['user_id']};
+                var islogin=1;
+                if(islogin){
+                    //已登录用户才能去抽奖
+                    if (click) {
+                        return false;
+                    }else{
+                        //向后端接口发请求返回中奖结果
+                        var geturl="{:url('index/gamePost',false,false)}"+'?user_id='+user_id;
+                        $.ajax({
+                            url:geturl,
+                            type:"GET",
+                            dataType:"json",
+                            async:false,
+                            success:function(data){
+                                var a = Math.random();
+                                var b =Math.round(a);
+                                if(data.code==1){
+                                    var rewardid = data.data.gift_id
+                                    var name = data.data.name;
+                                    var prize=-1;
+                                    var prizename = '';
+                                    if(rewardid==1){
+                                        //0,6一等奖 数据库 1
+                                        if(b){
+                                            lottery.prize = 0;
+                                            prize=0;
+                                        }else{
+                                            lottery.prize = 6;
+                                            prize=6;
+                                        }
+                                        prizename = "恭喜您中的，一等奖获得金币,获得金币"+data.data.score;
+                                    }else if(rewardid==2){
+                                        //1，3二等奖  数据库 2
+                                        if(b){
+                                            lottery.prize = 1;
+                                            prize=1;
+                                        }else{
+                                            lottery.prize = 3;
+                                            prize=3;
+                                        }
+                                        prizename = "恭喜您中的，二等奖获得金币,获得金币"+data.data.score;
+                                    }else if(rewardid==3){
+                                        //2，5 三等奖  数据库 2
+                                        if(b){
+                                            lottery.prize = 2;
+                                            prize=2;
+                                        }else{
+                                            lottery.prize = 5;
+                                            prize=5;
+                                        }
+                                        prizename =  "恭喜您中的，三等奖获得金币,获得金币"+data.data.score;
+                                    }else{
+                                        //4，7未中奖  数据库 3
+                                        if(b){
+                                            lottery.prize = 4;
+                                            prize=4;
+                                        }else{
+                                            lottery.prize = 7;
+                                            prize=7;
+                                        }
+                                        prizename = "很遗憾，您未中奖！";
+                                    }
+                                    lottery.speed=100;
+                                    roll();
+                                    click=true;
+                                    setTimeout(function(){
+                                           // alert(prizename);
+
+                                        layer.open({
+                                            content: prizename,
+                                            btn: '确定',
+                                            shadeClose: false,
+
+                                        });
+                                    }, 6000);
+                                    return false;
+                                }else{
+                                    /*错误处理*/
+                                    if(data.code==3){
+                                        $("#novip").show();
+                                    }else{
+                                        $("#notime").show();
+                                    }
+                                }
+                            }/*function结束*/
+                        });/*ajax结束*/
+                    }/*else结束*/
+                }
+            });
+        </script>
+        <!--效果html结束-->
+
+</body>
+</html>

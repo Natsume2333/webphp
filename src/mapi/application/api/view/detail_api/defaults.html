@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>财富明细</title>
+
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <link href="__STATIC__/css/detail.css" rel="stylesheet">
+    <link href="__STATIC__/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="defaults-dis">
+
+<div class="col-xs-12 pad-all">
+    <div class="defaults-type-title">
+        <div class="defaults-type-title-name bor-bottom" data-type="2" data-uid="{$list.uid}">
+            <div class="defaults-type-img"><img src="__STATIC__/image/shouru1.png"/></div>
+            <div class="defaults-type-center">收入明细</div>
+        </div>
+        <div class="defaults-type-title-name" data-type="1" data-uid="{$list.uid}">
+            <div class="defaults-type-img"><img src="__STATIC__/image/shouru2.png"/></div>
+            <div class="defaults-type-center">支出明细</div>
+        </div>
+        <div class="defaults-type-title-names bor-top" data-type="3" data-uid="{$list.uid}">
+            <div class="defaults-type-img"><img src="__STATIC__/image/shouru3.png"/></div>
+            <div class="defaults-type-center">充值明细</div>
+        </div>
+        <div class="defaults-type-title-names bor-top" data-type="4" data-uid="{$list.uid}">
+            <div class="defaults-type-img"><img src="__STATIC__/image/shouru4.png"/></div>
+            <div class="defaults-type-center">提现明细</div>
+        </div>
+    </div>
+</div>
+
+<script src="__STATIC__/js/jquery-1.10.2.min.js"></script>
+<script src="__STATIC__/layer/layer.js" rel="stylesheet"></script>
+<script>
+    $(function () {
+
+        $(".defaults-type-title-name").click(function () {
+            var type = $(this).attr("data-type");
+            var uid = $(this).attr("data-uid");
+            var url = "/mapi/public/index.php/api/detail_api/index/uid/" + uid + "/type/" + type;
+            window.location.href = url;
+        })
+
+        $(".defaults-type-title-names").click(function () {
+            var type = $(this).attr("data-type");
+            var uid = $(this).attr("data-uid");
+            if(type ==3){
+                var url = "/mapi/public/index.php/api/detail_api/recharge/uid/" + uid;
+            }else{
+                var url = "/mapi/public/index.php/api/detail_api/withdrawal/uid/" + uid;
+            }
+
+            window.location.href = url;
+        })
+
+    })
+</script>
+</body>
+</html>

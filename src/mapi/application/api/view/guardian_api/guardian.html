@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+
+    <link href="__STATIC__/css/bootstrap.min.css" rel="stylesheet">
+    <link href="__STATIC__/css/guardian.css" rel="stylesheet">
+    <script src="__STATIC__/js/jquery-1.10.2.min.js"></script>
+
+    <title>我的守护</title>
+</head>
+<body class="guardian_bg">
+<div class="guardian_list col-xs-12 pad">
+
+    <div  class="guardian_user_list col-xs-12 pad">
+
+        {volist name="list" id="v" key="k"}
+        <div class="col-xs-12  guardian_border_bottom">
+            <div class="guardian_user_img guardian_bg_img">
+                <img src="{$v.avatar}"/>
+            </div>
+            <div class="guardian_user_name">
+                <div class="guardian_user_title guardian_bg_color">{$v.user_nickname}</div>
+                <div class="guardian_user_coin guardian_bg_color_time">到期时间：{$v.addtime|date="Y-m-d",###}</div>
+            </div>
+            <div class="guardian_user_right_list">
+                <div class="guardian_user_host_btn" data-id="{$v.hostid}">续费</div>
+            </div>
+        </div>
+        {/volist}
+
+    </div>
+</div>
+<script>
+    var uid="{$user['uid']}";
+    var token="{$user['token']}";
+    $(".guardian_user_host_btn").click(function(){
+        var hostid=$(this).attr("data-id");
+        window.location.href = "/mapi/public/index.php/api/guardian_api/index?hostid="+hostid+"&uid="+uid+"&token="+token;
+    })
+</script>
+</body>
+</html>

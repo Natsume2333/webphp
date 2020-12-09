@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>新手引导</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="__STATIC__/css/index.css" rel="stylesheet">
+    <link href="__STATIC__/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="col-xs-12 novice_guide creal">
+   <div class="col-xs-3 novice_guide_type creal">
+        <a href="/admin/public/portal/article/index/id/{$category[1]['id']}.html">
+            <div class="col-xs-12 novice_guide_type-img"><img src="__STATIC__/img/remen.png"></div>
+            <div class="col-xs-12 novice_guide_type-name creal">{$category[1]['name']}</div>
+        </a>
+   </div>
+    <div class="col-xs-3 novice_guide_type creal">
+       <a href="/admin/public/portal/article/index/id/{$category[2]['id']}.html">
+            <div class="col-xs-12 novice_guide_type-img"><img src="__STATIC__/img/xingweiguifan.png"></div>
+            <div class="col-xs-12 novice_guide_type-name creal">{$category[2]['name']}</div>
+        </a>
+   </div>
+    <div class="col-xs-3 novice_guide_type creal">
+         <a href="/admin/public/portal/article/index/id/{$category[3]['id']}.html">
+            <div class="col-xs-12 novice_guide_type-img"><img src="__STATIC__/img/tuijanhepaihang.png"></div>
+            <div class="col-xs-12 novice_guide_type-name creal">{$category[3]['name']}</div>
+        </a>
+   </div>
+    <div class="col-xs-3 novice_guide_type creal">
+         <a href="/admin/public/portal/article/index/id/{$category[4]['id']}.html">
+            <div class="col-xs-12 novice_guide_type-img"><img src="__STATIC__/img/gengduo.png"></div>
+            <div class="col-xs-12 novice_guide_type-name creal">{$category[4]['name']}</div>
+        </a>
+   </div>
+</div>
+<div class="col-xs-12 guide">{$category[0]['name']}</div>
+{volist name="portal" id="vo" key="i"}
+<div class="col-xs-12 guide-cond creal">
+    <a href="/admin/public/portal/article/index/id/{$vo.id}.hmtl">
+        <div class="col-xs-10">{$i}. {$vo.post_title}</div>
+        <div class="col-xs-2"><i class="glyphicon glyphicon-chevron-right"></i></div>
+    </a>
+</div>
+{/volist}
+</body>
+</html>

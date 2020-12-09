@@ -1,0 +1,53 @@
+@media screen and (min-width: 375px) and (max-width: 960px) {
+    body,html{font-size:14px;margin:0;}
+}
+@media screen and (min-width: 100px) and (max-width: 374px) {
+    body,html{font-size:12px;margin:0;}
+}
+.guardian_index{background: #ff4d87;}
+.pad{padding:0px!important;}
+.guardian_user{background: #fff;position:fixed;bottom: 0;left:0;}
+.guardian_user_img{float:left;width:4em;height:4em;overflow: hidden;border-radius: 0.5em;margin-top:1em;}
+.guardian_user_img img{width:100%;height:100%;}
+.guardian_user_name{float:left;width:calc(100% - 4em - 20%);padding-left:1em;height:6em;}
+.guardian_user_title{width:100%;height:2em;line-height: 2em;margin-top:1em;}
+.guardian_user_coin{width:100%;height:2em;line-height: 2em;}
+.guardian_user_right{float:left;width:20%;height:6em;}
+.guardian_user_btn{width:4em;height:2.5em;line-height: 2.5em;background: #36b1f8;color:#fff;text-align: center;margin:1.7em auto;border-radius: 1em;}
+
+.guardian_user_right_list{float:left;width:20%;height:6em;position:relative;}
+.guardian_user_img_list{background-image: url('../image/sort.png');background-repeat : no-repeat;background-size:100% ; height:3em;line-height: 3em;margin: 1em calc(50% - 1em);color:#ac3601;}
+.guardian_user_img_number{position:absolute;width:2em;text-align: center; }
+.guardian_user_img_bg{background: #b7b7b7;border-radius: 50%;height:2em;line-height: 2em;margin: 1.5em calc(50% - 1em);color:#fff;}
+.guardian_user_list .guardian_user_title,.guardian_user_list .guardian_user_coin{color:#fff;}
+a{text-decoration: none;}
+a:link {
+    text-decoration: none;
+}
+
+/*守护主播*/
+.guardian_host{height:100%;}
+.guardian_host_img{height:10em;background: url('../image/guardianhost.png'); background-repeat : no-repeat;background-size:100% 100%; }
+.guardian_host_title{border-bottom:1px solid #e0e0e0;height:6em;margin-top:1em;}
+.guardian_host_name{height:2em;line-height: 2em;font-size: 16px;font-weight: bold;}
+.guardian_host_no{height:3em;line-height: 3em;color:#a9a9a9;}
+.guardian_host_time_kai{height:3em;line-height: 3em;font-weight: bold;}
+.guardian_host_time_te{height:3em;line-height: 3em;text-align: right;}
+.guardian_host_time_te a{color:#a9a9a9;}
+.guardian_host_type{width:45%;height:4.5em;line-height: 4.5em;text-align: center;border:1px solid #d2d2d2;float:left;margin:1em 5% 0 0;border-radius: 1em;color:#3b3a3a;font-weight:600;}
+.guardian_host_color{border:1px solid #fe9019!important;background: url('../image/jiao.png'); background-repeat : no-repeat;background-size:20% 33%;background-position: bottom right;}
+.guardian_host_end{height:3em;line-height: 3em;color:#848383;margin-top:1em;}
+.guardian_host_end span{color:#ff9f2f;}
+.guardian_host_coin{font-size: 16px;height:3em;line-height: 3em;font-weight: bold;color:#383838;}
+.guardian_host_my_coin{position:fixed;bottom:4em;left:0;height:3em;line-height: 3em;font-weight: bold;color:#6c6c6c;}
+
+.guardian_host_btn{position:fixed;width:100%;height:3em;line-height: 3em;text-align: center;color:#fff;background: #fe9019;bottom:0;left:0;font-size: 14px;}
+.guardian_user_bottom{border-bottom: 1px solid #ffafc9;}
+
+/*守护主播的列表*/
+.guardian_user_host_btn{background: #00d3df;width:100%;height:2.5em;margin-top:1.7em;color:#fff;line-height: 2.5em;text-align: center;border-radius: 1em;}
+.guardian_bg{background: #f6f6f6;}
+.guardian_bg_color{color:#636363!important;font-weight: bold;}
+.guardian_bg_color_time{color:#6e6e6e!important;}
+.guardian_bg_img{border-radius: 50%!important;}
+.guardian_border_bottom{border-bottom: 1px solid #e5e5e5;}

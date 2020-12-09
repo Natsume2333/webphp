@@ -1,0 +1,67 @@
+<include file="public@header" />
+</head>
+<body>
+<div class="wrap js-check-wrap">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="#">推广链接</a></li>
+    </ul>
+    <if condition="($level eq '1') or ($level eq '2')">
+    <form class="well form-inline margin-top-20" method="post" action="{:url('user/link')}">
+        下级代理id:
+        <input type="text" class="form-control" name="agent_id" style="width: 120px;" value="{:input('request.agent_id/s','')}" placeholder="请输入账号id">
+        渠道号:
+        <input type="text" class="form-control" name="channel" style="width: 120px;" value="{:input('request.channel/s','')}" placeholder="请输入渠道号">
+
+        <input type="submit" class="btn btn-primary" value="搜索" />
+        <a class="btn btn-danger" href="{:url('user/link')}">清空</a>
+    </form>
+    </if>
+    <table class="table table-hover table-bordered">
+        <thead>
+        <tr>
+            <th width="50">ID</th>
+            <th>渠道号</th>
+            <th>推广链接(直接下载)</th>
+            <th>本推广分成</th>
+            <th>下级代理账号（ID）</th>
+            <th>下级代理分成</th>
+            <th width="130">{:lang('ACTIONS')}</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <foreach name="users" item="vo">
+            <tr>
+                <td>{$vo.id}</td>
+                <td>{$vo.channel}</td>
+                <td>{$vo.link}</td>
+                <td>{$vo['earnings']} %</td>
+                <td>
+                    <if condition="$vo['vid'] neq 0">
+                       {$vo['agent_name']}({$vo['agent_name_id']})
+                        <else />
+                        无
+                    </if>
+                </td>
+
+                <td>
+                    <if condition="$vo['vid'] neq 0">
+                        {$vo['next_earnings']} %
+                        <else />
+                        无
+                    </if>
+                </td>
+                <td>
+                    <if condition="$vo['vid'] neq 0">
+                        <a href='{:url("user/linkedit",array("id"=>$vo["id"]))}'>{:lang('EDIT')}</a>
+                    </if>
+                </td>
+            </tr>
+        </foreach>
+        </tbody>
+    </table>
+
+</div>
+<script src="__STATIC__/js/admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,121 @@
+<include file="public@header"/>
+<style>
+    .guild-img {
+        width: 50px;
+        height: 50px
+    }
+
+    .js-ajax-form {
+        margin-top: 30px;
+    }
+</style>
+</head>
+<body>
+<div class="wrap js-check-wrap">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="javascript:;">公会提现记录</a></li>
+    </ul>
+    
+   <form class="well form-inline margin-top-20" method="post" action="{:url('guild_manage/withdrawal')}">
+        公会ID:
+        <input type="text" class="form-control" name="id" style="width: 120px;" value="{$data.id|default=''}" placeholder="请输入公会ID">
+       
+        提现状态:
+        <select name="status" class="form-control">
+            <option value="-1">全部</option>
+            <option value="0" <if condition="$data.status eq '0'"> selected='selected' </if> >审核中</option>
+            <option value="1" <if condition="$data.status eq 1"> selected='selected' </if> >成功</option>
+            <option value="2" <if condition="$data.status eq 2"> selected='selected' </if> >失败</option>
+        </select>
+        时间:
+        <input type="text" class="form-control js-bootstrap-date" name="start_time" value="{$data['start_time']|default=''}" style="width: 140px;" autocomplete="off">-
+        <input type="text" class="form-control js-bootstrap-date" name="end_time" value="{$data['end_time']|default=''}" style="width: 140px;" autocomplete="off"> &nbsp; &nbsp;
+
+        <input type="submit" class="btn btn-primary" value="搜索" />
+        <a class="btn btn-danger" href="{:url('guild_manage/withdrawal')}">清空</a>
+      
+    </form>
+
+        <table class="table table-hover table-bordered table-list">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>公会名称(ID)</th>
+                <th>提现的虚拟币数量</th>
+                <th>提现金额(元)</th>
+                <th>账户类型</th>
+                <th>账户名称</th>
+                <th>账户</th>
+                <th>状态</th>
+                <th>创建时间</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tfoot>
+            <foreach name="list" id="vo">
+                <tr>
+                    <td>{$vo.id}</td>
+                    <td>{$vo.name}({$vo.gid})</td>
+                    <td>{$vo.coin}</td>
+                    <td>{$vo.money}</td>
+                    <td>
+                        <if condition="$vo['account_type'] eq '1'">
+                            支付宝
+                            <else/>
+                            微信
+                        </if>
+                    </td>
+                    <td>{$vo.account_name}</td>
+                    <td>{$vo.cash_account}</td>
+                    <td>
+                        <if condition="$vo['status'] eq '0'">
+                            审核中
+                            <elseif condition="$vo['status'] eq '1'"/>
+                            审核通过
+                            <else/>
+                            审核拒绝
+                        </if>
+                    </td>
+                    <td>{$vo.addtime | date="Y-m-d H:i:s",###}</td>
+                    <td>
+                        <if condition="$vo['status'] eq '0'">
+                            <a href="{:url('guild_manage/upd_withdrawal',array('id'=>$vo.id,'status'=>1))}">通过</a>
+                            <a href="{:url('guild_manage/upd_withdrawal',array('id'=>$vo.id,'status'=>2))}">拒绝</a>
+                        </if>
+                    </td>
+                </tr>
+            </foreach>
+            </tfoot>
+        </table>
+         <div class="pagination">{$page}</div>
+
+</div>
+<script src="__STATIC__/js/admin.js"></script>
+<script src="__STATIC__/js/layer/layer.js" rel="stylesheet"></script>
+<script>
+     $(".del").click(function(){
+        var id=$(this).attr('data-id');
+        layer.confirm('确定删除？', {
+            btn: ['确定','取消'] //按钮
+        }, function(){
+            $.ajax({
+                url: "{:url('guild_manage/del')}",
+                type: 'post',
+                dataType: 'json',
+                data: {id: id},
+                success: function (data) {
+                    if(data =='1'){
+                        layer.msg("删除成功",{time: 2000, icon:1},function(){
+                            window.location.reload();
+                        });
+                    }else{
+                        layer.msg("删除失败",{time: 2000, icon:2});
+                    }
+                }
+            });
+
+        });
+    })
+</script>
+</body>
+</html>

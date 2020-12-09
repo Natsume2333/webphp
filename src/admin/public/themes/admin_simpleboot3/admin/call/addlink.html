@@ -1,0 +1,52 @@
+<include file="public@header" />
+</head>
+<body>
+<div class="wrap">
+    <ul class="nav nav-tabs">
+        <li><a href="{:url('agent/link')}">推广链接</a></li>
+        <li class="active"><a href="#">修改下级代理</a></li>
+    </ul>
+    <form class="form-horizontal js-ajax-form margin-top-20" role="form" method="post" action="{:url('agent/link_upd')}">
+        <div class="form-group">
+            <label for="input-user-nickname" class="col-sm-2 control-label">渠道号</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" id="input-user-nickname" name="channel" value="{$users['channel']|default=''}" readOnly="true">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="input-user-nickname" class="col-sm-2 control-label">推广地址</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" id="input-user-link" name="link" value="{$users['link']|default=''}" readOnly="true">
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label for="input-user-nickname" class="col-sm-2 control-label">一级代理ID</label>
+            <div class="col-md-6 col-sm-10">
+                <select name="agent_id1" id="gift" style="width: 30%;height: 35px; border-color: #dce4ec; color: #a5b6c6;">
+                    <foreach name="type" item="v">
+                        <option value="{$v['id']}" <if condition="$users['agent_id1'] eq $v['id']"> selected="delected" </if> >{$v['agent_login']} ( {$v['id']} )</option>
+                    </foreach>
+                </select>
+
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="input-user-nickname" class="col-sm-2 control-label">分成（%）</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" id="input-user-wx" name="divide_into1" value="{$users['divide_into1']|default=''}" placeholder="请输入分成，如 50 则是 50%">
+            </div>
+        </div>
+        <input type="hidden" name="id" value="{$users['id']|default=''}"/>
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-primary js-ajax-submit">{:lang('SAVE')}</button>
+            </div>
+        </div>
+    </form>
+</div>
+<script src="__STATIC__/js/admin.js"></script>
+</body>
+</html>

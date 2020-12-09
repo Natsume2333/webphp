@@ -1,0 +1,50 @@
+<include file="public@header" />
+</head>
+<body>
+<div class="wrap js-check-wrap">
+
+    <form class="well form-inline margin-top-20" method="post" action="{:url('validation/code')}">
+        接受手机号:
+        <input type="text" class="form-control" name="mobile" style="width: 120px;" value="{$data.mobile|default=''}" placeholder="请输入手机号">
+
+        <input type="submit" class="btn btn-primary" value="搜索" />
+        <a class="btn btn-danger" href="{:url('validation/code')}">清空</a>
+        <span >  &nbsp;&nbsp; 短信剩余：{$sms} 条</span>
+    </form>
+    <table class="table table-hover table-bordered">
+        <thead>
+        <tr>
+            <th width="50">ID</th>
+            <th>手机号</th>
+            <th>验证码</th>
+            <th>当天发送成功次数</th>
+            <th>最后发送时间</th>
+            <th>过期时间</th>
+        </tr>
+        </thead>
+        <tbody>
+        <foreach name="users" item="vo">
+            <tr>
+                <td>{$vo.id}</td>
+                <td>{$vo.account}</td>
+                <td>{$vo.code}</td>
+                <td>{$vo['count'] |default='0'} </td>
+                <td>{$vo['send_time'] |date='Y-m-d H:i:s',###}</td>
+                <td>{$vo['expire_time'] |date='Y-m-d H:i:s',###}</td>
+
+            </tr>
+        </foreach>
+        </tbody>
+    </table>
+    <div class="pagination">{$page}</div>
+</div>
+<script src="__STATIC__/js/admin.js"></script>
+<script>
+    $(".settlement").click(function(){
+        var id=$(this).attr("data-id");
+        var money=$(this).attr("data-money");
+
+    })
+</script>
+</body>
+</html>

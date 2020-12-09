@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>邀请奖励</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="__STATIC__/css/bootstrap.min.css" rel="stylesheet">
+    <link href="__STATIC__/css/invitation_user_sex.css" rel="stylesheet">
+</head>
+<body>
+<div class="body_a">
+  <div class="body_top_txt_right href" data-href="/mapi/public/index.php/api/invitation_api/sharing_center/uid/{$data.uid}" ><img src="__STATIC__/img/5.png"></div>
+  <div class="body_top_txt">{$data.sex}</div>
+
+  <div class="body_a_content">
+    <div class="body_a_content_a">邀请人数</div>
+    <div class="body_a_content_b"><span>{$data['sum']|default='0'}</span>人</div>
+  </div>
+  <div class="hr"></div>
+  <div class="body_a_content_right">
+    <div class="body_a_content_a">推广收入</div>
+    <div class="body_a_content_b"><span>{$data['reward_total']|default='0'}</span>元</div>
+  </div>
+  <div class="body_a_bottom">
+    <div class="body_a_zq body_a_z href" data-href="/mapi/public/index.php/api/invitation_api/index/uid/{$data.uid}" >邀请赚钱</div>
+    <div class="hra"></div>
+    <div class="body_a_xj body_a_zq href" data-href="/mapi/public/index.php/api/invitation_api/rewards/uid/{$data.uid}" >领取现金</div>
+  </div>
+</div>
+<div class="body_b">
+  <div class="body_b_top">
+    <div class="body_b_top_a">用户ID</div>
+    <div class="body_b_top_b">用户昵称</div>
+    <div class="body_b_top_c">注册时间</div>
+  </div>
+  {if condition='empty($data.peo)'}
+  <div class="body_b_content_ts">暂无用户，快去分享赚钱吧~~~</div>
+  {else/}
+  {volist name="$data.peo" id="vo"}
+    <div class="body_b_content">
+      <div class="body_b_content_a">{$vo.id}</div>
+      <div class="body_b_content_b">
+        {$vo.user_nickname}
+      </div>
+      <div class="body_b_content_c">{$vo.create_time|date='Y-m-d',###}</div>
+    </div>
+  {/volist}
+  {/if}
+
+</div>
+<script src="__STATIC__/js/jquery-1.10.2.min.js"></script>
+
+<script>
+    $(".href").click(function(){
+        var url=$(this).attr("data-href");
+        window.location.href=url;
+    })
+</script>
+</body>
+</html>

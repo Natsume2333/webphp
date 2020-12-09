@@ -1,0 +1,92 @@
+<include file="public@header"/>
+<style>
+    .js-ajax-form{margin-top:30px;}
+</style>
+</head>
+<body>
+<div class="wrap js-check-wrap">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="javascript:;">通话列表</a></li>
+    </ul>
+
+    <form class="js-ajax-form" action="{:url('refill/upd')}" method="post">
+
+        <table class="table table-hover table-bordered table-list">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>用户昵称(ID)</th>
+                <th>主播昵称(ID)</th>
+                <th>频道ID</th>
+                <th>状态</th>
+                <th>拨打时间</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tfoot>
+            <foreach name="list" id="vo">
+                <tr>
+                    <td>{$vo.id}</td>
+                    <td>{$vo['user_info']['user_nickname']}({$vo['user_info']['id']})</td>
+                    <td>{$vo['emcee_info']['user_nickname']}({$vo['emcee_info']['id']})</td>
+                    <td>{$vo.channel_id}</td>
+                    <if condition="$vo['status'] eq 1">
+                        <td>通话中</td>
+                        <else/>
+                        <td>等待接通</td>
+                    </if>
+                    <td>{$vo.create_time | date="Y-m-d H:i:s",###}</td>
+                    <td>
+                        <a href="#" onclick="select_video('{$vo.id}')">查看视频</a>
+                        | <a href="{:url('video_call_list/close',array('id'=>$vo.id))}">关闭</a>
+                         |  <a href="javescript:;" class="del" data-id="{$vo.id}">删除</a>
+                    </td>
+                </tr>
+            </foreach>
+            </tfoot>
+        </table>
+
+    </form>
+</div>
+<script src="__STATIC__/js/layer/layer.js" rel="stylesheet"></script>
+<script>
+
+    function select_video(id){
+        layer.open({
+            type: 2,
+            title: '查看视频',
+            shadeClose: true,
+            shade: 0.8,
+            area: ['90%', '90%'],
+            content: '/admin/public/admin/video_call_list/select_video/id/' + id //iframe的url
+        });
+    }
+    $(".del").click(function(){
+        var id=$(this).attr('data-id');
+        layer.confirm('确定删除？', {
+            btn: ['确定','取消'] //按钮
+        }, function(){
+            $.ajax({
+                url: "{:url('video_call_list/del')}",
+                type: 'post',
+                dataType: 'json',
+                data: {id: id},
+                success: function (data) {
+                    if(data =='1'){
+                        layer.msg("删除成功",{time: 2000, icon:1},function(){
+                            window.location.reload();
+                        });
+                    }else{
+                        layer.msg("删除失败",{time: 2000, icon:2});
+                    }
+                }
+            });
+
+        });
+    })
+    $(".btn-primary").click(function(){
+        $(".js-ajax-form").submit();
+    })
+</script>
+</body>
+</html>

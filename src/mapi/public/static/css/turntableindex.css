@@ -1,0 +1,176 @@
+body{
+	margin:0;
+	padding: 0;
+	position: relative;
+	
+}
+
+.content{
+	position: fixed;
+	width:90%;
+	height:80%;
+	background: #fff;
+	box-shadow: 0 0 5px #888888;
+	bottom:3em;
+	left:5%;
+	overflow: hidden;
+	
+	background-image:url(../img/turntablebg.png); 
+    background-repeat:no-repeat; 
+    background-size:100% 100%;
+}
+
+.bg{
+	background-image:url(../img/turntableradio3.png); 
+    background-repeat:no-repeat; 
+    background-size:100% 100%;
+    width:18em;
+    height:18em;
+    margin:1em auto 0;
+
+    overflow: hidden;
+}
+
+.radio{
+	    background-image: url(../img/turntableradio.png);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    width: 4.6em;
+    height: 6em;
+    margin: 0 auto;
+    margin-top: 5.88em;
+}
+
+/*.noprize{
+	position: absolute;
+	width:2em;
+	height:2em;
+	margin-left: 13.2em;
+    margin-top: 8.6em;
+	transform: rotate(88deg);
+}*/
+
+
+
+.prize1{
+	margin-left: 11.8em;
+    margin-top: 11.2em;
+    transform: rotate(135deg);
+}
+
+.prize2{
+	margin-left: 9.2em;
+    margin-top: 12.5em;
+    transform: rotate(140deg);
+}
+
+.prize3{
+	margin-left: 6.6em;
+    margin-top: 12.5em;
+	transform: rotate(150deg);
+}
+
+.prize4{
+	margin-left: 4em;
+    margin-top: 11.3em;
+	transform: rotate(240deg);
+}
+
+.prize5{
+	margin-left: 3em;
+    margin-top: 8.7em;
+	transform: rotate(275deg);
+}
+
+.prize6{
+	margin-left: 3.5em;
+    margin-top: 5.8em;
+	transform: rotate(320deg);
+}
+
+.prize7{
+    margin-left: 5.2em;
+    margin-top: 3.5em;
+	transform: rotate(0deg);
+}
+
+.prize8{
+	margin-left: 8em;
+    margin-top: 3em;
+	transform: rotate(45deg);
+}
+.prize9{
+	margin-left: 10.8em;
+    margin-top: 3.8em;
+	
+}
+.prize10{
+	margin-left: 12.8em;
+    margin-top: 5.8em;
+    transform: rotate(63deg);
+}
+.prize{
+	position: absolute;
+	width:2em;
+	height:2em;
+}
+.prize11{
+	position: absolute;
+	width:2em;
+	height:2em;
+	margin-left: 13.2em;
+    margin-top: 8.6em;
+	transform: rotate(88deg);
+}
+.statement{
+	width:70%;
+	margin: 0 auto;
+	margin-top: 5em;
+	background-image:url(../img/turntablebg2.png); 
+    background-repeat:no-repeat; 
+    background-size:100% 100%;
+    height: 9em;
+        font-size: 14px;
+}
+
+.statement ul{
+	list-style: none;
+	width:80%;
+	margin: 0em 0 0 20%;
+	padding-top:1em;
+	color:#323232;
+
+}
+.statement ul li{
+	width:100%;
+	height:1.5em;
+	line-height: 1.5em;
+}
+.explain{width:80%;margin:0em auto;padding-top:0.5em;text-align: center;color:#323232;}
+
+
+ @media only screen and (max-width:330px) {
+   	.statement{
+		width:70%;
+		margin: 0 auto;
+		margin-top: 3em;
+		background-image:url(../img/turntablebg2.png); 
+	    background-repeat:no-repeat; 
+	    background-size:100% 100%;
+	    height: 8em;
+	}
+	.explain {
+	    width: 80%;
+	    margin: 0em auto;
+	    padding-top: 0.5em;
+	    text-align: center;
+	    color: #323232;
+	}
+	.statement ul{padding-top:0.5em;}
+	.statement ul li {width: 100%; height: 1.5em;line-height: 1.5em;}
+
+}
+ @media only screen and (min-width:400px) {
+   .bg{margin: 3em auto 0!important;}
+
+}

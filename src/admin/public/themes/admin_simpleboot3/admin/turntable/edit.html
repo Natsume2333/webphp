@@ -1,0 +1,82 @@
+<include file="public@header"/>
+<style type="text/css">
+    .pic-list li {
+        margin-bottom: 5px;
+    }
+    .gift{margin-top:40px;}
+    #gift{    width: 50%;
+        height: 35px;
+        border-color: #dce4ec;
+        color: ;}
+</style>
+
+</head>
+<body>
+<div class="wrap js-check-wrap">
+    <ul class="nav nav-tabs">
+        <li><a href="{:url('turntable/index')}">转盘列表</a></li>
+        <li><a href="{:url('turntable/add')}">添加礼物分类</a></li>
+        <li class="active"><a href="javascript:;">修改</a></li>
+    </ul>
+    <form action="{:url('turntable/editPost')}" class="js-ajax-form" method="post" >
+        <div class="row gift">
+            <div class="col-md-8  col-md-offset-2">
+                <table class="table table-bordered">
+                    
+                    <tr>
+                        <th>选择礼物<span class="form-required">*</span></th>
+                        <td>
+                            <select name="type" required id="gift">
+                                <option value="">请选择礼物</option>
+                                <option value="0">未中奖</option>
+                                <foreach name="gift" id="v">
+                                    <option value="{$v.id}">{$v.name}</option>
+                                </foreach>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>数量<span class="form-required">*</span></th>
+                        <td>
+                            <input class="form-control" type="text" name="num" style="width:150px;" required value="{$turn[0]['num']}" placeholder="数量" title="默认无限数量" />
+                            
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>中奖概率<span class="form-required">*</span></th>
+                        <td>
+                            <input class="form-control" type="text" name="gl" style="width:150px;" required value="{$turn[0]['probability']}" placeholder="概率总和自定" title="概率总和自定" />
+                            
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>排序<span class="form-required">*</span></th>
+                        <td>
+                            <input class="form-control" type="text" name="orderno" style="width:100px;"
+                                   required value="{$turn[0]['orderon']}" placeholder="排序号"/>
+                        </td>
+                    </tr>
+                    <input type="hidden" name="id" value="{$turn[0]['id']}">
+                    
+                </table>
+                
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-primary js-ajax-submit">修改</button>
+                        <a class="btn btn-default" href="{:url('turntable/index')}">{:lang('BACK')}</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
+<script type="text/javascript" src="__STATIC__/js/admin.js"></script>
+<script>
+    $('#gift').val({$turn[0]['gift_id']});
+</script>
+
+</body>
+</html>

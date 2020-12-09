@@ -1,0 +1,106 @@
+{
+    "name": "首页",
+    "action": "portal/Index/index",
+    "description": "首页模板文件",
+    "order": 5.0,
+    "more": {
+        "vars": {
+            "top_slide": {
+                "title": "顶部幻灯片",
+                "value": "",
+                "type": "text",
+                "dataSource": {
+                    "api": "admin/Slide/index",
+                    "multi": false
+                },
+                "placeholder": "请选择顶部幻灯片",
+                "tip": "",
+                "rule": {
+                    "require": true
+                }
+            }
+        },
+        "widgets": {
+            "features": {
+                "title": "快速了解U聊",
+                "display": "1",
+                "vars": {
+                    "sub_title": {
+                        "title": "副标题",
+                        "value": "Quickly understand the ThinkCMF",
+                        "type": "text",
+                        "placeholder": "请输入副标题",
+                        "tip": "",
+                        "rule": {
+                            "require": true
+                        }
+                    },
+                    "features": {
+                        "title": "特性介绍",
+                        "value": [
+                            {
+                                "title": "电话聊天",
+                                "icon": "bars",
+                                "content": "1秒连线附近的人"
+                            },
+                            {
+                                "title": "真人在线",
+                                "icon": "group",
+                                "content": "有效拒绝照骗"
+                            },
+                            {
+                                "title": "爱上U聊",
+                                "icon": "cloud",
+                                "content": "交友就是快"
+                            },
+
+                        ],
+                        "type": "array",
+                        "item": {
+                            "title": {
+                                "title": "标题",
+                                "value": "",
+                                "type": "text",
+                                "rule": {
+                                    "require": true
+                                }
+                            },
+                            "icon": {
+                                "title": "图标",
+                                "value": "",
+                                "type": "text"
+                            },
+                            "content": {
+                                "title": "描述",
+                                "value": "",
+                                "type": "textarea"
+                            }
+                        },
+                        "tip": ""
+
+                    }
+                }
+            },
+            "last_news": {
+                "title": "最新资讯",
+                "display": "1",
+                "vars": {
+                    "last_news_category_id": {
+                        "title": "文章分类ID",
+                        "value": "",
+                        "type": "text",
+                        "dataSource": {
+                            "api": "portal/category/index",
+                            "multi": true
+                        },
+                        "placeholder": "请选择分类",
+                        "tip": "",
+                        "rule": {
+                            "require": true
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

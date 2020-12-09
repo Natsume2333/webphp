@@ -1,0 +1,42 @@
+body,html{font-size:12px;height:100%;margin:0;}
+.fee{height:3.5em;font-weight: 500;    font-weight: 600;    border-top: 1px solid #f7f7f7;}
+.pad{padding:0px!important;}
+.fee_level{height:3.5em;line-height: 3.5em;text-align: right;}
+.fee_name{height:3.5em;line-height: 3em;}
+.fee_pad{padding:1em 0 0!important;}
+.fee_bg{height:3.5em;font-weight: 500; color: #ccc; border-top: 1px solid #f7f7f7;}
+
+
+
+label {
+    padding-right: 1em;
+}
+.radio_fee{}
+input[type=radio]:after  {
+    content: "";
+    display:block;
+    width: 1.2em;
+    height: 1.2em;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 14px;
+    font-size: 16px;
+    color: #fff;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    box-sizing:border-box;
+    position: relative;
+    left: -0.2em;
+    top:-0.2em;
+}
+
+input[type=radio]:checked:after  {
+    content: "";
+    transform:matrix(-0.766044,-0.642788,-0.642788,0.766044,0,0);
+    -webkit-transform:matrix(-0.766044,-0.642788,-0.642788,0.766044,0,0);
+    border: 6px solid #ff57ef;
+}
+.fee_is_auth{width:100%;height:10em;line-height:10em;text-align: center;font-weight: 600;}
+
+
+

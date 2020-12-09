@@ -1,0 +1,162 @@
+<include file="public@header"/>
+<style>
+    .gift-img{width:50px;height:50px}
+    .gift-img img{width:100%;height:100%;}
+    .gift-in input{width:25px;}
+    .js-ajax-form{margin-top:30px;}
+    .identity img{width:30px;height:30px;border-radius: 50%;}
+    .details{cursor: pointer;}
+    .layui-layer-demo .layui-layer-title{
+        background: #e0e0e0!important;
+    }
+    .form-control{width:110px!important;}
+    #status,#type{    width: 100px;
+        height: 32px;
+        border-color: #dce4ec;
+        color: #aeb5bb;}
+    .table-list{font-size:14px!important;}
+    .consume-col{color:#ff41ee;}
+    .layui-layer{width: 1000px!important;}
+    a{text-decoration: none;}
+    .details_type td{text-align: center;}
+    .consume_count{width:100%;height:40px;line-height: 40px}
+    .consume_count span{margin-left:30px;}
+</style>
+</head>
+<body>
+<div class="wrap js-check-wrap">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="javascript:;">消费记录表</a></li>
+    </ul>
+    <form class="well form-inline margin-top-20" name="form1" method="post">
+        用户消费ID：
+        <input class="form-control" type="text" name="uid" style="width: 200px;" value="{:input('request.uid')}"
+               placeholder="请输入用户ID">
+        用户收益ID：
+        <input class="form-control" type="text" name="touid" style="width: 200px;" value="{:input('request.touid')}"
+               placeholder="请输入用户ID">
+        消费类型：
+        <select name="type" id="type">
+            <option value="-1">全部消费</option>
+            <option value="1" <if condition="$request.type eq 1"> selected="selected" </if>>短视频消费</option>
+            <option value="2" <if condition="$request.type eq 2"> selected="selected" </if>>私照消费</option>
+            <option value="3" <if condition="$request.type eq 3"> selected="selected" </if>>礼物消费</option>
+            <option value="4" <if condition="$request.type eq 4"> selected="selected" </if>>一对一视频消费</option>
+            <option value="5" <if condition="$request.type eq 5"> selected="selected" </if>>私信消息付费</option>
+            <option value="6" <if condition="$request.type eq 6"> selected="selected" </if>>购买守护消费</option>
+            <option value="7" <if condition="$request.type eq 7"> selected="selected" </if>>转盘游戏抽奖</option>
+            <option value="8" <if condition="$request.type eq 8"> selected="selected" </if>>购买联系方式</option>
+        </select>
+        时间:
+        <input type="text" class="form-control js-bootstrap-datetime" name="start_time"
+               value="{$request.start_time|default=''}"
+               style="width: 200px;" autocomplete="off">-
+        <input type="text" class="form-control js-bootstrap-datetime" name="end_time"
+               value="{$request.end_time|default=''}"
+               style="width: 200px;" autocomplete="off"> &nbsp; &nbsp;
+
+        <input type="submit" class="btn btn-primary" value="搜索" onclick='form1.action="{:url('Consume/index')}";form1.submit();'/>
+        <a class="btn btn-danger" href="{:url('Consume/index')}">清空</a>
+
+        <input type="button" class="btn btn-primary from_export" style="background-color: #1dccaa;" value="导出" onclick='form1.action="{:url('Consume/export')}";form1.submit();'>
+
+
+    </form>
+
+    <php>
+
+        $type = array(0 => '其他消费',1 => '视频消费',2 => '私照消费' ,3 => '礼物消费', 4 => '一对一视频消费',5 => '私信消息付费',6 => '购买守护消费',7 => '转盘游戏抽奖',8 => '购买联系方式')
+
+    </php>
+    <form class="js-ajax-form" action="{:url('Consume/upd')}" method="post">
+        <h4>总消费{$total}(币)</h4>
+        <table class="table table-hover table-bordered table-list">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>消费用户（ID）</th>
+                <th>收益用户（ID）</th>
+                <th>消费数量（金币）</th>
+                <th>主播收益</th>
+                <th>消费说明</th>
+                <th>消费类型</th>
+                <th>消费时间</th>
+
+            </tr>
+            </thead>
+            <tfoot>
+
+            <foreach name="data" id="vo">
+                <tr>
+                    <td>{$vo.id}</td>
+                    <td>{$vo.uname}({$vo.user_id})</td>
+                    <td>{$vo.toname}({$vo.to_user_id})</td>
+                    <td>{$vo.coin}</td>
+                    <td>{$vo.profit}</td>
+                    <th>{$vo.content}</th>
+                    <th>
+                        <if condition="$vo['type'] eq 4"/>
+                            <a href="javascript:void(0);" class="details" data-id="{$vo.table_id}"> {$type[$vo.type]}</a>
+                        <else/>
+                             {$type[$vo.type]}
+                        </if>
+                   
+                    </th>
+                    <th>{$vo.create_time | date="Y-m-d H:i:s",###}</th>
+                </tr>
+            </foreach>
+            </tfoot>
+        </table>
+        <ul class="pagination">{$page}</ul>
+
+    </form>
+
+</div>
+<script src="__STATIC__/js/layer/layer.js" rel="stylesheet"></script>
+<script src="__STATIC__/js/admin.js"></script>
+<script>
+    $(".details").click(function(){
+        var id=$(this).attr("data-id");
+        $.ajax({
+            url: "{:url('consume/select_call')}",
+            type: 'get',
+            dataType: 'json',
+            offset: 'rb', //具体配置参考：offset参数项
+            area: ['1000px', '500px'],
+            data: {id: id},
+            success: function (data) {
+               
+                var html='<div style="width:1000px!important;height:500px;"><div class="consume_count"><span>总消费(金币)：'+data.coin+'</span><span>主播总收益： '+data.profit+' </span><span>邀请总收益 ： '+data.money+'<span><span>总时长 ： '+data.time+'<span></div><table class="table table-hover table-bordered details_type"><thead><tr><th style="text-align: center;background: #f7f7f7;">消费用户（ID）</th><th style="text-align: center;background: #f7f7f7;">收益用户（ID）</th><th style="text-align: center;background: #f7f7f7;">消费数量（金币）</th><th style="text-align: center;background: #f7f7f7;">主播收益</th><th style="text-align: center;background: #f7f7f7;">主播邀请人(ID)</th><th style="text-align: center;background: #f7f7f7;">邀请收益(元)</th><th style="text-align: center;background: #f7f7f7;">消费说明</th><th style="text-align: center;background: #f7f7f7;">消费时间</th></tr></thead><tbody>';
+               var user=data.user;
+                for(var i=0;i<user.length;i++){
+                    html+='<tr><td>'+user[i]['uname']+'('+user[i]['user_id']+')</td><td>'+user[i]['toname']+'('+user[i]['to_user_id']+')</td><td>'+user[i]['coin']+'</td><td>'+user[i]['profit']+'</td><td>';
+                    if(user[i]['cid']){
+                         html+=user[i]['cname']+'('+user[i]['cid']+')</td><td>'+user[i]['money'];
+                    }else{
+                         html+='</td><td>';
+                    }
+                    html+='</td><td>'+user[i]['content']+'</td><td>'+user[i]['create_time']+'</td></tr>';
+                  
+                }
+                html+='</tbody></table></div>';
+                 //自定页
+                 layer.open({
+                    type: 1,
+                    title: '视频通话记录',
+                    closeBtn: 0,
+                    shadeClose: true,
+                    skin: 'yourclass',
+                    content: html
+                });
+             
+            }
+        });
+
+       
+
+    })
+
+
+</script>
+</body>
+</html>

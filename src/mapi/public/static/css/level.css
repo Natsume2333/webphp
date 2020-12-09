@@ -1,0 +1,20 @@
+body,html{font-size:14px;height:100%;margin:0;}
+/*我的等级*/
+.level img{width:100%;}
+.creal{padding:0px!important;}
+.level-topb{margin:2em auto 1em;}
+.level-v{color:#252323;font-size:16px;}
+.level-v1{color:#979797;font-size:10px;}
+.level-pro{height: 1em!important;border-radius: 2em!important;background:#e5e2e2 !important;margin-bottom: 0.5em!important;}
+.level-pro .progress-bar{line-height:1em!important;background:#FF4081;}
+.level-dej{height:2em;line-height:2em;}
+.level-dej1,.level-li2{color:#a39f9a;font-style: oblique;}
+.font-sty{font-style: oblique;}
+.level-dej2,.level-li1{color:#FF4081;font-style: oblique;}
+.level-oil{height:2em;line-height:2em;}
+.level-chong{height:4em;line-height:4em;border-top:1px solid #d6d6d6;border-bottom:1px solid #d6d6d6;margin-top:1em;}
+.level-chong a{color:#484848;}
+.level-yao{height:3em;line-height:3em;color:#656565;}
+.level-yang{color:#909090;font-size:10px;}
+.table-bordered td{text-align:center;}
+.level-m{color:#FF4081;font-style: oblique;}

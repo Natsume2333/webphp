@@ -1,0 +1,55 @@
+body,html{font-size:14px;height:100%;margin:0;}
+/*邀请样式*/
+.creal{padding:0px!important;}
+.creal_le{padding-left:0px!important;}
+.creal_ri{padding-right:0px!important;}
+.invite img{width:100%;}
+.invite_jj{height:2em;background:#dd3d2d;}
+.invite_ff{background:#fe4a31;padding-top:1.5em;padding-bottom:1.5em;}
+.invite_yqbj{background:#dd3d2d;margin-top:1.5em;}
+.invite_img{border:0.5px solid #fff;margin-top:1.5em;}
+.invite_wz{color:#fff;margin-top:1em;}
+.invite_y{font-size:10px;color:#fff;padding-top:1em;padding-bottom:1em;}
+/*我的奖励*/
+.creal-5{padding-left:5px!important;padding-right:0px!important;}
+.creal-6{padding-left:5px!important;padding-right:5px!important;}
+.invite_jiang{background:#dd3d2d;margin-top:1em;}
+.invite_myjl{color:#fff;font-size:10px;margin-top:1.5em;}
+.invite_zhc{background:#fe4a31;color:#fff;margin-top:1em;height:7em;padding:0.5em 0 0 !important;}
+.invite_zhc span{color:#ffd700;}
+.invite_ztd{ font-size: 10px;color: #fff;padding-left:5px!important;padding-right:0px!important;height:1.5em;line-height:1.5em;}
+.invite_shif{color:#fff;font-size:10px;margin:1em 0;}
+.invite_yqbj_bun{margin-bottom:3.5em!important;}
+
+
+
+.invite_xq{margin-top:1em;background:#dd3d2d;}
+.invite_leij{color:#fff;font-size:10px;margin-top:1em;}
+.invite_je{color:#ffd700;margin-top:0.5em;margin-bottom:0.5em;}
+.invite-lef{border-left:1px  dashed #fff;}
+.invite_td{background:#c13131;color:#fff;font-size:10px;height:2em;line-height:2em;margin-bottom:1.5em;}
+.invite_pah{height:3em;line-height:3em;}
+.invite_tou img{width:2em;height:2em;border-radius: 50%;}
+.invite_jqi{color:#ffd700;}
+.creal{ overflow: hidden;}
+.more{text-align: center;}
+#wrapper{height:35em;}
+.more .flip{
+    transform: rotate(180deg);
+}
+.loading{
+    background-size: 25px;
+}
+.more .loading{
+    -webkit-transform: rotate(0deg) translateZ(0);
+    -webkit-transition-duration: 0;
+    -webkit-animation-name: loading;
+    -webkit-animation-duration: 2s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+}
+
+
+.invite_bott{position:fixed!important; bottom: 0; left:0;color:#fff;}
+.invite_bott1{height:4em;line-height:4em;background:#ff9801;}
+.invite_bott2{height:4em;line-height:4em;background:#af31ff;}

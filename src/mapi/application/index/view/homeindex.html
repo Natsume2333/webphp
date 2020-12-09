@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<!-- saved from url=(0028)http://www.vliao66.com/#sec3 -->
+<html lang="en">
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="format-detection" content="telephone=no">
+    <meta content="email=no" name="format-detection">
+    <!--<link href="http://www.vliao66.com/static/favicon.ico" rel="shortcut icon">-->
+    <link href="{$data['logo']}" rel="shortcut icon">
+    <title>{$data['system_name']}</title>
+    <meta name="Keywords" content="{$data['system_name']}">
+    <meta name="Description" content="{$data['system_name']}">
+
+    <link rel="stylesheet" href="{:url('static/css/app_pc.css',false,false)}">
+    <style>
+        .common-header {
+            height: 845px;
+            background: url({:url('static/image/topbg1.png',false,false)}) no-repeat top;
+        }
+    </style>
+
+</head>
+
+<body>
+    <header class="common-header" id="header">
+        <!--<div class="nav">-->
+            <!--&lt;!&ndash;<div class="logo">&ndash;&gt;-->
+                <!--&lt;!&ndash;&lt;!&ndash;<img src="{:url('static/image/logo1.png',false,false)}" alt="v聊">&ndash;&gt;&ndash;&gt;-->
+                <!--&lt;!&ndash;<img src="{$data['logo']}">&ndash;&gt;-->
+            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+            <!--&lt;!&ndash;<ul>&ndash;&gt;-->
+                <!--&lt;!&ndash;<li><a href="#">首页</a></li>&ndash;&gt;-->
+                <!--&lt;!&ndash;<li><a href="#">关于我们</a></li>&ndash;&gt;-->
+                <!--&lt;!&ndash;<li><a href="#">加入我们</a></li>&ndash;&gt;-->
+                <!--&lt;!&ndash;<li><a href="#">联系我们</a></li>&ndash;&gt;-->
+            <!--&lt;!&ndash;</ul>&ndash;&gt;-->
+        <!--</div>-->
+
+        <div class="wrapper">
+            <div class="w-left">
+                <img src="{:url('static/image/title1.png',false,false)}" alt="">
+                <p>根据你的手机，选择下载</p>
+                <div class="down">
+                    <div class="d-img">
+                        <a href="{$data['ios_download_url']}" target="_blank"><img src="{:url('static/image/apple2x.png',false,false)}" alt="" border="0"></a>
+                        <a href="{$data['android_download_url']}" target="_blank"><img src="{:url('static/image/android2x.png',false,false)}" alt="" border="0"></a>
+                    </div>
+                    <!--<img class="erweima" src="{:url('static/image/erweima2x.png',false,false)}" alt="">-->
+                    <img class="erweima" src="{$data['wx_pic']}" alt="">
+                </div>
+            </div>
+            <img class="adimg" src="{:url('static/image/shouji1.png',false,false)}" alt="">
+        </div>
+    </header>
+
+    <section class="sec" id="sec1">
+        <div class="title">
+            <p>在{$data['system_name']}</p>
+            <p>结识你心仪的好友</p>
+        </div>
+        <div align="center">
+            <img src="{:url('static/image/2p1.png',false,false)}" alt="">
+        </div>
+    </section>
+
+    <section class="sec" id="sec2">
+        <div class="title">
+            <p>在{$data['system_name']}</p>
+            <p>邂逅你的甜蜜缘分</p>
+        </div>
+        <img src="{:url('static/image/3p1.png',false,false)}" alt="">
+    </section>
+
+
+
+    <div class="footer">
+
+        {$data['pc_icon']}
+        <!--Copyright © 2019 山东布谷鸟网络科技有限公司 | <a href="http://qr.ccm.gov.cn/lic/cdc56c9499ea43018fb66960de04befc" target="_blank">鄂网文（2017）8655-195号</a> <a href="http://www.miibeian.gov.cn/" target="_blank">鄂ICP备17020306号-2</a>-->
+
+<!--<br>违法和不良信息举报电话: 0716-4169969（7*24小时)-->
+<br>违法和不良信息举报
+<a href="http://www.12377.cn/node_552908.htm" target="_blank">网上有害信息举报专区</a>
+<!--<br><a href="http://www.vlcps.com/" target="_blank">V聊CPS推广联盟</a> <a href="http://g.vchat6.com/" target="_blank">公会入驻</a>-->
+    </div>
+
+<script type="text/javascript">
+    function IsPC() {
+        var userAgentInfo = navigator.userAgent;
+        var Agents = ['Android', 'iPhone',
+            'SymbianOS', 'Windows Phone',
+            'iPad', 'iPod'
+        ];
+        var flag = true;
+        for (var i = 0; i < Agents.length; i++) {
+            if (userAgentInfo.indexOf(Agents[i]) != -1) {
+                flag = false;
+                break;
+            }
+        }
+        return flag;
+    }
+    if(!IsPC()) {
+        window.location.href = "{:url('index/index/mobileHomeIndex')}";
+    }
+</script>
+</body></html>

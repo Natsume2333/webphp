@@ -1,0 +1,50 @@
+<include file="public@header"/>
+<style type="text/css">
+    .pic-list li {
+        margin-bottom: 5px;
+    }
+</style>
+
+</head>
+<body>
+<div class="wrap js-check-wrap">
+    <ul class="nav nav-tabs">
+        <li><a href="{:url('VideoCard/index')}">充值列表</a></li>
+        <li class="active"><a href="javascript:;">添加充值分类</a></li>
+    </ul>
+    <form action="{:url('VideoCard/addPost')}" method="post" >
+        <div class="row">
+            <div class="col-md-9">
+                <table class="table table-bordered">
+
+                    <tr>
+                        <th>观看小视频消费的金币 <span class="form-required">*</span></th>
+                        <td><input class="form-control" type="text" name="post[coin]" id="source" value="{$level.coin |default=''}"
+                                   placeholder="请输入金币数"></td>
+                    </tr>
+
+                    <tr>
+                        <th>排序<span class="form-required">*</span></th>
+                        <td>
+                            <input class="form-control" type="text" name="post[orderno]" style="width:100px;"
+                                   required value="{$level.orderno |default='100'}" placeholder="排序号"/>
+                        </td>
+                    </tr>
+                </table>
+                <input type="hidden" name="id" value="{$level.id |default=''}"/>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-primary js-ajax-submit">{:lang('ADD')}</button>
+                        <a class="btn btn-default" href="{:url('VideoCard/index')}">{:lang('BACK')}</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
+<script type="text/javascript" src="__STATIC__/js/admin.js"></script>
+
+
+</body>
+</html>

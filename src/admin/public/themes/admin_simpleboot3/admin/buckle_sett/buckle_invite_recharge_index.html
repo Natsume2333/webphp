@@ -1,0 +1,74 @@
+<include file="public@header"/>
+<style>
+    .js-ajax-form {
+        margin-top: 30px;
+    }
+</style>
+</head>
+<body>
+<div class="wrap js-check-wrap">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="javascript:;">邀请充值扣率列表</a></li>
+        <li><a href="{:url('buckle_sett/add_buckle_invite_recharge_rule')}">添加充值扣量规则</a></li>
+    </ul>
+
+    <form class="js-ajax-form" action="{:url('buckle_sett/upd')}" method="post">
+
+        <table class="table table-hover table-bordered table-list">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>注册上限（天）</th>
+                <th>注册下限（天）</th>
+                <th>扣量概率</th>
+                <th>创建时间</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tfoot>
+            <foreach name="list" id="vo">
+                <tr>
+                    <td>{$vo.id}</td>
+                    <td>{$vo.upper_limit}</td>
+                    <td>{$vo.lower_limit}</td>
+                    <td>{$vo.probability}%</td>
+                    <td>{$vo.create_time | date="Y-m-d H:i:s",###}</td>
+                    <td>
+                        <a href="{:url('buckle_sett/add_buckle_invite_recharge_rule',array('id'=>$vo.id))}">编辑</a>
+                        <a href="javescript:;" class="del" data-id="{$vo.id}">删除</a>
+                    </td>
+                </tr>
+            </foreach>
+            </tfoot>
+        </table>
+    </form>
+
+</div>
+<script src="__STATIC__/js/layer/layer.js" rel="stylesheet"></script>
+<script>
+    $(".del").click(function () {
+        var id = $(this).attr('data-id');
+        layer.confirm('确定删除？', {
+            btn: ['确定', '取消'] //按钮
+        }, function () {
+            $.ajax({
+                url: "{:url('buckle_sett/del_buckle_invite_recharge_rule')}",
+                type: 'post',
+                dataType: 'json',
+                data: {id: id},
+                success: function (data) {
+                    if (data == '1') {
+                        layer.msg("删除成功", {time: 2000, icon: 1}, function () {
+                            window.location.reload();
+                        });
+                    } else {
+                        layer.msg("删除失败", {time: 2000, icon: 2});
+                    }
+                }
+            });
+
+        });
+    })
+</script>
+</body>
+</html>

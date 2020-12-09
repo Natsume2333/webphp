@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>徒弟贡献榜</title>
+
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <link href="__STATIC__/css/disciple.css" rel="stylesheet">
+    <link href="__STATIC__/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="dis">
+<div class="col-xs-12 disciple creal">
+  <div class="col-xs-12 disciple-shou">
+      <div class="col-xs-1 creal text-reight disciple-xswt">
+          <img src="__STATIC__/image/question_mark.png"/>
+      </div>
+      <div class="col-xs-7 creal disciple-shou-col disciple-xswt">收他为徒</div>
+      <div class="col-xs-1 creal">
+          <img src="__STATIC__/her_homepage.png"/>
+      </div>
+      <div class="col-xs-3 creal disciple-shou-col">TA的主页</div>
+  </div>
+    <div class="col-xs-12 text-center disciple-qir">近 七 日</div>
+    <div class="col-xs-12 ">
+        <div class="col-xs-2 col-xs-offset-2 disciple-jblef"></div>
+        <div class="col-xs-4 disciple-jbcol text-center">{$cal}</div>
+        <div class="col-xs-2 disciple-jbrig"></div>
+    </div>
+    <div class="col-xs-4 col-xs-offset-4 " >
+        <div class="disciple-oneimg"><img src="__STATIC__/image/crown_no1.png"/></div>
+        <div class="disciple-oneimg1">
+            <img src="__STATIC__/image/bg_no1.png"/>
+        </div>
+
+        <div class="disciple-oneimg3">
+            <if condition="$tudCount gt 0">
+                <img src="{$tud[0]['avatar']}" onclick="App.startUserHomePage({$tud[0]['touid']})"/>
+                <else/>
+                <img src="__STATIC__/image/timg.jpg"/>
+            </if>
+        </div>
+        <div class="disciple-oneimg2">
+            <img src="__STATIC__/image/num_no1.png"/>
+        </div>
+
+    </div>
+    <div class="col-xs-12 disciple-zha">
+        <if condition="$tudCount gt 0">
+                <div class="col-xs-12 box_relative">{$tud[0]['user_nickname']}</div>
+                <div class="col-xs-12 box_relative1">贡献 {$tud[0]['sum']} 聊币</div>
+            <else/>
+                <div class="col-xs-12 box_relative">暂无徒弟</div>
+        </if>
+    </div>
+
+    <div class="col-xs-12 disciple-dingw">
+
+        <div class="col-xs-4">
+            <div class="disciple-oneimg"><img src="__STATIC__/image/crown_no2.png"/></div>
+            <div class="disciple-oneimg1">
+                <img src="__STATIC__/image/bg_no2.png"/>
+            </div>
+
+            <div class="disciple-oneimg4">
+                <if condition="$tudCount gt 1">
+                        <img src="{$tud[1]['avatar']}"  onclick="App.startUserHomePage({$tud[1]['touid']})"/>
+                    <else/>
+                       <img src="__STATIC__/image/timg.jpg"/>
+                </if>
+
+            </div>
+            <div class="disciple-oneimg2">
+                <img src="__STATIC__/image/num_no2.png"/>
+            </div>
+
+        </div>
+
+        <div class="col-xs-4 col-xs-offset-4">
+            <div class="disciple-oneimg"><img src="__STATIC__/image/crown_no3.png"/></div>
+            <div class="disciple-oneimg1">
+                <img src="__STATIC__/image/bg_no3.png"/>
+            </div>
+
+            <div class="disciple-oneimg5">
+                <if condition="$tudCount gt 2">
+                    <img src="{$tud[2]['avatar']}"  onclick="App.startUserHomePage({$tud[2]['touid']})"/>
+                    <else/>
+                    <img src="__STATIC__/image/timg.jpg"/>
+                </if>
+            </div>
+            <div class="disciple-oneimg2">
+                <img src="__STATIC__/image/num_no3.png"/>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<div class="col-xs-12">
+
+    <div class="col-xs-4 disciple-zha1 creal">
+        <if condition="$tudCount gt 1">
+            <div class="col-xs-12 box_relative3 creal">{$tud[1]['user_nickname']}</div>
+            <div class="col-xs-12 box_relative2 creal">贡献 {$tud[1]['sum']} 聊币</div>
+            <else/>
+            <div class="col-xs-12 box_relative3 creal">暂无徒弟</div>
+        </if>
+    </div>
+    <div class="col-xs-4 col-xs-offset-4 disciple-zha1 creal">
+        <if condition="$tudCount gt 2">
+            <div class="col-xs-12 box_relative3 creal">{$tud[2]['user_nickname']}</div>
+            <div class="col-xs-12 box_relative2 creal">贡献 {$tud[2]['sum']} 聊币</div>
+            <else/>
+            <div class="col-xs-12 box_relative3 creal">暂无徒弟</div>
+        </if>
+
+    </div>
+</div>
+<div class="col-xs-12 disciple-tab">
+    <if condition="$tudCount gt 3">
+        <volist name="tud" id="v" key="i" offset="3">
+            <a  onclick="App.startUserHomePage({$v.touid})">
+                <div class="col-xs-12 creal disciple-tab1">
+                    <div class="col-xs-1 text-center creal">{$i+3}</div>
+                    <div class="col-xs-2 creal disciple-tab_img"><img src="{$v.avatar}"/></div>
+                    <div class="col-xs-6 tab-name creal">{$v.user_nickname}</div>
+                    <div class="col-xs-3 creal text-right disciple-tab_pm">贡献<span>{$v.sum}聊币</span></div>
+                </div>
+            </a>
+        </volist>
+    </if>
+</div>
+
+</div>
+
+<script src="__STATIC__/js/jquery-1.10.2.min.js"></script>
+<script src="__STATIC__/layer/layer.js" rel="stylesheet"></script>
+<script>
+    $(function(){
+        $(".disciple-xswt").click(function(){
+            //信息框
+            layer.open({
+                title: [
+                    '如何收TA为徒',
+                    'background-color: #fff; color:#000;text-align:center;'
+                ],
+                'area':['80%','45%'],
+                content: "<div>1.成为ta的贡献榜TOP1，师徒锁定每七日更新一次，若师傅的贡献不足徒弟七日贡献榜的5%，则师徒关系解除，解除后徒弟的近七日贡献榜TOP1自动成为新师傅</div><div>2.如果ta没有被锁师傅,赠送师徒礼物即可说定成为ta的师傅七天</div>"
+                ,btn: '我知道了'
+            });
+        })
+
+        // 页数
+        var page={$name.p};
+        var uid={$name.uid};
+        var isscroll=true;
+        $(window).scroll(function() {
+            srollPos = $(this).scrollTop();
+            totalheight = parseFloat($(window).height()) + parseFloat(srollPos);
+            if(($(document).height()-50) <= totalheight  && isscroll) {
+
+                isscroll=false;
+                getlistmore();
+            }
+
+        });
+        function getlistmore(){
+            $.ajax({
+                type: 'POST',
+                url: "{:url('disciple/pages')}",
+                data:{'page':page,'uid':uid},
+                dataType: 'json',
+                success: function(data){
+
+                    if(data['cal'].length>0){
+                        var html='';
+                        for(var i=0;i<data['cal'].length;i++){
+                            var nums=data.page+i+1;
+
+                            var  avatar=data['cal'][i]['avatar'];
+                            var  user_nickname=data['cal'][i]['user_nickname'];
+                            var  sum=data['cal'][i]['sum'];
+                            var touid=data['cal'][i]['touid'];
+                            html+=" <a  onclick='App.startUserHomePage("+touid+")'><div class='col-xs-12 creal disciple-tab1'><div class='col-xs-1 text-center creal'>"+nums+"</div><div class='col-xs-2 creal disciple-tab_img'><img src='"+avatar+"'/></div><div class='col-xs-6 tab-name creal'>"+user_nickname+"</div><div class='col-xs-3 creal text-right disciple-tab_pm'>贡献<span>"+sum+"聊币</span></div></div></a>"
+                        }
+
+                        $(".disciple-tab").append(html);
+                        page++;
+                        isscroll=true;
+                    }
+
+
+                }
+            });
+        }
+    })
+</script>
+</body>
+</html>

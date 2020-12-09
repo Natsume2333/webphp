@@ -1,0 +1,125 @@
+<include file="public@header"/>
+<style type="text/css">
+    .pic-list li {
+        margin-bottom: 5px;
+    }
+
+    .js-ajax-form {
+        margin-top: 30px;
+    }
+</style>
+
+</head>
+<body>
+<div class="wrap js-check-wrap">
+    <ul class="nav nav-tabs">
+        <li><a href="{:url('refill/pay_menu')}">支付渠道列表</a></li>
+        <li class="active"><a href="javascript:;">添加支付渠道</a></li>
+    </ul>
+    <form class="js-ajax-form" action="{:url('refill/add_pay_menu_post')}" method="post" >
+        <div class="row">
+            <div class="col-md-9">
+                <table class="table table-bordered">
+                    <tr>
+                        <th>名称<span class="form-required">*</span></th>
+                        <td>
+                            <input class="form-control" type="text" name="post[pay_name]"
+                                   id="title"   placeholder="请输入名称"/>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>支付图标<span class="form-required">*</span></th>
+                        <td>
+                            <div style="text-align: center;">
+                                <input type="hidden" name="post[icon]" id="thumbnail" value="">
+                                <a href="javascript:uploadOneImage('图片上传','#thumbnail');">
+                                    <img src="__TMPL__/public/assets/images/default-thumbnail.png"
+                                         id="thumbnail-preview"
+                                         width="135" style="cursor: pointer"/>
+
+                                </a>
+                                <input type="button" class="btn btn-sm btn-cancel-thumbnail" value="取消图片">
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>商户号 <span class="form-required">*</span></th>
+                        <td><input class="form-control" type="text" name="post[merchant_id]" id="merchant_id"
+                                   placeholder="请输入商户号"></td>
+                    </tr>
+
+                    <tr>
+                        <th>APP_ID <span class="form-required">*</span></th>
+                        <td><input class="form-control" type="text" name="post[app_id]" id="app_id"
+                                   placeholder="请输入APP_ID"></td>
+                    </tr>
+
+
+                    <tr>
+                        <th>类名 <span class="form-required">*</span></th>
+                        <td><input class="form-control" type="text" name="post[class_name]" id="class_name"
+                                   placeholder="请输入类名称"></td>
+                    </tr>
+                    <tr>
+                        <th>状态<span class="form-required">*</span></th>
+                        <td>
+                            <input  type="radio" name="post[status]"  value="1"/>&nbsp;&nbsp;开启 &nbsp;&nbsp;&nbsp;&nbsp;
+                            <input  type="radio" name="post[status]" value="0"/>&nbsp;&nbsp;关闭
+                        </td>
+                    </tr>
+                    <tr>
+
+                        <th>支付渠道类型 <span class="form-required">*</span></th>
+                        <td><input class="form-control" type="text" name="post[pay_class]" id="pay_class"
+                                   placeholder="支付渠道类型"></td>
+                    </tr>
+                    <tr>
+                        <th>支付渠道编码 <span class="form-required">*</span></th>
+                        <td><input class="form-control" type="text" name="post[pay_type]" id="pay_type"
+                                   placeholder="支付渠道编码"></td>
+                    </tr>
+                    <tr>
+                        <th>密钥 <span class="form-required">*</span></th>
+                        <td><input class="form-control" type="text" name="post[md5_key]" id="md5_key"
+                                   placeholder="密钥"></td>
+                    </tr>
+                    <tr>
+                        <th>公钥 <span class="form-required">*</span></th>
+                        <td><input class="form-control" type="text" name="post[public_key]" id="public_key"
+                                   placeholder="公钥"></td>
+                    </tr>
+
+                    <tr>
+                        <th>私钥<span class="form-required">*</span></th>
+
+                        <td><input class="form-control" type="text" name="post[private_key]" id="private_key"
+                                   placeholder="私钥"></td>
+
+                    </tr>
+                    <tr>
+                        <th>排序<span class="form-required">*</span></th>
+
+                        <td><input class="form-control" type="text" name="post[orderno]" id="orderno" value="{$data.orderno |default=''}"
+                                   placeholder="排序"></td>
+                    </tr>
+
+                </table>
+
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-primary js-ajax-submit">{:lang('ADD')}</button>
+                        <a class="btn btn-default" href="{:url('refill/pay_menu')}">{:lang('BACK')}</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
+<script type="text/javascript" src="__STATIC__/js/admin.js"></script>
+
+
+</body>
+</html>

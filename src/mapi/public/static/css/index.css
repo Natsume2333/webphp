@@ -1,0 +1,47 @@
+
+/*新手引导*/
+a:hover,a:link{color:#424242;}
+
+.novice_guide{height:8em;}
+.novice_guide_type{height: 100%;}
+.novice_guide_type-img{height:2em;margin-top: 2em;text-align: center;}
+.novice_guide_type-img img{height: 100%;}
+.novice_guide_type-name{height: 2em;line-height: 2em;text-align: center;margin-top:0.5em;}
+.novice_guide_type a{color:#676666;}
+
+.creal{padding:0px!important;}
+.guide{height:3.5em;line-height:3.5em;background:#FAFAFA;color:#848484;}
+
+.guide-cond{height:3.5em;line-height:3.5em;border-bottom:1px solid #e6e6e6;}
+.guide-cond a{color:#676666;}
+.guide-div{height:1em;background:#f3f2ff;}
+.glyphicon-chevron-right{color:#909090;}
+
+
+.guide-type a{color:#424242;}
+.guide-type-col i{color:#963ccc;}
+.guide-type-col2 i{color:#f50606;}
+.guide-type-col3 i{color:#ff7d1d;}
+.guide-type-col4 i{color:#037dc8;}
+.guide-guf{height:5em;line-height:5em;border-bottom:1px solid #e6e6e6;font-size:12px;}
+.guide-guf i{color:#f11010;padding-right:0.5em;}
+.guide-guf a{color:#424242;}
+
+/*详情页 */
+.guide-center{height:3.5em;line-height:3.5em;color:#5f5d5d;}
+@media ( min-width: 100px) and (max-width: 370px) {
+
+
+    .guide-type-img{height:2.5em;}
+    .guide-type-img img{height: 100%;}
+   body,html{font-size:12px!important;height:100%;margin:0;overflow: hidden;}
+}
+
+@media ( min-width: 370px){
+    .guide-cond a{ font-size: 14px;}
+    .guide-type{font-size:14px;}
+     .guide-type-img{height:2.5em;text-align: center;}
+    .guide-type-img img{height: 100%;}
+    body,html{font-size:14px;height:100%;margin:0;overflow: hidden;}
+
+}

@@ -1,0 +1,80 @@
+<include file="public@header"/>
+<style type="text/css">
+    .pic-list li {
+        margin-bottom: 5px;
+    }
+    .gift{margin-top:40px;}
+    #gift{    width: 30%;
+        height: 35px;
+        border-color: #dce4ec;
+        color: #a5b6c6;}
+</style>
+
+</head>
+<body>
+<div class="wrap js-check-wrap">
+    <ul class="nav nav-tabs">
+        <li><a href="{:url('admin_index/index')}">用户列表</a></li>
+        <li class="active"><a href="javascript:;">编辑信息</a></li>
+    </ul>
+    <form action="{:url('admin_index/edit_post')}" method="post" >
+        <div class="row gift">
+            <div class="col-md-8  col-md-offset-2">
+                <table class="table table-bordered">
+                    <tr>
+                        <th>用户昵称 <span class="form-required">*</span></th>
+                        <td>
+                            <input class="form-control" type="text" name="user_nickname"
+                                   id="user_nickname" required value="{$data.user_nickname |default=''}" placeholder="请输入用户昵称"/>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>用户头像<span class="form-required">*</span></th>
+                        <td>
+                            <div style="text-align: center;">
+                                <input type="hidden" name="avatar" id="thumbnail" value="{$data['avatar'] |default=''}">
+                                <a href="javascript:uploadOneImage('图片上传','#thumbnail');">
+                                    <if condition="$data['avatar']">
+                                        <img src="{$data['avatar']}"
+                                             id="thumbnail-preview"
+                                             width="135" style="cursor: pointer"/>
+                                        <else/>
+                                        <img src="__TMPL__/public/assets/images/default-thumbnail.png"
+                                             id="thumbnail-preview"
+                                             width="135" style="cursor: pointer"/>
+                                    </if>
+
+                                </a>
+                                <input type="button" class="btn btn-sm btn-cancel-thumbnail" value="取消图片">
+                            </div>
+                        </td>
+                    </tr>
+
+                </table>
+                <input type="hidden" name="id" value="{$data.id |default=''}"/>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-primary js-ajax-submit">{:lang('ADD')}</button>
+                        <a class="btn btn-default" href="{:url('admin_index/index')}">{:lang('BACK')}</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
+
+</body>
+<script type="text/javascript" src="__STATIC__/js/admin.js"></script>
+<script>
+    $(function () {
+
+        $('.btn-cancel-thumbnail').click(function () {
+            $('#thumbnail-preview').attr('src', '__TMPL__/public/assets/images/default-thumbnail.png');
+            $('#thumbnail').val('');
+        });
+
+    });
+</script>
+</html>

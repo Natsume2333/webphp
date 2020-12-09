@@ -1,0 +1,39 @@
+ <!DOCTYPE html>
+<html>
+<head>
+    <title>首页</title>
+    <meta name="keywords" content=""/>
+    <meta name="description" content="">
+    <include file="public@head"/>
+</head>
+
+<body class="body-white" >
+    <div class="tab-content">
+        <div class="tab-pane active" id="one">
+             
+            <table class="table table-bordered table-striped table-hover">
+                <thead>
+                <tr>
+                    <th>公会总收益</th>
+                    <th>剩余收益</th>
+                    <th>公会今日收益</th>
+                    <th>提成比例</th>
+                    <th>总人数</th>
+                    <th>待审核人数</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{$list.total_earnings|default='0'}</td>
+                        <td>{$list.earnings|default='0'}</td>
+                        <td>{$list.day_income|default='0'}</td>
+                        <td>{$list.commission|default='0'}</td>
+                        <td>{$list.num}</td>
+                        <td>{$list.auditing_num}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

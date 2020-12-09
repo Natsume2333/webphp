@@ -1,0 +1,42 @@
+<include file="public@header"/>
+</head>
+<body>
+<div class="wrap js-check-wrap">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="javascript:;">VIP设置记录</a></li>
+    </ul>
+    <form class="js-ajax-form" action="" method="post">
+        <table class="table table-hover table-bordered table-list">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>被操作用户</th>
+                <th>操作人</th>
+                <th>VIP结束时间</th>
+                <th>状态</th>
+                <th>操作时间</th>
+            </tr>
+            </thead>
+            <tfoot>
+            <foreach name="list" id="vo">
+                <tr>
+                    <td>{$vo.id}</td>
+                    <td>{$vo.uname}</td>
+                    <td>{$vo.aname}</td>
+                    <td>{$vo.vip_time | date="Y-m-d H:i:s",###}</td>
+                    <if condition="$vo['state'] eq '1'">
+                        <td>成功</td>
+                        <else/>
+                        <td>失败</td>
+                    </if>
+                    <td>{$vo.ctime | date="Y-m-d H:i:s",###}</td>
+                </tr>
+            </foreach>
+            </tfoot>
+        </table>
+        <ul class="pagination">{$page|default=''}</ul>
+    </form>
+</div>
+<script src="__STATIC__/js/admin.js"></script>
+</body>
+</html>

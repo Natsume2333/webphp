@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title> 修改资料</title>
+<meta name="keywords" content=""/>
+<meta name="description" content="">
+<include file="public@head"/>
+<style type="text/css">
+  .account_btn{cursor: pointer;}
+</style>
+</head>
+<body class="body-white" id="top" style="padding-top: 20px">
+
+    <div class="container tc-main" style="width: 100%;">
+       <div class="tabs">
+           <ul class="nav nav-tabs">
+               <li class="active"><a href="javascript:;" > 公会提现</a></li>
+               <li ><a href="{:url('union/Personal/withdrawal_log')}" > 提现记录</a></li>
+           </ul>
+           <div class="tab-content" style="margin-top: 60px;">
+                <div class="tab-pane active" id="one">
+                <table class="table table-bordered table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <th>公会总收益</th>
+                        <th>剩余收益</th>
+                        <th>可提现(元)</th>
+                        <th>提现类型</th>
+                        <th>提现账户名称</th>
+                        <th>提现账户</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                          <td>{$list.total_earnings|default='0'}</td>
+                          <td>{$list.earnings|default='0'}</td>
+                          <td>{$list.can_carry|default='0'}</td>
+                          <td>
+                             <if condition="$list['account_type'] eq 1">
+                              支付宝
+                              <else/>
+                               微信
+                             </if>
+                          </td>
+                          <td>{$list.account_name}</td>
+                          <td>{$list.cash_account}</td>
+                          <td>
+                            <div class="account_btn" data-cash="{$list.cash_account}" data-earnings="{$list.earnings}" data-can="{$list['can_carry']}">提现</div>
+                          </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+           </div>             
+       </div>
+            
+    </div>
+  <include file="public@scripts" />
+  <script src="__STATIC__/js/layer/layer.js" rel="stylesheet"></script>
+</body>
+<script type="text/javascript">
+  var least_guild_withdrawal="{$data['least_guild_withdrawal']}";
+  var guild_exchange="{$data['guild_exchange']}";
+  var cash_day_limit="{$data['cash_day_limit']}";
+
+   $(".account_btn").click(function(){
+
+        var earnings=$(this).attr("data-earnings");    //余额
+        var cash_account=$(this).attr("data-cash");    //提现账户
+         var can_carry=$(this).attr("data-can");    //提现账户
+
+        if(!cash_account){
+           layer.msg("请绑定账户",{time: 2000, icon:2});
+           return false;
+        }
+        
+         var html='<div>可提现金额:'+can_carry+'元</div><input type="text" id="num" placeholder="请输入余额" style="width:300px;margin-top:20px;padding-left:10px;"><div style="margin-top:10px;color:#f96363;width:300px;">* 兑换比例'+guild_exchange+'=1元;<br/> 每日只提现'+cash_day_limit+'次;<br/> 每次最低提现'+least_guild_withdrawal+'元；</div>';
+          
+        layer.open({
+                title: '提 现'   
+                ,content: html
+                ,area: ['400px', '300px']
+                ,btn:['确认','取消']
+                ,yes: function(index, layero){
+                    var num=$('#num').val();
+                    if(parseInt(num) > parseInt(can_carry)){
+                        layer.msg("可提现金额不正确",{time: 2000, icon:2});
+                        return false;
+                    }
+                    if(parseInt(num) < parseInt(least_guild_withdrawal)){
+                        layer.msg("每次最低提现"+least_guild_withdrawal+"元",{time: 2000, icon:2});
+                        return false;
+                    }
+
+                    $.ajax({
+                        url: "{:url('union/personal/guild_withdrawal')}",
+                        type: 'post',
+                        dataType: 'json',
+                        data: {coin:num},
+                        success: function (data) {
+                            if(data.code =='1'){
+                                layer.msg(data.msg,{time: 2000, icon:1},function(){
+                                    window.location.reload();
+                                });
+                            }else{
+                                layer.msg(data.msg,{time: 2000, icon:2});
+                            }
+                        }
+                    });
+                }
+            });
+      
+    })
+</script>
+</html>

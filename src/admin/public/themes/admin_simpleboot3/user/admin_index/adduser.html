@@ -1,0 +1,110 @@
+<include file="public@header"/>
+<style type="text/css">
+    .pic-list li {
+        margin-bottom: 5px;
+    }
+
+    .gift {
+        margin-top: 40px;
+    }
+
+    #gift {
+        width: 30%;
+        height: 35px;
+        border-color: #dce4ec;
+        color: #a5b6c6;
+    }
+</style>
+
+</head>
+<body>
+<div class="wrap js-check-wrap">
+    <ul class="nav nav-tabs">
+
+               <li><a href="{:url('user/AdminIndex/index')}">{:lang('USER_INDEXADMIN_INDEX')}</a></li>
+
+         <li  class="active"><a>添加用户</a></li>
+    </ul>
+    <form action="{:url('AdminIndex/addUserPost')}" class="js-ajax-form" method="post">
+        <div class="row gift">
+            <div class="col-md-8  col-md-offset-2">
+                <table class="table table-bordered">
+                    <tr>
+                        <th>用户名称（登录账号）<span class="form-required">*</span></th>
+                        <td>
+                            <input class="form-control" type="text" name="user_login"
+                                   id="title" required value="" placeholder="请输入用户名称"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>昵称 <span class="form-required">*</span></th>
+                        <td>
+                            <input class="form-control" type="text" name="user_nickname"
+                                   id="title" required value="" placeholder="请输入昵称"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>个性签名<span class="form-required">*</span></th>
+                        <td>
+                            <textarea required class="form-control" name="signature"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>性别<span class="form-required">*</span></th>
+                        <td>
+                            <label>
+                                <input type="radio" name="sex" value="1" id="radio1">男
+                            </label>&nbsp;&nbsp;
+                            <label>
+                                <input type="radio" name="sex" value="2" id="radio1">女
+                            </label>&nbsp;&nbsp;
+                            <label>
+                                <input type="radio" name="sex" value="0" id="radio1">保密
+                            </label>&nbsp;&nbsp;
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <th>头像<span class="form-required">*</span></th>
+                        <td>
+                            <div style="text-align: center;">
+                                <input type="hidden" name="avatar" id="thumbnail">
+                                <a href="javascript:uploadOneImage('图片上传','#thumbnail');">
+                                    <img src="__TMPL__/public/assets/images/default-thumbnail.png"
+                                             id="thumbnail-preview"
+                                             width="135" style="cursor: pointer"/>
+                                </a>
+                                <input type="button" class="btn btn-sm btn-cancel-thumbnail" value="取消图片">
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-primary js-ajax-submit">{:lang('ADD')}</button>
+                        <a class="btn btn-default" href="{:url('gift/index')}">{:lang('BACK')}</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
+<script type="text/javascript" src="__STATIC__/js/admin.js"></script>
+<script>
+    $(function () {
+
+        $('.btn-cancel-thumbnail').click(function () {
+            $('#thumbnail-preview').attr('src', '__TMPL__/public/assets/images/default-thumbnail.png');
+            $('#thumbnail').val('');
+        });
+
+    });
+</script>
+
+</body>
+</html>
+<script type="text/javascript">
+    
+</script>
